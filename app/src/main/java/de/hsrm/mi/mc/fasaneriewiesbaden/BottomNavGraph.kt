@@ -6,25 +6,23 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 @Composable
-fun SetupNavGraph(
-    navController: NavHostController
-) {
+fun BottomNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Map.route
+        startDestination = BottomBarScreen.Map.route
     ) {
         composable(
-            route = Screen.Map.route
+            route = BottomBarScreen.Map.route
         ) {
             MapScreen()
         }
         composable(
-            route = Screen.Level.route
+            route = BottomBarScreen.Level.route
         ) {
             LevelScreen()
         }
         composable(
-            route = Screen.Info.route
+            route = BottomBarScreen.Info.route
         ) {
             InfoScreen()
         }

@@ -7,19 +7,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.FasanerieWiesbadenTheme
 
 class MainActivity : ComponentActivity() {
 
-    lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             FasanerieWiesbadenTheme {
-                navController = rememberNavController()
-                SetupNavGraph(navController = navController)
+                MainScreen()
             }
         }
     }
@@ -37,6 +33,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     FasanerieWiesbadenTheme {
-        Greeting("Android")
+        MainScreen()
     }
 }

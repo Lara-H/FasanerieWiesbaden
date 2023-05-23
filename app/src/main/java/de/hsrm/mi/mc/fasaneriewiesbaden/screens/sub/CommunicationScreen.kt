@@ -35,7 +35,6 @@ fun IntroScreen(imagePath: Int, imageDescription: String, text: String) {
             contentDescription = imageDescription,
             modifier = Modifier
                 .align(Alignment.End)
-
         )
         val scroll = rememberScrollState(0)
         Text(

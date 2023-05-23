@@ -9,36 +9,36 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @Composable
 fun InfoScreen() {
     Column(modifier = Modifier .fillMaxSize() .padding(all = MaterialTheme.spacing.medium)) {
-        Text(text = "Täglich außer freitags")
+        Text(text = stringResource(R.string.info_headline))
         Row(modifier = Modifier .fillMaxWidth() .padding(top = MaterialTheme.spacing.medium)) {
             Column(modifier = Modifier .weight(1f)) {
-                Text(text = "11:00 Uhr")
+                Text(text = stringResource(R.string.info_time_early))
             }
             Column(modifier = Modifier .weight(1f)) {
-                Text(text = "Bär")
-                Text(text = "Wolf")
-                Text(text = "Luchs")
+                Text(text = stringResource(R.string.info_animal_bear))
+                Text(text = stringResource(R.string.info_animal_wolf))
+                Text(text = stringResource(R.string.info_animal_lynx))
             }
         }
         Row(modifier = Modifier .fillMaxWidth() .padding(top = MaterialTheme.spacing.medium)) {
             Column(modifier = Modifier .weight(1f)) {
-                Text(text = "15:00 Uhr")
+                Text(text = stringResource(R.string.info_time_late))
             }
             Column(modifier = Modifier .weight(1f)) {
-                Text(text = "Fuchs")
-                Text(text = "Waschbär")
-                Text(text = "Marderhund")
-                Text(text = "Wildkatze")
-                Text(text = "Fischotter")
+                Text(text = stringResource(R.string.info_animal_fox))
+                Text(text = stringResource(R.string.info_animal_racoon))
+                Text(text = stringResource(R.string.info_animal_racoondog))
+                Text(text = stringResource(R.string.info_animal_wildcat))
+                Text(text = stringResource(R.string.info_animal_otter))
             }
         }
-
     }
 }
 

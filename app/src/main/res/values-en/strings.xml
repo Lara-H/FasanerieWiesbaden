@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fasanerie Wiesbaden</string>
+    <string name="info_headline">Every day except Friday</string>
+    <string name="info_time_early">11 am</string>
+    <string name="info_time_late">3 pm</string>
+    <string name="info_animal_bear">bear</string>
+    <string name="info_animal_wolf">wolf</string>
+    <string name="info_animal_lynx">lynx</string>
+    <string name="info_animal_fox">fox</string>
+    <string name="info_animal_racoon">racoon</string>
+    <string name="info_animal_racoondog">racoon dog</string>
+    <string name="info_animal_wildcat">wildcat</string>
+    <string name="info_animal_otter">otter</string>
+</resources>

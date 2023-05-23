@@ -9,14 +9,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.LocalSpacing
 
 @Composable
 fun LevelScreen() {
-    var num = 10
     Column(modifier = Modifier
         .fillMaxSize()
-        .padding(all = 20.dp)){
+        .padding(all = LocalSpacing.current.medium)){
         Text(text = "Level")
         Row(modifier = Modifier .fillMaxWidth()) {
             Column(modifier = Modifier .weight(1f)) {

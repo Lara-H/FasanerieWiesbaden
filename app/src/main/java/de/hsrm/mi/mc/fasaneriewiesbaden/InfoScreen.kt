@@ -9,13 +9,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.LocalSpacing
 
 @Composable
 fun InfoScreen() {
-    Column(modifier = Modifier .fillMaxSize() .padding(all = 20.dp)) {
+    Column(modifier = Modifier .fillMaxSize() .padding(all = LocalSpacing.current.medium)) {
         Text(text = "Täglich außer freitags")
-        Row(modifier = Modifier .fillMaxWidth() .padding(top = 20.dp)) {
+        Row(modifier = Modifier .fillMaxWidth() .padding(top = LocalSpacing.current.medium)) {
             Column(modifier = Modifier .weight(1f)) {
                 Text(text = "11:00 Uhr")
             }
@@ -25,7 +25,7 @@ fun InfoScreen() {
                 Text(text = "Luchs")
             }
         }
-        Row(modifier = Modifier .fillMaxWidth() .padding(top = 20.dp)) {
+        Row(modifier = Modifier .fillMaxWidth() .padding(top = LocalSpacing.current.medium)) {
             Column(modifier = Modifier .weight(1f)) {
                 Text(text = "15:00 Uhr")
             }

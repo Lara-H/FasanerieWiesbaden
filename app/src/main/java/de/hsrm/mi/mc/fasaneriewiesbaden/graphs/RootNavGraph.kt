@@ -14,6 +14,7 @@ fun RootNavGraph(navController: NavHostController) {
         startDestination = Graph.INTRO,
     ) {
         introNavGraph(navController = navController)
+        goatNavGraph(navController = navController)
         composable(route = Graph.MAIN) {
             MainScreen()
         }
@@ -24,6 +25,7 @@ fun RootNavGraph(navController: NavHostController) {
 object Graph {
     const val ROOT = "root_graph"
     const val INTRO = "intro_graph"
+    const val GOAT = "goat_graph"
     const val MAIN = "main_graph"
     const val OUTRO = "outro_graph"
 }

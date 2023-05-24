@@ -17,6 +17,7 @@ fun RootNavGraph(navController: NavHostController) {
         composable(route = Graph.MAIN) {
             MainScreen()
         }
+        outroNavGraph(navController = navController)
     }
 }
 
@@ -24,4 +25,5 @@ object Graph {
     const val ROOT = "root_graph"
     const val INTRO = "intro_graph"
     const val MAIN = "main_graph"
+    const val OUTRO = "outro_graph"
 }

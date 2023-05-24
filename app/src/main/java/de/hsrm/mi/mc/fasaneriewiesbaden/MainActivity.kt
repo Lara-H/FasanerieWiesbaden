@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.RootNavGraph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CodeScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.FasanerieWiesbadenTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +18,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FasanerieWiesbadenTheme {
-                RootNavGraph(navController = rememberNavController())
+                CodeScreen(title = "Code", url = "https://fasanerie.net/")
+                //RootNavGraph(navController = rememberNavController())
             }
         }
     }

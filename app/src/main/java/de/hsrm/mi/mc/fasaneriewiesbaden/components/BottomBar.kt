@@ -12,14 +12,14 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import de.hsrm.mi.mc.fasaneriewiesbaden.BottomBarScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.MainScreen
 
 @Composable
 fun BottomBar(navController: NavHostController) {
     val screens = listOf(
-        BottomBarScreen.Map,
-        BottomBarScreen.Level,
-        BottomBarScreen.Info,
+        MainScreen.Map,
+        MainScreen.Level,
+        MainScreen.Info,
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -37,7 +37,7 @@ fun BottomBar(navController: NavHostController) {
 
 @Composable
 fun RowScope.AddItem(
-    screen: BottomBarScreen,
+    screen: MainScreen,
     currentDestination: NavDestination?,
     navController: NavHostController
 ) {

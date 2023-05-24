@@ -1,30 +1,43 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 
 @Composable
-fun BottomNavGraph(navController: NavHostController) {
+fun MainNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = BottomBarScreen.Map.route
+        route = Graph.MAIN,
+        startDestination = MainScreen.Map.route
     ) {
         composable(
-            route = BottomBarScreen.Map.route
+            route = MainScreen.Map.route
         ) {
             MapScreen()
         }
         composable(
-            route = BottomBarScreen.Level.route
+            route = MainScreen.Level.route
         ) {
             LevelScreen()
         }
         composable(
-            route = BottomBarScreen.Info.route
+            route = MainScreen.Info.route
         ) {
             InfoScreen()
         }
     }
+}
+
+sealed class MainScreen(val route: String, val icon: ImageVector) {
+    object Map: MainScreen(route = "map_screen", icon = Icons.Default.Place)
+    object Level: MainScreen(route = "level_screen", icon = Icons.Default.Home)
+    object Info: MainScreen(route = "info_screen", icon = Icons.Default.Info)
 }

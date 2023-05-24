@@ -18,7 +18,7 @@ fun MainScreen() {
         topBar = { TopBar("Hello World", isMainNav = true) },
         bottomBar = { BottomBar(navController = navController)}
     ) {
-        BottomNavGraph(navController = navController)
+        MainNavGraph(navController = navController)
     }
 }
 

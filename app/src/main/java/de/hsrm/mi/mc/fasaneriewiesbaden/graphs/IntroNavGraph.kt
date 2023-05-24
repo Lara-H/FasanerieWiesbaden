@@ -63,7 +63,7 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController) {
                         "\n" +
                         "Deine Eltern machen sich aber bestimmt schon Sorgen. Komm, wir begleiten dich nach Hause, ich möchte sowieso noch mit deinem Papa reden.",
                 btnText = "Weiter",
-                onBtnClick = { navController.navigate(IntroScreen.Departure.route) },
+                onBtnClick = { navController.navigate(Graph.MAIN) },
             )
         }
     }

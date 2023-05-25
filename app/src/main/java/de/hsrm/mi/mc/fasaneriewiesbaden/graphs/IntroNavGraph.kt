@@ -18,11 +18,7 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController) {
                 title = stringResource(R.string.title_name_squirrel),
                 imagePath = R.drawable.squirrel,
                 imageDescription= "Squirrel",
-                text = "Hallo, mein Name ist Elli Eichhorn und ich bewache diesen Park.\n" +
-                        "\n" +
-                        "Aber der Park ist in Gefahr! Wenn wir nicht bald genug Geld auftreiben muss der Park verkauft werden und alle Tiere müssen sich ein neues Zuhause suchen.\n" +
-                        "\n" +
-                        "Jetzt kann uns nur noch der Goldschatz retten, der laut einer alten Legende im Park versteckt ist. Hilfst du uns ihn zu finden?",
+                text = stringResource(R.string.intro_greeting_text),
                 btnText = stringResource(R.string.intro_greeting_btn),
                 onBtnClick = { navController.navigate(IntroScreen.Explanation.route) }
             )
@@ -32,11 +28,7 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController) {
                 title = stringResource(R.string.title_name_squirrel),
                 imagePath = R.drawable.squirrel,
                 imageDescription= "Squirrel",
-                text = "Vielen Dank, dass du uns helfen möchtest! Du scheinst ein echter Tierfreund zu sein.\n" +
-                        "\n" +
-                        "Um den Schatz zu finden sollten wir die Tiere befragen, diese kennen sich hier am besten aus und zusammen können wir den Schatz bestimmt finden.\n" +
-                        "\n" +
-                        "Moment, was höre ich da für ein Geräusch…\n",
+                text = stringResource(R.string.intro_explanation_text),
                 btnText = stringResource(R.string.communication_btn),
                 onBtnClick = { navController.navigate(IntroScreen.Meeting.route) }
             )
@@ -46,9 +38,7 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController) {
                 title = stringResource(R.string.title_name_goat_child),
                 imagePath = R.drawable.goat_child,
                 imageDescription= "Goat child",
-                text = "Määääh, mein Name ist Becky.\n" +
-                        "\n" +
-                        "Ich übe gerade meine neuen Tanzschritte, um Profitänzerin zu werden!",
+                text = stringResource(R.string.intro_meeting_text),
                 btnText = stringResource(R.string.communication_btn),
                 onBtnClick = { navController.navigate(IntroScreen.Departure.route) }
             )
@@ -58,11 +48,7 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController) {
                 title = stringResource(R.string.title_name_squirrel),
                 imagePath = R.drawable.squirrel,
                 imageDescription= "Squirrel",
-                text = "Hallo Becky, \n" +
-                        "\n" +
-                        "Deine Tanzschritte sehen schon richtig toll aus, ich bin mir sicher du wirst mal eine große Tänzerin!\n" +
-                        "\n" +
-                        "Deine Eltern machen sich aber bestimmt schon Sorgen. Komm, wir begleiten dich nach Hause, ich möchte sowieso noch mit deinem Papa reden.",
+                text = stringResource(R.string.intro_departure_text),
                 btnText = stringResource(R.string.communication_btn),
                 onBtnClick = { navController.navigate(Graph.MAIN) },
             )

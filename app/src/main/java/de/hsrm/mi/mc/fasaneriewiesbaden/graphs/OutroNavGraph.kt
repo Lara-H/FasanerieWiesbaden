@@ -20,7 +20,7 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController) {
                 title = stringResource(R.string.title_name_squirrel),
                 imagePath = R.drawable.squirrel,
                 imageDescription= "Squirrel",
-                text = "Lass uns alle unseren neuen Freunde holen, um gemeinsam den Schatz zu finden und den Park zu retten!",
+                text = stringResource(R.string.outro_speech_text),
                 btnText = stringResource(R.string.communication_btn),
                 onBtnClick = { navController.navigate(OutroScreen.Treasure.route) }
             )
@@ -30,7 +30,7 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController) {
                 title = stringResource(R.string.title_location_bat),
                 imagePath = R.drawable.treasure,
                 imageDescription= "Treasure",
-                text = "Gemeinsam gelingt es den Tieren den Schatz zu bergen…",
+                text = stringResource(R.string.outro_treasure_text),
                 btnText = stringResource(R.string.communication_btn),
                 onBtnClick = { navController.navigate(OutroScreen.Thanks.route) }
             )
@@ -40,11 +40,7 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController) {
                 title = stringResource(R.string.title_name_squirrel),
                 imagePath = R.drawable.squirrel,
                 imageDescription= "Squirrel",
-                text = "Hurra, der Park ist gerettet!\n" +
-                        "\n" +
-                        "Vielen Dank für deine Hilfe! Als kleines Dankeschön möchten wir dir natürlich auch etwas von unserem Fund abgeben. \n" +
-                        "\n" +
-                        "Mit diesem kannst du dir im Shop des Tierparks etwas Tolles aussuchen.",
+                text = stringResource(R.string.outro_thanks_text),
                 btnText = stringResource(R.string.outro_code_btn),
                 onBtnClick = { navController.navigate(OutroScreen.Code.route) }
             )

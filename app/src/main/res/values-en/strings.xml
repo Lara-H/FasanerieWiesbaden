@@ -1,15 +1,111 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fasanerie Wiesbaden</string>
-    <string name="info_headline">Every day except Friday</string>
-    <string name="info_time_early">11 am</string>
-    <string name="info_time_late">3 pm</string>
-    <string name="info_animal_bear">bear</string>
-    <string name="info_animal_wolf">wolf</string>
-    <string name="info_animal_lynx">lynx</string>
-    <string name="info_animal_fox">fox</string>
-    <string name="info_animal_racoon">racoon</string>
-    <string name="info_animal_racoondog">racoon dog</string>
-    <string name="info_animal_wildcat">wildcat</string>
-    <string name="info_animal_otter">otter</string>
+<string name="app_name">Fasanerie Wiesbaden</string>
+
+<string name="title_map">Map</string>
+<string name="title_level">Level</string>
+<string name="title_info">Feeding times</string>
+<string name="title_code">Code</string>
+
+<string name="title_name_squirrel">Elli</string>
+<string name="title_name_bat">Frieda</string>
+<string name="title_name_bear">Bruno</string>
+<string name="title_name_chicken">Henry</string>
+<string name="title_name_deer">Hugo</string>
+<string name="title_name_fox">Fiona</string>
+<string name="title_name_goat">Björn</string>
+<string name="title_name_goat_child">Becky</string>
+<string name="title_name_lynx">Ludwig</string>
+<string name="title_name_otter">Olli</string>
+<string name="title_name_owl">Emilia</string>
+<string name="title_name_raccoon">Wilma</string>
+
+<string name="title_location_bat">Bat cave</string>
+<string name="title_location_bear">Wolf-Bear-Enclosure</string>
+<string name="title_location_chicken">Bird pond</string>
+<string name="title_location_deer">Deer enclosure</string>
+<string name="title_location_fox">Fox-Badger-Tunnel</string>
+<string name="title_location_goat">Goat meadow</string>
+<string name="title_location_lynx">Lynx enclosure</string>
+<string name="title_location_otter">Otter enclosure</string>
+<string name="title_location_owl">Bird of prey facility</string>
+<string name="title_location_raccoon">Raccoon enclosure</string>
+
+<string name="map_text">From your location, move to the green dot on the map</string>
+
+<string name="info_headline">Every day except Friday</string>
+<string name="info_time_early">11 am</string>
+<string name="info_time_late">3 pm</string>
+<string name="info_animal_bear">bear</string>
+<string name="info_animal_wolf">wolf</string>
+<string name="info_animal_lynx">lynx</string>
+<string name="info_animal_fox">fox</string>
+<string name="info_animal_racoon">racoon</string>
+<string name="info_animal_racoondog">racoon dog</string>
+<string name="info_animal_wildcat">wildcat</string>
+<string name="info_animal_otter">otter</string>
+
+<string name="communication_btn">Next</string>
+
+<string name="intro_greeting_text">Hello, my name is Elli and I am the park ranger. Our park needs money and should be sold! Now only the pot of gold that according to an old legend is hidden somewhere in the park can save us. Can you help us find him?</string>
+<string name="intro_greeting_btn">Yes, I\'m happy to help!</string>
+<string name="intro_explanation_text">Thank you, you seem to be a real animal lover! In order to find the treasure we should ask the animals, they know their way around best and together we can definitely find the treasure. Wait, what\'s that noise…</string>
+<string name="intro_meeting_text">Meeeeh, my name is Becky. Look meh. I’m just practicing my new dance steps meh to become a professional dancer meh!</string>
+<string name="intro_departure_text">Your dance steps look great! Your parents must be worried. Come on, we\'ll take you home.</string>
+
+<string name="station_goat_greeting_text">Meeeeh, I’m Björn, nice to meet you meh! We are counting all the goats in our meadow right now meh. However, some guests have also snuck underneath meh. Can you help us distinguish the goats from the other animals meh?</string>
+<string name="station_goat_greeting_btn">Help Björn</string>
+<string name="station_goat_game_text">Look carefully at the pictures of the goat breeds on the information board</string>
+<string name="station_goat_game_question">Is that a goat?</string>
+<string name="station_goat_bye_text">Thanks for your help meh, now we can count all the goats meh! I hear you’re looking for treasure meh. Unfortunately, we could not find anything on our climbing tours meh. But the foxes next door are good snoopers and may know a little more meh.</string>
+
+<string name="station_fox_greeting_text">LOREM IPSUM</string>
+<string name="station_fox_greeting_btn">Help Fiona</string>
+<string name="station_fox_game_text">Swipe the dirt to dig</string>
+<string name="station_fox_bye_text">LOREM IPSUM</string>
+
+<string name="station_bear_greeting_text">LOREM IPSUM</string>
+<string name="station_bear_greeting_btn">Help Bruno</string>
+<string name="station_bear_game_text">Shake your smartphone to make some honey drip out of the bee nest</string>
+<string name="station_bear_bye_text">LOREM IPSUM</string>
+
+<string name="station_lynx_greeting_text">LOREM IPSUM</string>
+<string name="station_lynx_greeting_btn">Help Ludwig</string>
+<string name="station_lynx_game_text">Put the pictures in the right order by swapping them with a tap</string>
+<string name="station_lynx_bye_text">LOREM IPSUM</string>
+
+<string name="station_deer_greeting_text">LOREM IPSUM</string>
+<string name="station_deer_greeting_btn">Help Hugo</string>
+<string name="station_deer_game_text">Scan the QR code on the feeding station</string>
+<string name="station_deer_bye_text">LOREM IPSUM</string>
+
+<string name="station_raccoon_greeting_text">LOREM IPSUM</string>
+<string name="station_raccoon_greeting_btn">Help Wilma</string>
+<string name="station_raccoon_game_text">Connect the same socks together by tapping</string>
+<string name="station_raccoon_bye_text">LOREM IPSUM</string>
+
+<string name="station_owl_greeting_text">LOREM IPSUM</string>
+<string name="station_owl_greeting_btn">Help Emilia</string>
+<string name="station_owl_game_text">LOREM IPSUM</string>
+<string name="station_owl_bye_text">LOREM IPSUM</string>
+
+<string name="station_chicken_greeting_text">LOREM IPSUM</string>
+<string name="station_chicken_greeting_btn">Help Henry</string>
+<string name="station_chicken_game_text">LOREM IPSUM</string>
+<string name="station_chicken_bye_text">LOREM IPSUM</string>
+
+<string name="station_otter_greeting_text">LOREM IPSUM</string>
+<string name="station_otter_greeting_btn">Help Olli</string>
+<string name="station_otter_game_text">Tap on the fish to catch them</string>
+<string name="station_otter_bye_text">LOREM IPSUM</string>
+
+<string name="station_bat_greeting_text">LOREM IPSUM</string>
+<string name="station_bat_greeting_btn">Help Frieda</string>
+<string name="station_bat_game_text">Turn your phone in the right direction to guide Frieda through the cave</string>
+<string name="station_bat_bye_text">LOREM IPSUM</string>
+
+<string name="outro_speech_text">LOREM IPSUM</string>
+<string name="outro_treasure_text">Together, the animals manage to salvage the treasure…</string>
+<string name="outro_explanation_text">LOREM IPSUM</string>
+<string name="outro_thanks_text">LOREM IPSUM</string>
+<string name="outro_code_btn">Redeem code</string>
 </resources>

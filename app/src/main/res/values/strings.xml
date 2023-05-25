@@ -1,5 +1,37 @@
 <resources>
     <string name="app_name">Fasanerie Wiesbaden</string>
+
+    <string name="title_map" translatable="false">Karte</string>
+    <string name="title_level" translatable="false">Level</string>
+    <string name="title_info" translatable="false">Fütterungszeiten</string>
+    <string name="title_code" translatable="false">Code</string>
+
+    <string name="title_name_squirrel" translatable="false">Elli Eichhorn</string>
+    <string name="title_name_bat" translatable="false">Frieda Fledermaus</string>
+    <string name="title_name_bear" translatable="false">Bruno Bär</string>
+    <string name="title_name_chicken" translatable="false">Henry Hahn</string>
+    <string name="title_name_deer" translatable="false">Hugo Hirsch</string>
+    <string name="title_name_fox" translatable="false">Fiona Fuchs</string>
+    <string name="title_name_goat" translatable="false">Björn Bock</string>
+    <string name="title_name_goat_child" translatable="false">Becky Bock</string>
+    <string name="title_name_lynx" translatable="false">Ludwig Luchs</string>
+    <string name="title_name_otter" translatable="false">Olli Otter</string>
+    <string name="title_name_owl" translatable="false">Emilia Eule</string>
+    <string name="title_name_raccoon" translatable="false">Wilma Waschbär</string>
+
+    <string name="title_location_bat" translatable="false">Fledermaushöhle</string>
+    <string name="title_location_bear" translatable="false">Wolf-Bär-Gehege</string>
+    <string name="title_location_chicken" translatable="false">Teichvogelanlage</string>
+    <string name="title_location_deer" translatable="false">Hirschgehege</string>
+    <string name="title_location_fox" translatable="false">Fuchs-Dachs-Tunnel</string>
+    <string name="title_location_goat" translatable="false">Ziegenwiese</string>
+    <string name="title_location_lynx" translatable="false">Luchsgehege</string>
+    <string name="title_location_otter" translatable="false">Fischottergehege</string>
+    <string name="title_location_owl" translatable="false">Greifvogelanlage</string>
+    <string name="title_location_raccoon" translatable="false">Waschbärgehege</string>
+
+    <string name="map_text" translatable="false">Bewege dich von deinem Standort aus zum grünen Punkt auf der Karte</string>
+
     <string name="info_headline">Täglich außer freitags</string>
     <string name="info_time_early">11:00 Uhr</string>
     <string name="info_time_late">15:00 Uhr</string>
@@ -11,4 +43,70 @@
     <string name="info_animal_racoondog">Marderhund</string>
     <string name="info_animal_wildcat">Wildkatze</string>
     <string name="info_animal_otter">Fischotter</string>
+
+    <string name="communication_btn" translatable="false">Weiter</string>
+
+    <string name="intro_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="intro_greeting_btn" translatable="false">Ja, ich helfe gerne!</string>
+    <string name="intro_explanation_text" translatable="false">LOREM IPSUM</string>
+    <string name="intro_meeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="intro_departure_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_goat_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_goat_greeting_btn" translatable="false">Helfe Björn</string>
+    <string name="station_goat_game_text" translatable="false">Schau dir die Bilder der Ziegenrassen auf dem Infoschild genau an</string>
+    <string name="station_goat_game_question" translatable="false">Ist das eine Ziege?</string>
+    <string name="station_goat_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_fox_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_fox_greeting_btn" translatable="false">Helfe Fiona</string>
+    <string name="station_fox_game_text" translatable="false">Streiche über die Erde, um zu graben</string>
+    <string name="station_fox_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_bear_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_bear_greeting_btn" translatable="false">Helfe Bruno</string>
+    <string name="station_bear_game_text" translatable="false">Schüttet dein Smartphone, damit etwas Honig aus dem Bienennest tropft</string>
+    <string name="station_bear_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_lynx_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_lynx_greeting_btn" translatable="false">Helfe Ludwig</string>
+    <string name="station_lynx_game_text" translatable="false">Bringe die Bilder durch Vertauschen durch Antippen in die richtige Reihenfolge</string>
+    <string name="station_lynx_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_deer_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_deer_greeting_btn" translatable="false">Helfe Hugo</string>
+    <string name="station_deer_game_text" translatable="false">Scanne den QR-Code auf dem Futterautomaten</string>
+    <string name="station_deer_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_raccoon_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_raccoon_greeting_btn" translatable="false">Helfe Wilma</string>
+    <string name="station_raccoon_game_text" translatable="false">Füge die gleichen Socken durch Antippen zusammen</string>
+    <string name="station_raccoon_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_owl_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_owl_greeting_btn" translatable="false">Helfe Emilia</string>
+    <string name="station_owl_game_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_owl_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_chicken_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_chicken_greeting_btn" translatable="false">Helfe Henry</string>
+    <string name="station_chicken_game_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_chicken_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_otter_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_otter_greeting_btn" translatable="false">Helfe Olli</string>
+    <string name="station_otter_game_text" translatable="false">Tippe auf die Fische, um sie zu fangen</string>
+    <string name="station_otter_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="station_bat_greeting_text" translatable="false">LOREM IPSUM</string>
+    <string name="station_bat_greeting_btn" translatable="false">Helfe Frieda</string>
+    <string name="station_bat_game_text" translatable="false">Drehe dein Handy in die richtige Richtung, um Frieda durch die Höhle zu leiten</string>
+    <string name="station_bat_bye_text" translatable="false">LOREM IPSUM</string>
+
+    <string name="outro_speech_text" translatable="false">LOREM IPSUM</string>
+    <string name="outro_treasure_text" translatable="false">Gemeinsam gelingt es den Tieren den Schatz zu bergen...</string>
+    <string name="outro_explanation_text" translatable="false">LOREM IPSUM</string>
+    <string name="outro_thanks_text" translatable="false">LOREM IPSUM</string>
+    <string name="outro_code_btn" translatable="false">Code einlösen</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package de.hsrm.mi.mc.fasaneriewiesbaden
+package de.hsrm.mi.mc.fasaneriewiesbaden.screens.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize

@@ -1,10 +1,12 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.graphs
 
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CodeScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.TextImageScreen
 
@@ -15,27 +17,27 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController) {
     ) {
         composable(route = OutroScreen.Speech.route) {
             CommunicationScreen(
-                title = "Elli Eichhorn",
+                title = stringResource(R.string.title_name_squirrel),
                 imagePath = R.drawable.squirrel,
                 imageDescription= "Squirrel",
                 text = "Lass uns alle unseren neuen Freunde holen, um gemeinsam den Schatz zu finden und den Park zu retten!",
-                btnText = "Weiter",
+                btnText = stringResource(R.string.communication_btn),
                 onBtnClick = { navController.navigate(OutroScreen.Treasure.route) }
             )
         }
         composable(route = OutroScreen.Treasure.route) {
             TextImageScreen(
-                title = "Fledermaushöhle",
+                title = stringResource(R.string.title_location_bat),
                 imagePath = R.drawable.treasure,
                 imageDescription= "Treasure",
                 text = "Gemeinsam gelingt es den Tieren den Schatz zu bergen…",
-                btnText = "Weiter",
+                btnText = stringResource(R.string.communication_btn),
                 onBtnClick = { navController.navigate(OutroScreen.Thanks.route) }
             )
         }
         composable(route = OutroScreen.Thanks.route) {
             CommunicationScreen(
-                title = "Elli Eichhorn",
+                title = stringResource(R.string.title_name_squirrel),
                 imagePath = R.drawable.squirrel,
                 imageDescription= "Squirrel",
                 text = "Hurra, der Park ist gerettet!\n" +
@@ -43,8 +45,13 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController) {
                         "Vielen Dank für deine Hilfe! Als kleines Dankeschön möchten wir dir natürlich auch etwas von unserem Fund abgeben. \n" +
                         "\n" +
                         "Mit diesem kannst du dir im Shop des Tierparks etwas Tolles aussuchen.",
-                btnText = "Code einlösen",
+                btnText = stringResource(R.string.outro_code_btn),
                 onBtnClick = { navController.navigate(OutroScreen.Code.route) }
+            )
+        }
+        composable(route = OutroScreen.Code.route) {
+            CodeScreen(
+                url = "https://fasanerie.net/"
             )
         }
     }

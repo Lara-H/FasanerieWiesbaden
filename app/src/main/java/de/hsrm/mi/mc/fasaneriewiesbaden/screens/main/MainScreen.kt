@@ -1,4 +1,4 @@
-package de.hsrm.mi.mc.fasaneriewiesbaden
+package de.hsrm.mi.mc.fasaneriewiesbaden.screens.main
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -6,6 +6,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import de.hsrm.mi.mc.fasaneriewiesbaden.MainNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.BottomBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 
@@ -15,7 +16,7 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
-        topBar = { TopBar("Hello World", isMainNav = true) },
+        topBar = { TopBar("LOREM IPSUM", isMainNav = true) },
         bottomBar = { BottomBar(navController = navController)}
     ) {
         MainNavGraph(navController = navController)
@@ -27,4 +28,3 @@ fun MainScreen() {
 fun MainScreenPreview() {
     MainScreen()
 }
-

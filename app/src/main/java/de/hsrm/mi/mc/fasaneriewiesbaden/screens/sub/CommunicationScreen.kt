@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.BottomButton
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import androidx.compose.runtime.*
+import androidx.compose.ui.tooling.preview.Preview
+import de.hsrm.mi.mc.fasaneriewiesbaden.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -62,4 +64,21 @@ fun CommunicationScreen(title: String, imagePath: Int, imageDescription: String,
             text = btnText,
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CommunicationScreenPreview() {
+    CommunicationScreen(
+        title = "Elli Eichhorn",
+        imagePath = R.drawable.squirrel,
+        imageDescription= "Squirrel",
+        text = "Hurra, der Park ist gerettet!\n" +
+                "\n" +
+                "Vielen Dank für deine Hilfe! Als kleines Dankeschön möchten wir dir natürlich auch etwas von unserem Fund abgeben. \n" +
+                "\n" +
+                "Mit diesem kannst du dir im Shop des Tierparks etwas Tolles aussuchen.",
+        btnText = "Weiter",
+        onBtnClick = { }
+    )
 }

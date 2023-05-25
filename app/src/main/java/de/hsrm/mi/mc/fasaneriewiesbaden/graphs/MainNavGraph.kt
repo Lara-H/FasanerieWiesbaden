@@ -10,6 +10,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.InfoScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.LevelScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.MapScreen
 
 @Composable
 fun MainNavGraph(navController: NavHostController) {

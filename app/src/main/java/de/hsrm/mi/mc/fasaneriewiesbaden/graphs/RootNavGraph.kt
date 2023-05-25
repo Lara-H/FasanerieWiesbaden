@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import de.hsrm.mi.mc.fasaneriewiesbaden.MainScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.MainScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.goatNavGraph
 
 @Composable

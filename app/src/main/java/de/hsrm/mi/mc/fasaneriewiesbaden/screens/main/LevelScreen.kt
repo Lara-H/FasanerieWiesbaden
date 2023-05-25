@@ -1,4 +1,4 @@
-package de.hsrm.mi.mc.fasaneriewiesbaden
+package de.hsrm.mi.mc.fasaneriewiesbaden.screens.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @Composable

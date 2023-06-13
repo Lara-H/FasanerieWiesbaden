@@ -20,9 +20,7 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController) {
                 title = stringResource(R.string.title_name_goat),
                 imagePath = R.drawable.goat,
                 imageDescription= "Goat",
-                text = "Määääh, mein Name ist Björn, schön Dich kennen zu lernen mäh! Wie ich sehe habt ihr auch Becky mitgebracht mäh.\n" +
-                        "\n" +
-                        "Wir zählen gerade alle Ziegen auf unserer Wiese. Allerdings haben sich auch einige Gäste darunter geschlichen. Kannst du uns helfen sie die Ziegen von den anderen Tieren zu unterscheiden?",
+                text = stringResource(R.string.station_goat_greeting_text),
                 btnText = stringResource(R.string.station_goat_greeting_btn),
                 onBtnClick = { navController.navigate(GoatScreen.Game1.route) }
             )
@@ -32,7 +30,7 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController) {
                 isCorrect = true,
                 imagePath = R.drawable.game_goat_1,
                 onCorrectClick = { navController.navigate(GoatScreen.Game2.route) },
-                onFalseClick = { navController.navigate(Graph.MAIN) }
+                onFalseClick = { navController.navigate(GoatScreen.Error.route) }
             )
         }
         composable(route = GoatScreen.Game2.route) {
@@ -40,7 +38,7 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController) {
                 isCorrect = false,
                 imagePath = R.drawable.game_goat_1,
                 onCorrectClick = { navController.navigate(GoatScreen.Game3.route) },
-                onFalseClick = { navController.navigate(Graph.MAIN) }
+                onFalseClick = { navController.navigate(GoatScreen.Error.route) }
             )
         }
         composable(route = GoatScreen.Game3.route) {
@@ -48,7 +46,7 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController) {
                 isCorrect = true,
                 imagePath = R.drawable.game_goat_1,
                 onCorrectClick = { navController.navigate(GoatScreen.Game4.route) },
-                onFalseClick = { navController.navigate(Graph.MAIN) }
+                onFalseClick = { navController.navigate(GoatScreen.Error.route) }
             )
         }
         composable(route = GoatScreen.Game4.route) {
@@ -56,7 +54,7 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController) {
                 isCorrect = true,
                 imagePath = R.drawable.game_goat_1,
                 onCorrectClick = { navController.navigate(GoatScreen.Game5.route) },
-                onFalseClick = { navController.navigate(Graph.MAIN) }
+                onFalseClick = { navController.navigate(GoatScreen.Error.route) }
             )
         }
         composable(route = GoatScreen.Game5.route) {
@@ -64,7 +62,17 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController) {
                 isCorrect = false,
                 imagePath = R.drawable.game_goat_1,
                 onCorrectClick = { navController.navigate(GoatScreen.Bye.route) },
-                onFalseClick = { navController.navigate(Graph.MAIN) }
+                onFalseClick = { navController.navigate(GoatScreen.Error.route) }
+            )
+        }
+        composable(route = GoatScreen.Error.route) {
+            CommunicationScreen(
+                title = stringResource(R.string.title_name_goat),
+                imagePath = R.drawable.goat,
+                imageDescription= "Goat",
+                text = stringResource(R.string.station_goat_game_error),
+                btnText = stringResource(R.string.communication_btn),
+                onBtnClick = { navController.navigate(GoatScreen.Game1.route) }
             )
         }
         composable(route = GoatScreen.Bye.route) {
@@ -72,9 +80,7 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController) {
                 title = stringResource(R.string.title_name_goat),
                 imagePath = R.drawable.goat,
                 imageDescription= "Goat",
-                text = "Vielen Dank für deine Hilfe, nun können wir alle Ziegen zählen!\n" +
-                        "\n" +
-                        "Ich höre du suchst nach einem Schatz mäh. Auf unseren Klettertouren konnten wir leider nichts finden. Aber Dachs und Fuchs nebenan sind sehr gute Schnüffler und wissen vielleicht etwas mäh.",
+                text = stringResource(R.string.station_goat_bye_text),
                 btnText = stringResource(R.string.communication_btn),
                 onBtnClick = { navController.navigate(Graph.MAIN) }
             )
@@ -89,5 +95,6 @@ sealed class GoatScreen(val route: String) {
     object Game3 : GoatScreen(route = "GAME3")
     object Game4 : GoatScreen(route = "GAME4")
     object Game5 : GoatScreen(route = "GAME5")
+    object Error : GoatScreen(route = "ERROR")
     object Bye : GoatScreen(route = "BYE")
 }

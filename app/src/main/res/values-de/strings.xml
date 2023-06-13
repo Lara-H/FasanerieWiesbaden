@@ -56,6 +56,7 @@
     <string name="station_goat_greeting_btn">Helfe Björn</string>
     <string name="station_goat_game_text">Schau dir die Bilder der Ziegenrassen auf dem Infoschild genau an</string>
     <string name="station_goat_game_question">Ist das eine Ziege?</string>
+    <string name="station_goat_game_error">Das war leider nicht richtig. Aber versuche es einfach noch einmal!</string>
     <string name="station_goat_bye_text">Vielen Dank für deine Hilfe mäh, nun können wir alle Ziegen zählen mäh! Ich höre du suchst nach einem Schatz mäh. Auf unseren Klettertouren konnten wir leider nichts finden mäh. Aber die Füchse nebenan sind gute Schnüffler und wissen vielleicht etwas määäähr.</string>
 
     <string name="station_fox_greeting_text">LOREM IPSUM</string>

@@ -56,6 +56,7 @@
 <string name="station_goat_greeting_btn">Help Björn</string>
 <string name="station_goat_game_text">Look carefully at the pictures of the goat breeds on the information board</string>
 <string name="station_goat_game_question">Is that a goat?</string>
+<string name="station_goat_game_error">Unfortunately that was not correct. But just try again!</string>
 <string name="station_goat_bye_text">Thanks for your help meh, now we can count all the goats meh! I hear you’re looking for treasure meh. Unfortunately, we could not find anything on our climbing tours meh. But the foxes next door are good snoopers and may know a little more meh.</string>
 
 <string name="station_fox_greeting_text">LOREM IPSUM</string>

@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+
+    // Maps
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -70,4 +73,8 @@ dependencies {
 
     //QR Code
     implementation("com.simonsickle:composed-barcodes:1.1.1")
+
+    // Maps
+    implementation 'com.google.maps.android:maps-compose:2.7.2'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 }

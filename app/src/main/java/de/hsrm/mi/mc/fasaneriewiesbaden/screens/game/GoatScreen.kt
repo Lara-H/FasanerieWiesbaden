@@ -65,7 +65,7 @@ fun GoatScreen(isCorrect: Boolean, imagePath: Int, onCorrectClick: () -> Unit, o
                 id = imagePath),
                 contentDescription = "Animal",
                 modifier = Modifier
-                    .align(Alignment.End)
+                    .align(Alignment.CenterHorizontally)
                     .padding(bottom = MaterialTheme.spacing.large)
             )
             Row(modifier = Modifier.fillMaxWidth()) {

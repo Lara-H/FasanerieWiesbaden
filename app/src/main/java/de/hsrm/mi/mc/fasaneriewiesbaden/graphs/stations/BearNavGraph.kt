@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.BearScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
 fun NavGraphBuilder.bearNavGraph(navController: NavHostController) {
@@ -22,8 +23,12 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController) {
                 imageDescription= "Bear",
                 text = stringResource(R.string.station_bear_greeting_text),
                 btnText = stringResource(R.string.station_bear_greeting_btn),
-                onBtnClick = { }
+                onBtnClick = { navController.navigate(BearScreen.Game.route) }
             )
+        }
+        composable(route = BearScreen.Game.route) {
+            BearScreen(
+                whenDone = { navController.navigate(BearScreen.Bye.route) })
         }
         composable(route = BearScreen.Bye.route) {
             CommunicationScreen(
@@ -40,5 +45,6 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController) {
 
 sealed class BearScreen(val route: String) {
     object Greeting : BearScreen(route = "GREETING")
+    object Game : BearScreen(route = "GAME")
     object Bye : BearScreen(route = "BYE")
 }

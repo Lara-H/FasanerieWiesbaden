@@ -7,13 +7,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.OtterScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
 fun NavGraphBuilder.otterNavGraph(navController: NavHostController) {
 
     navigation(
         route = Graph.OTTER,
-        startDestination = OtterScreen.Greeting.route
+        startDestination = OtterScreen.Game.route
     ) {
         composable(route = OtterScreen.Greeting.route) {
             CommunicationScreen(
@@ -24,6 +25,9 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController) {
                 btnText = stringResource(R.string.station_otter_greeting_btn),
                 onBtnClick = { }
             )
+        }
+        composable(route = OtterScreen.Game.route) {
+            OtterScreen()
         }
         composable(route = OtterScreen.Bye.route) {
             CommunicationScreen(
@@ -40,5 +44,7 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController) {
 
 sealed class OtterScreen(val route: String) {
     object Greeting : OtterScreen(route = "GREETING")
+
+    object Game : OtterScreen(route = "GAME")
     object Bye : OtterScreen(route = "BYE")
 }

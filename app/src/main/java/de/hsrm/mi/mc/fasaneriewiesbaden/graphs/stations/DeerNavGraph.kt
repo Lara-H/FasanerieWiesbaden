@@ -7,13 +7,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.DeerScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
 fun NavGraphBuilder.deerNavGraph(navController: NavHostController) {
 
     navigation(
         route = Graph.DEER,
-        startDestination = DeerScreen.Greeting.route
+        startDestination = DeerScreen.Game.route
     ) {
         composable(route = DeerScreen.Greeting.route) {
             CommunicationScreen(
@@ -24,6 +25,9 @@ fun NavGraphBuilder.deerNavGraph(navController: NavHostController) {
                 btnText = stringResource(R.string.station_deer_greeting_btn),
                 onBtnClick = { }
             )
+        }
+        composable(route = DeerScreen.Game.route) {
+            DeerScreen()
         }
         composable(route = DeerScreen.Bye.route) {
             CommunicationScreen(
@@ -40,5 +44,7 @@ fun NavGraphBuilder.deerNavGraph(navController: NavHostController) {
 
 sealed class DeerScreen(val route: String) {
     object Greeting : DeerScreen(route = "GREETING")
+
+    object Game : DeerScreen(route = "GAME")
     object Bye : DeerScreen(route = "BYE")
 }

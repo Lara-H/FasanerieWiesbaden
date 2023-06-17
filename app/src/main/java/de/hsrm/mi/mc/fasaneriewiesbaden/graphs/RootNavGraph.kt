@@ -21,7 +21,7 @@ fun RootNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = Graph.CHICKEN,
+        startDestination = Graph.MAIN,
     ) {
         introNavGraph(navController = navController)
 

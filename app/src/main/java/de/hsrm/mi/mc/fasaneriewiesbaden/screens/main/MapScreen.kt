@@ -1,32 +1,43 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.main
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun MapScreen() {
-    val start = LatLng(50.10296712995634, 8.19239066804138)
+    val data = Data()
+
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(start, 20f)
+        position = CameraPosition.fromLatLngZoom(LatLng(data.nextStationState.value.mapLatitude, data.nextStationState.value.mapLongitude), 20f)
     }
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState
     ) {
-        Marker(
-            state = MarkerState(position = start),
-            title = "Start",
-            snippet = "Start"
-        )
-
+        data.listStationsState.value.stations.forEach {
+            Marker(
+                state = MarkerState(position = LatLng(it.mapLatitude, it.mapLongitude)),
+                title = it.name,
+                snippet = "Start",
+                icon = if (data.nextStationState.value == it) {
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+                } else {
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)
+                }
+            )
+        }
     }
 }
 

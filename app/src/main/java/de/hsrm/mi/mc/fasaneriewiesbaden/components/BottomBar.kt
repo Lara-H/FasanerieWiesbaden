@@ -3,9 +3,14 @@ package de.hsrm.mi.mc.fasaneriewiesbaden.components
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalAbsoluteTonalElevation
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -24,7 +29,7 @@ fun BottomBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomAppBar() {
+    BottomAppBar(containerColor = MaterialTheme.colorScheme.secondary, contentColor = Color.White) {
         screens.forEach { screen ->
             AddItem(
                 screen = screen,
@@ -45,7 +50,7 @@ fun RowScope.AddItem(
         icon = {
             Icon(
                 imageVector = screen.icon,
-                contentDescription = "Navigation Icon"
+                contentDescription = "Navigation Icon",
             )
         },
         selected = currentDestination?.hierarchy?.any {
@@ -53,7 +58,12 @@ fun RowScope.AddItem(
         } == true,
         onClick = {
             navController.navigate(screen.route)
-        }
+        },
+        colors = androidx.compose.material3.NavigationBarItemDefaults.colors(
+            selectedIconColor = Color.White,
+            unselectedIconColor = MaterialTheme.colorScheme.onSecondary,
+            indicatorColor = MaterialTheme.colorScheme.secondary
+        )
     )
 }
 

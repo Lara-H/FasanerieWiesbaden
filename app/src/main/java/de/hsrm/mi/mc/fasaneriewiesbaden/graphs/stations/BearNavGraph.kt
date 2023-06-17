@@ -14,7 +14,7 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController) {
 
     navigation(
         route = Graph.BEAR,
-        startDestination = BearScreen.Greeting.route
+        startDestination = BearScreen.Game.route
     ) {
         composable(route = BearScreen.Greeting.route) {
             CommunicationScreen(

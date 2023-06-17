@@ -69,7 +69,7 @@ fun BearScreen(whenDone: () -> Unit) {
     ) {
     }
 
-    Box(modifier = Modifier .fillMaxSize() .background(Color.Blue)) {
+    Box(modifier = Modifier .fillMaxSize() .background(MaterialTheme.colorScheme.secondary)) {
         var i = 0
         currentAlignment.forEach {
             Image(

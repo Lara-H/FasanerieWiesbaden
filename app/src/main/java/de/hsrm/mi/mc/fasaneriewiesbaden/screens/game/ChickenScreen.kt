@@ -57,7 +57,7 @@ fun ChickenScreen() {
     val eggSizePx = with(density) {eggSize.roundToPx()}
 
     // random
-    val randomOffsetX = (0 until screenWidthPx-chickenSizePx).shuffled().last().toFloat()
+    val randomOffsetX = (0 until screenWidthPx-eggSizePx).shuffled().last().toFloat()
     val randomOffsetY = (with(density) {offsetTop.dp.roundToPx()} until screenHeightPx-offsetBottom).shuffled().last().toFloat()
 
     Box (modifier = Modifier .fillMaxSize() .background(Color.Green)) {

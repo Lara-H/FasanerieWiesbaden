@@ -24,7 +24,9 @@ fun MainNavGraph(navController: NavHostController) {
         composable(
             route = MainScreen.Map.route
         ) {
-            MapScreen()
+            MapScreen(
+                onBtnClick = { navController.navigate(Graph.FOX) },
+            )
         }
         composable(
             route = MainScreen.Level.route

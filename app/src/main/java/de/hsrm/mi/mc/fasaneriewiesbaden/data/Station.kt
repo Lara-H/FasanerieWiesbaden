@@ -1,5 +1,6 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.data
 
+import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import kotlinx.coroutines.flow.MutableStateFlow
 
 data class StationState(val stations: List<Station>)

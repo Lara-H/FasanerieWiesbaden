@@ -6,11 +6,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CodeScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.TextImageScreen
 
-fun NavGraphBuilder.outroNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.outroNavGraph(navController: NavHostController, data: Data) {
     navigation(
         route = Graph.OUTRO,
         startDestination = OutroScreen.Speech.route
@@ -47,7 +48,7 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController) {
         }
         composable(route = OutroScreen.Code.route) {
             CodeScreen(
-                url = "https://fasanerie.net/"
+                id = data.userID.toString()
             )
         }
     }

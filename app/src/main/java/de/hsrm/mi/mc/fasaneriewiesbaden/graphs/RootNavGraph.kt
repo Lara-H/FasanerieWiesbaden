@@ -22,7 +22,7 @@ fun RootNavGraph(navController: NavHostController, data: Data) {
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = Graph.GOAT,
+        startDestination = Graph.OUTRO,
     ) {
         introNavGraph(navController = navController, data = data)
 
@@ -40,7 +40,7 @@ fun RootNavGraph(navController: NavHostController, data: Data) {
         composable(route = Graph.MAIN) {
             MainScreen(data = data)
         }
-        outroNavGraph(navController = navController)
+        outroNavGraph(navController = navController, data = data)
     }
 }
 

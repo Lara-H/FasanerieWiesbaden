@@ -2,6 +2,7 @@ package de.hsrm.mi.mc.fasaneriewiesbaden.data
 
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import kotlinx.coroutines.flow.MutableStateFlow
+import java.util.UUID
 
 class Station(
     val locationName: String,
@@ -14,6 +15,7 @@ class Station(
 }
 
 class Data() {
+    val userID: UUID = UUID.randomUUID()
     var listStationsState =
         MutableStateFlow(listOf(
             Station("Eingang", "Elli Eichhorn",50.10296712995634, 8.19239066804138, false, Graph.INTRO),

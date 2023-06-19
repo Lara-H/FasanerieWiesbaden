@@ -6,9 +6,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
-fun NavGraphBuilder.introNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) {
+
+    // TODO
+    data.listStationsState.value.stations[0].isDone = true
+    data.nextStationState.value = data.listStationsState.value.stations[1]
+
     navigation(
         route = Graph.INTRO,
         startDestination = IntroScreen.Greeting.route

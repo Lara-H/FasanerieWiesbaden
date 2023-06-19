@@ -1,93 +1,65 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.main
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun LevelScreen() {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        ){
-        Row(modifier = Modifier .fillMaxWidth()) {
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut_full),
-                contentDescription = "Nut",
-                contentScale = ContentScale.Fit
-            )
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut_full),
-                contentDescription = "Nut"
-            )
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
-        }
-        Row(modifier = Modifier .fillMaxWidth()) {
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
-        }
-        Row(modifier = Modifier .fillMaxWidth()) {
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
-        }
-        Row(modifier = Modifier .fillMaxWidth()) {
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
-            Image(
-                modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut),
-                contentDescription = "Nut"
-            )
+fun LevelScreen(data: Data) {
+
+    Column(modifier = Modifier .fillMaxSize() .padding(top = 64.dp, bottom = 80.dp)){
+
+        var i = 0
+        var posInLine = 0
+        val itemsPerLine = 4
+
+        if (data.listStationsState.value.stations.size > 0) {
+            while (i < data.listStationsState.value.stations.size) {
+                Row(modifier = Modifier .fillMaxWidth()) {
+                    posInLine = 0
+                    while ((posInLine < itemsPerLine)) {
+                        if (i < data.listStationsState.value.stations.size) {
+                            val item = data.listStationsState.value.stations[i]
+                            if (item.isDone) {
+                                Image(
+                                    modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
+                                    painter = painterResource(id = R.drawable.nut_full),
+                                    contentDescription = "Nut",
+                                    contentScale = ContentScale.Fit
+                                )
+                            } else {
+                                Image(
+                                    modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
+                                    painter = painterResource(id = R.drawable.nut),
+                                    contentDescription = "Nut",
+                                    contentScale = ContentScale.Fit
+                                )
+                            }
+                        } else {
+                            Box(modifier = Modifier .weight(1f))
+                        }
+                        i++
+                        posInLine++
+                    }
+                }
+            }
         }
     }
 }
@@ -95,5 +67,5 @@ fun LevelScreen() {
 @Preview(showBackground = true)
 @Composable
 fun LevelScreenPreview() {
-    LevelScreen()
+    LevelScreen(data = Data())
 }

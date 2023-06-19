@@ -11,33 +11,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @Composable
 fun InfoScreen() {
-    Column(modifier = Modifier .fillMaxSize() .padding(all = MaterialTheme.spacing.medium)) {
-        Text(text = stringResource(R.string.info_headline))
+    Column(modifier = Modifier .fillMaxSize() .padding(top = 64.dp, bottom = 80.dp) .padding(all = MaterialTheme.spacing.medium)) {
+        Text(text = stringResource(R.string.info_headline), color = MaterialTheme.colorScheme.tertiary)
         Row(modifier = Modifier .fillMaxWidth() .padding(top = MaterialTheme.spacing.medium)) {
             Column(modifier = Modifier .weight(1f)) {
-                Text(text = stringResource(R.string.info_time_early))
+                Text(text = stringResource(R.string.info_time_early), color = MaterialTheme.colorScheme.onBackground)
             }
             Column(modifier = Modifier .weight(1f)) {
-                Text(text = stringResource(R.string.info_animal_bear))
-                Text(text = stringResource(R.string.info_animal_wolf))
-                Text(text = stringResource(R.string.info_animal_lynx))
+                Text(text = stringResource(R.string.info_animal_bear), color = MaterialTheme.colorScheme.onBackground)
+                Text(text = stringResource(R.string.info_animal_wolf), color = MaterialTheme.colorScheme.onBackground)
+                Text(text = stringResource(R.string.info_animal_lynx), color = MaterialTheme.colorScheme.onBackground)
             }
         }
         Row(modifier = Modifier .fillMaxWidth() .padding(top = MaterialTheme.spacing.medium)) {
             Column(modifier = Modifier .weight(1f)) {
-                Text(text = stringResource(R.string.info_time_late))
+                Text(text = stringResource(R.string.info_time_late), color = MaterialTheme.colorScheme.onBackground)
             }
             Column(modifier = Modifier .weight(1f)) {
-                Text(text = stringResource(R.string.info_animal_fox))
-                Text(text = stringResource(R.string.info_animal_racoon))
-                Text(text = stringResource(R.string.info_animal_racoondog))
-                Text(text = stringResource(R.string.info_animal_wildcat))
-                Text(text = stringResource(R.string.info_animal_otter))
+                Text(text = stringResource(R.string.info_animal_fox), color = MaterialTheme.colorScheme.onBackground)
+                Text(text = stringResource(R.string.info_animal_racoon), color = MaterialTheme.colorScheme.onBackground)
+                Text(text = stringResource(R.string.info_animal_racoondog), color = MaterialTheme.colorScheme.onBackground)
+                Text(text = stringResource(R.string.info_animal_wildcat), color = MaterialTheme.colorScheme.onBackground)
+                Text(text = stringResource(R.string.info_animal_otter), color = MaterialTheme.colorScheme.onBackground)
             }
         }
     }

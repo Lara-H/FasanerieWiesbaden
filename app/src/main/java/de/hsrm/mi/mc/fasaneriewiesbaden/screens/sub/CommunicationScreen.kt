@@ -51,12 +51,13 @@ fun CommunicationScreen(title: String, imagePath: Int, imageDescription: String,
         val scroll = rememberScrollState(0)
         Text(
             modifier = Modifier
-                .background(color = Color.Cyan)
+                .background(color = Color.White)
                 .padding(all = MaterialTheme.spacing.medium)
                 .fillMaxWidth()
                 .height(200.dp)
                 .verticalScroll(scroll),
             text = text,
+            color = MaterialTheme.colorScheme.onBackground
         )
 
         BottomButton(

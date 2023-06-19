@@ -9,7 +9,7 @@ class Station(
     val name: String,
     val mapLatitude: Double,
     val mapLongitude: Double,
-    val isDone: Boolean
+    var isDone: Boolean
 ) {
 }
 

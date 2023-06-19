@@ -1,4 +1,4 @@
-package de.hsrm.mi.mc.fasaneriewiesbaden
+package de.hsrm.mi.mc.fasaneriewiesbaden.graphs
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -9,13 +9,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.InfoScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.LevelScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.MapScreen
 
 @Composable
-fun MainNavGraph(navController: NavHostController) {
+fun MainNavGraph(navController: NavHostController, data: Data) {
     NavHost(
         navController = navController,
         route = Graph.MAIN,
@@ -26,12 +26,13 @@ fun MainNavGraph(navController: NavHostController) {
         ) {
             MapScreen(
                 onBtnClick = { navController.navigate(Graph.FOX) },
+                data = data
             )
         }
         composable(
             route = MainScreen.Level.route
         ) {
-            LevelScreen()
+            LevelScreen(data = data)
         }
         composable(
             route = MainScreen.Info.route

@@ -44,17 +44,16 @@ fun GoatScreen(isCorrect: Boolean, imagePath: Int, onCorrectClick: () -> Unit, o
         .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column(modifier = Modifier
-            .padding(all = MaterialTheme.spacing.medium),) {
+        Column() {
+            TopBar(text = stringResource(R.string.title_location_goat), isMainNav = false)
             Text(
-                modifier = Modifier
-                    .padding(bottom = MaterialTheme.spacing.medium),
+                modifier = Modifier .padding(all = MaterialTheme.spacing.medium),
                 text = stringResource(R.string.station_goat_game_text),
             )
             Text(
-                modifier = Modifier
-                    .padding(bottom = MaterialTheme.spacing.medium),
+                modifier = Modifier.padding(start = MaterialTheme.spacing.medium, end = MaterialTheme.spacing.medium, bottom = MaterialTheme.spacing.medium),
                 text = stringResource(R.string.station_goat_game_question),
+                color = MaterialTheme.colorScheme.tertiary
             )
         }
         Column(modifier = Modifier

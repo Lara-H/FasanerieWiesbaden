@@ -11,10 +11,6 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
 fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) {
 
-    // TODO
-    data.listStationsState.value.stations[0].isDone = true
-    data.nextStationState.value = data.listStationsState.value.stations[1]
-
     navigation(
         route = Graph.INTRO,
         startDestination = IntroScreen.Greeting.route
@@ -56,7 +52,11 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) 
                 imageDescription= "Squirrel",
                 text = stringResource(R.string.intro_departure_text),
                 btnText = stringResource(R.string.communication_btn),
-                onBtnClick = { navController.navigate(Graph.MAIN) },
+                onBtnClick = { navController.navigate(Graph.MAIN) {
+                    // TODO
+                    data.listStationsState.value[0].isDone = true
+                    data.currentStationState.value = data.listStationsState.value[1]
+                } },
             )
         }
     }

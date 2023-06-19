@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -30,13 +29,13 @@ fun LevelScreen(data: Data) {
         var posInLine = 0
         val itemsPerLine = 4
 
-        if (data.listStationsState.value.stations.size > 0) {
-            while (i < data.listStationsState.value.stations.size) {
+        if (data.listStationsState.value.isNotEmpty()) {
+            while (i < data.listStationsState.value.size) {
                 Row(modifier = Modifier .fillMaxWidth()) {
                     posInLine = 0
                     while ((posInLine < itemsPerLine)) {
-                        if (i < data.listStationsState.value.stations.size) {
-                            val item = data.listStationsState.value.stations[i]
+                        if (i < data.listStationsState.value.size) {
+                            val item = data.listStationsState.value[i]
                             if (item.isDone) {
                                 Image(
                                     modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),

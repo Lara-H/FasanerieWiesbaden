@@ -25,7 +25,7 @@ fun MainNavGraph(navController: NavHostController, data: Data) {
             route = MainScreen.Map.route
         ) {
             MapScreen(
-                onBtnClick = { navController.navigate(Graph.FOX) },
+                navController = navController,
                 data = data
             )
         }

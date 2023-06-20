@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,14 +33,16 @@ import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import kotlin.math.roundToInt
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ChickenScreen() {
-
     var currentPoints by remember { mutableStateOf(0) }
+    var imgPath by remember { mutableStateOf(R.drawable.egg) }
 
+    // helpers to convert dp to px
     val density = LocalDensity.current
     val configuration = LocalConfiguration.current
 
@@ -58,9 +62,9 @@ fun ChickenScreen() {
 
     // random
     val randomOffsetX = (0 until screenWidthPx-eggSizePx).shuffled().last().toFloat()
-    val randomOffsetY = (with(density) {offsetTop.dp.roundToPx()} until screenHeightPx-offsetBottom).shuffled().last().toFloat()
+    val randomOffsetY = (with(density) {offsetTop.dp.roundToPx()} until screenHeightPx-offsetBottom-chickenSizePx).shuffled().last().toFloat()
 
-    Box (modifier = Modifier .fillMaxSize() .background(Color.Green)) {
+    Box (modifier = Modifier .fillMaxSize() .background(MaterialTheme.colorScheme.background)) {
             var offsetX by remember { mutableStateOf(randomOffsetX) }
             var offsetY by remember { mutableStateOf(randomOffsetY) }
 
@@ -80,12 +84,44 @@ fun ChickenScreen() {
             if (offsetY > (screenHeightPx-offsetBottom).toFloat()) {
                 offsetY = (screenHeightPx-offsetBottom).toFloat()
             }
-            // onHenry
-            if (offsetX > screenWidthPx-chickenSizePx && offsetY > screenHeightPx-chickenSizePx) {
-                currentPoints++
+
+            // onLeftChicken
+            if (offsetX < (screenWidthPx/2) && offsetY > screenHeightPx-chickenSizePx) {
+                if (imgPath == R.drawable.egg_brown) {
+                    currentPoints++
+                }
+                val random = (0..1).shuffled().last()
+                imgPath = if (random == 0) {
+                    R.drawable.egg
+                } else {
+                    R.drawable.egg_brown
+                }
                 offsetX = randomOffsetX
                 offsetY = randomOffsetY
             }
+            // onRightChicken
+            if (offsetX > (screenWidthPx/2) && offsetY > screenHeightPx-chickenSizePx) {
+                if (imgPath == R.drawable.egg) {
+                    currentPoints++
+                }
+                val random = (0..1).shuffled().last()
+                imgPath = if (random == 0) {
+                    R.drawable.egg
+                } else {
+                    R.drawable.egg_brown
+                }
+                offsetX = randomOffsetX
+                offsetY = randomOffsetY
+            }
+
+            Image(
+                painter = painterResource(
+                    id = R.drawable.chicken_brown),
+                contentDescription = "Chicken",
+                modifier = Modifier
+                    .size(chickenSize)
+                    .offset { IntOffset(0, screenHeightPx-chickenSizePx) }
+            )
 
             Image(
                 painter = painterResource(
@@ -97,15 +133,13 @@ fun ChickenScreen() {
             )
 
             Image(
-                painter = painterResource(
-                    id = R.drawable.egg),
+                painter = painterResource(id = imgPath),
                 contentDescription = "Egg",
                 modifier = Modifier
                     .size(eggSize)
                     .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
                     .pointerInput(Unit) {
-                        detectDragGestures { change, dragAmount ->
-                            change.consume()
+                        detectDragGestures { change, dragAmount -> change.consume()
                             offsetX += dragAmount.x
                             offsetY += dragAmount.y
                         }
@@ -120,7 +154,7 @@ fun ChickenScreen() {
 
         Column {
             TopBar(text = stringResource(R.string.title_location_chicken), isMainNav = false)
-            Text(text = "Sammel die Eier ein und übergebe sie Henry")
+            Text(text = "Sammel die Eier ein und übergebe sie dem gleichfarbigen Huhn", modifier = Modifier .padding(all = MaterialTheme.spacing.medium))
         }
 
         ProcessBar(

@@ -7,13 +7,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.BatScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
 fun NavGraphBuilder.batNavGraph(navController: NavHostController) {
 
     navigation(
         route = Graph.BAT,
-        startDestination = BatScreen.Greeting.route
+        startDestination = BatScreen.Game.route
     ) {
         composable(route = BatScreen.Greeting.route) {
             CommunicationScreen(
@@ -24,6 +25,9 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController) {
                 btnText = stringResource(R.string.station_bat_greeting_btn),
                 onBtnClick = { }
             )
+        }
+        composable(route = BatScreen.Game.route) {
+            BatScreen()
         }
         composable(route = BatScreen.Bye.route) {
             CommunicationScreen(
@@ -40,5 +44,7 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController) {
 
 sealed class BatScreen(val route: String) {
     object Greeting : BatScreen(route = "GREETING")
+
+    object Game : BatScreen(route = "GAME")
     object Bye : BatScreen(route = "BYE")
 }

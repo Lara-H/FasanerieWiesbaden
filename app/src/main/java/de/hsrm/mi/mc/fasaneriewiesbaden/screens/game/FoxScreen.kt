@@ -6,15 +6,16 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.accessibility.AccessibilityManager
+import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.rememberTransformableState
-import androidx.compose.foundation.gestures.transformable
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -30,41 +31,80 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
-
+import kotlin.math.roundToInt
+import java.util.Timer
+import kotlin.concurrent.schedule
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun FoxScreen() {
 
+    // helpers to convert dp to px
+    val density = LocalDensity.current
+    val configuration = LocalConfiguration.current
+
+    // device size
+    val screenWidthPx = with(density) {configuration.screenWidthDp.dp.roundToPx()}
+
+    val imgSize = 100.dp
+    val imgSizePx = with(density) {imgSize.roundToPx()}
+
+    var offsetX by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableStateOf(0f) }
+
     var currentPoints by remember { mutableStateOf(0) }
     var moneyVisible by remember { mutableStateOf(0f) }
 
-    var oldrotation by remember { mutableStateOf(0f) }
-    var rotation by remember { mutableStateOf(0f) }
+    var oldroffsetX by remember { mutableStateOf(0f) }
+    var distance by remember { mutableStateOf(0f) }
 
-    val state = rememberTransformableState { zoomChange, offsetChange, rotationChange ->
-        rotation += rotationChange
+    // Start
+    if (offsetX < ((screenWidthPx/2)-(imgSizePx/2))*(-1)) {
+        offsetX = ((screenWidthPx/2)-(imgSizePx/2))*(-1).toFloat()
+    }
+    // End
+    if (offsetX > (screenWidthPx/2)-(imgSizePx/2)) {
+        offsetX = (screenWidthPx/2)-(imgSizePx/2).toFloat()
+    }
+    // Top
+    if (offsetY < imgSizePx*(-1)) {
+        offsetY = imgSizePx*(-1).toFloat()
+    }
+    // Bottom
+    if (offsetY > imgSizePx) {
+        offsetY = imgSizePx.toFloat()
     }
 
-    if ((rotation - oldrotation > 45f)) {
+    distance = oldroffsetX - offsetX
+    if (distance < 0) {
+        distance *= (-1)
+    }
+
+    if (distance > imgSizePx) {
         if (moneyVisible == 0f) {
-            moneyVisible = 1f
-            currentPoints++
-        } else {
-            moneyVisible = 0f
+            val random = (0..5).shuffled().last()
+            if (random == 0) {
+                moneyVisible = 1f
+                currentPoints++
+                Timer().schedule(5000){
+                    moneyVisible = 0f
+                }
+            }
         }
-        oldrotation = rotation
+        oldroffsetX = offsetX
     }
 
     Column(modifier = Modifier
@@ -75,10 +115,10 @@ fun FoxScreen() {
 
         Column() {
             TopBar(text = stringResource(R.string.title_location_fox), isMainNav = false)
-            Text(text = "Rotiere den Bohrer mit zwei Fingern, um zu graben", Modifier.padding(all = MaterialTheme.spacing.medium), color = Color.White)
+            Text(text = "Bewege die Hände mit deinem Finger über das Erdloch, um zu graben", Modifier.padding(all = MaterialTheme.spacing.medium), color = Color.White)
         }
 
-        Box(
+        Box(modifier = Modifier .fillMaxWidth()
         ) {
             Image(
                 painter = painterResource(id = R.drawable.hole),
@@ -87,28 +127,28 @@ fun FoxScreen() {
                     .align(Alignment.Center)
             )
             Image(
-                modifier = Modifier
-                    // apply other transformations like rotation and zoom
-                    // on the pizza slice emoji
-                    .padding(top = 60.dp, bottom = 40.dp)
-                    .graphicsLayer(
-                        rotationZ = rotation,
-                    )
-                    // add transformable to listen to multitouch transformation events
-                    // after offset
-                    .transformable(state = state)
-                    .fillMaxWidth()
-                    .align(Alignment.Center),
-                painter = painterResource(id = R.drawable.drill),
-                contentDescription = "Hole",
-            )
-            Image(
                 painter = painterResource(id = R.drawable.beehome),
                 contentDescription = "Money",
                 modifier = Modifier
+                    .align(Alignment.Center)
                     .size(50.dp)
                     .alpha(moneyVisible)
-                    .align(Alignment.TopCenter)
+                    .offset { IntOffset((imgSizePx*(-1) until imgSizePx).shuffled().last(), (imgSizePx*(-1) until imgSizePx).shuffled().last()) }
+            )
+            Image(
+                modifier = Modifier
+                    .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
+                    .pointerInput(Unit) {
+                        detectDragGestures { change, dragAmount ->
+                            change.consume()
+                            offsetX += dragAmount.x
+                            offsetY += dragAmount.y
+                        }
+                    }
+                    .size(100.dp)
+                    .align(Alignment.Center),
+                painter = painterResource(id = R.drawable.hands),
+                contentDescription = "Hands",
             )
         }
 

@@ -19,7 +19,7 @@ class Data() {
     var listStationsState =
         MutableStateFlow(listOf(
             Station("Eingang", "Elli Eichhorn",50.10296712995634, 8.19239066804138, false, Graph.INTRO),
-            Station("Ziegen", "Björn Bock", 50.103323, 8.192826, false, Graph.GOAT),
+            Station("Zhandiegen", "Björn Bock", 50.103323, 8.192826, false, Graph.GOAT),
             Station("Füchse", "Fiona Fuchs", 50.104116, 8.194161, false, Graph.FOX),
             Station("Bären", "Bruno Bär", 50.106387, 8.196074, false, Graph.BEAR),
             Station("Luchse", "Ludwig Luchs", 50.106107, 8.194052, false, Graph.LYNX),

@@ -22,7 +22,7 @@ fun RootNavGraph(navController: NavHostController, data: Data) {
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = Graph.BAT,
+        startDestination = Graph.FOX,
     ) {
         introNavGraph(navController = navController, data = data)
 

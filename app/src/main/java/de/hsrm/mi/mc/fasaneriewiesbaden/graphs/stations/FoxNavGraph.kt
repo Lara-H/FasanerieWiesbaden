@@ -7,13 +7,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.FoxScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
 fun NavGraphBuilder.foxNavGraph(navController: NavHostController) {
 
     navigation(
         route = Graph.FOX,
-        startDestination = FoxScreen.Greeting.route
+        startDestination = FoxScreen.Game.route
     ) {
         composable(route = FoxScreen.Greeting.route) {
             CommunicationScreen(
@@ -22,8 +23,11 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController) {
                 imageDescription= "Fox",
                 text = stringResource(R.string.station_fox_greeting_text),
                 btnText = stringResource(R.string.station_fox_greeting_btn),
-                onBtnClick = { }
+                onBtnClick = { navController.navigate(FoxScreen.Game.route) }
             )
+        }
+        composable(route = FoxScreen.Game.route) {
+            FoxScreen()
         }
         composable(route = FoxScreen.Bye.route) {
             CommunicationScreen(
@@ -40,5 +44,6 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController) {
 
 sealed class FoxScreen(val route: String) {
     object Greeting : FoxScreen(route = "GREETING")
+    object Game : FoxScreen(route = "GAME")
     object Bye : FoxScreen(route = "BYE")
 }

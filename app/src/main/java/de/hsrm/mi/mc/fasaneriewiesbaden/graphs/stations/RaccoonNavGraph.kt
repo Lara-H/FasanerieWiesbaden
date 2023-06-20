@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.RaccoonScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
 fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController) {
@@ -22,8 +23,11 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController) {
                 imageDescription= "Raccoon",
                 text = stringResource(R.string.station_raccoon_greeting_text),
                 btnText = stringResource(R.string.station_raccoon_greeting_btn),
-                onBtnClick = { }
+                onBtnClick = { navController.navigate(RaccoonScreen.Game.route) }
             )
+        }
+        composable(route = RaccoonScreen.Game.route) {
+            RaccoonScreen()
         }
         composable(route = RaccoonScreen.Bye.route) {
             CommunicationScreen(
@@ -40,5 +44,7 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController) {
 
 sealed class RaccoonScreen(val route: String) {
     object Greeting : RaccoonScreen(route = "GREETING")
+
+    object Game : RaccoonScreen(route = "GAME")
     object Bye : RaccoonScreen(route = "BYE")
 }

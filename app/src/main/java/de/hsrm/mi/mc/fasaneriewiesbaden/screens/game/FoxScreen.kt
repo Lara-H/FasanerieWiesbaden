@@ -1,12 +1,6 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
-import android.view.accessibility.AccessibilityManager
-import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -59,17 +53,18 @@ fun FoxScreen() {
     // device size
     val screenWidthPx = with(density) {configuration.screenWidthDp.dp.roundToPx()}
 
+    // image size
     val imgSize = 100.dp
     val imgSizePx = with(density) {imgSize.roundToPx()}
 
     var offsetX by remember { mutableStateOf(0f) }
     var offsetY by remember { mutableStateOf(0f) }
 
-    var currentPoints by remember { mutableStateOf(0) }
-    var moneyVisible by remember { mutableStateOf(0f) }
-
     var oldroffsetX by remember { mutableStateOf(0f) }
     var distance by remember { mutableStateOf(0f) }
+
+    var currentPoints by remember { mutableStateOf(0) }
+    var moneyVisible by remember { mutableStateOf(0f) }
 
     // Start
     if (offsetX < ((screenWidthPx/2)-(imgSizePx/2))*(-1)) {
@@ -127,11 +122,11 @@ fun FoxScreen() {
                     .align(Alignment.Center)
             )
             Image(
-                painter = painterResource(id = R.drawable.beehome),
+                painter = painterResource(id = R.drawable.money),
                 contentDescription = "Money",
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .size(50.dp)
+                    .size(30.dp)
                     .alpha(moneyVisible)
                     .offset { IntOffset((imgSizePx*(-1) until imgSizePx).shuffled().last(), (imgSizePx*(-1) until imgSizePx).shuffled().last()) }
             )
@@ -159,21 +154,6 @@ fun FoxScreen() {
         )
     }
 
-}
-
-fun Fragment.vibratePhone() {
-    val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-    if (Build.VERSION.SDK_INT >= 26) {
-        vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
-    } else {
-        vibrator.vibrate(200)
-    }
-}
-
-private fun Context.isTouchExplorationEnabled(): Boolean {
-    // can be null during unit tests
-    val accessibilityManager = getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager?
-    return accessibilityManager?.isTouchExplorationEnabled ?: false
 }
 
 @Preview(showBackground = true)

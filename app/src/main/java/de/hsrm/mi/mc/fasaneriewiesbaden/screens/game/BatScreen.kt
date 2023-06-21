@@ -29,7 +29,6 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun BatScreen() {
@@ -62,12 +61,12 @@ fun BatScreen() {
 
             Image(
                 modifier = Modifier
-                    .offset(143.dp, -350.dp)
+                    .offset(143.dp, (-350).dp)
                     .size(150.dp),
                 painter = painterResource(id = R.drawable.drill_1),
                 contentDescription = "Drill",
             )
-            Box(modifier = Modifier .offset(0.dp, -250.dp)) {
+            Box(modifier = Modifier .offset(0.dp, (-250).dp)) {
                 Image(
                     modifier = Modifier
                         // apply other transformations like rotation and zoom
@@ -83,7 +82,7 @@ fun BatScreen() {
                     contentDescription = "Drill",
                 )
             }
-            Box(modifier = Modifier .offset(140.dp, -125.dp)) {
+            Box(modifier = Modifier .offset(140.dp, (-125).dp)) {
                 Image(
                     modifier = Modifier
                         // apply other transformations like rotation and zoom
@@ -116,7 +115,6 @@ fun BatScreen() {
                 )
             }
         }
-
     }
 
 }

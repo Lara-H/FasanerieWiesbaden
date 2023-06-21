@@ -14,10 +14,9 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,20 +30,15 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun GoatScreen(isCorrect: Boolean, imagePath: Int, onCorrectClick: () -> Unit, onFalseClick: () -> Unit) {
-    Scaffold(
-        topBar = { TopBar(text = stringResource(R.string.title_location_goat), isMainNav = false) },
-    ) {
-    }
+fun GoatScreen(isCorrect: Boolean, imagePath: Int, currentPoints: Int, onCorrectClick: () -> Unit, onFalseClick: () -> Unit) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column() {
+        Column {
             TopBar(text = stringResource(R.string.title_location_goat), isMainNav = false)
             Text(
                 modifier = Modifier .padding(all = MaterialTheme.spacing.medium),
@@ -77,6 +71,7 @@ fun GoatScreen(isCorrect: Boolean, imagePath: Int, onCorrectClick: () -> Unit, o
                 Button(modifier = Modifier
                     .weight(1f)
                     .padding(start = MaterialTheme.spacing.medium / 2),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
                     onClick = { handleClick(false, isCorrect, onCorrectClick, onFalseClick) }) {
                     Icon(Icons.Default.Close, "Icon", tint = Color.White)
                 }
@@ -85,7 +80,7 @@ fun GoatScreen(isCorrect: Boolean, imagePath: Int, onCorrectClick: () -> Unit, o
         ProcessBar(
             icon = Icons.Default.Person,
             numberTotal = 5,
-            numberFull = 1
+            numberFull = currentPoints
         )
     }
 }
@@ -104,7 +99,8 @@ fun handleClick(clickedValue: Boolean, correctValue: Boolean, onCorrectClick: ()
 fun GoatScreenPreview() {
     GoatScreen(
         isCorrect = false,
-        imagePath = R.drawable.game_goat_1,
+        imagePath = R.drawable.goat_1,
+        currentPoints = 1,
         onCorrectClick = {},
         onFalseClick = {}
     )

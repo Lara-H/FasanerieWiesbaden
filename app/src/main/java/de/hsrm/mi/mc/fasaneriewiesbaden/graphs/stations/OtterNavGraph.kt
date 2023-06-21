@@ -6,15 +6,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.OtterScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
-fun NavGraphBuilder.otterNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.otterNavGraph(navController: NavHostController, data: Data) {
 
     navigation(
         route = Graph.OTTER,
-        startDestination = OtterScreen.Game.route
+        startDestination = OtterScreen.Greeting.route
     ) {
         composable(route = OtterScreen.Greeting.route) {
             CommunicationScreen(
@@ -23,7 +24,7 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController) {
                 imageDescription= "Otter",
                 text = stringResource(R.string.station_otter_greeting_text),
                 btnText = stringResource(R.string.station_otter_greeting_btn),
-                onBtnClick = { }
+                onBtnClick = { navController.navigate(OtterScreen.Game.route) }
             )
         }
         composable(route = OtterScreen.Game.route) {
@@ -36,7 +37,12 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController) {
                 imageDescription= "Otter",
                 text = stringResource(R.string.station_otter_bye_text),
                 btnText = stringResource(R.string.communication_btn),
-                onBtnClick = { navController.navigate(Graph.MAIN) }
+                onBtnClick = { navController.navigate(Graph.MAIN) {
+                    data.listStationsState.value[data.currentNumberState.value].isDone = true
+                    data.currentNumberState.value++
+                    data.currentStationState.value = data.listStationsState.value[data.currentNumberState.value]
+                    }
+                }
             )
         }
     }

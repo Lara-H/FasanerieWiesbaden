@@ -17,7 +17,6 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
-import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
@@ -37,7 +36,6 @@ fun MapScreen(navController: NavHostController, data: Data) {
                     state = MarkerState(position = LatLng(it.mapLatitude, it.mapLongitude)),
                     title = it.locationName,
                     snippet = it.animalName,
-                    onInfoWindowClick = { navController.navigate(Graph.GOAT) },
                     icon = if (data.currentStationState.value == it) {
                         BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
                     } else {
@@ -49,5 +47,4 @@ fun MapScreen(navController: NavHostController, data: Data) {
     }
 
     TextBox("Bewege dich von deinem Standort aus zum grünen Punkt auf der Karte", Color.White, Color.Black)
-
 }

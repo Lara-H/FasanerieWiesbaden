@@ -34,7 +34,6 @@ import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.res.painterResource
@@ -50,7 +49,9 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType",
+    "MutableCollectionMutableState"
+)
 @Composable
 fun BearScreen(whenDone: () -> Unit) {
 
@@ -71,7 +72,7 @@ fun BearScreen(whenDone: () -> Unit) {
 
     Box(modifier = Modifier .fillMaxSize() .background(MaterialTheme.colorScheme.secondary)) {
         var i = 0
-        currentAlignment.forEach {
+        currentAlignment.forEach { _ ->
             Image(
                 painter = painterResource(
                     id = R.drawable.beehoney),
@@ -137,28 +138,21 @@ fun Modifier.animatePlacement(): Modifier = composed {
         mutableStateOf<Animatable<IntOffset, AnimationVector2D>?>(null)
     }
     this
-        // 🔥 onPlaced should be before offset Modifier
         .onPlaced {
-            // Calculate the position in the parent layout
             targetOffset = it
                 .positionInParent()
                 .round()
         }
         .offset {
-            // Animate to the new target offset when alignment changes.
             val anim = animatable ?: Animatable(targetOffset, IntOffset.VectorConverter)
                 .also {
                     animatable = it
                 }
-
-
             if (anim.targetValue != targetOffset) {
                 scope.launch {
                     anim.animateTo(targetOffset, spring(stiffness = Spring.StiffnessMediumLow))
                 }
             }
-            // Offset the child in the opposite direction to the targetOffset, and slowly catch
-            // up to zero offset via an animation to achieve an overall animated movement.
             animatable?.let { it.value - targetOffset } ?: IntOffset.Zero
         }
 }

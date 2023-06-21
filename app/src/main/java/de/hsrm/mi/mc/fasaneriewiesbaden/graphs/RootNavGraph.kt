@@ -22,20 +22,20 @@ fun RootNavGraph(navController: NavHostController, data: Data) {
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = Graph.OTTER,
+        startDestination = Graph.MAIN,
     ) {
         introNavGraph(navController = navController, data = data)
 
-        goatNavGraph(navController = navController)
-        foxNavGraph(navController = navController)
-        bearNavGraph(navController = navController)
-        lynxNavGraph(navController = navController)
-        deerNavGraph(navController = navController)
-        raccoonNavGraph(navController = navController)
-        owlNavGraph(navController = navController)
-        chickenNavGraph(navController = navController)
-        otterNavGraph(navController = navController)
-        batNavGraph(navController = navController)
+        goatNavGraph(navController = navController, data = data)
+        foxNavGraph(navController = navController, data = data)
+        bearNavGraph(navController = navController, data = data)
+        lynxNavGraph(navController = navController, data = data)
+        deerNavGraph(navController = navController, data = data)
+        raccoonNavGraph(navController = navController, data = data)
+        owlNavGraph(navController = navController, data = data)
+        chickenNavGraph(navController = navController, data = data)
+        otterNavGraph(navController = navController, data = data)
+        batNavGraph(navController = navController, data = data)
 
         composable(route = Graph.RACCOON) {
             MainScreen(data = data)

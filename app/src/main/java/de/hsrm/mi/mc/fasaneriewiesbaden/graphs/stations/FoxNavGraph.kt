@@ -6,15 +6,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.FoxScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
-fun NavGraphBuilder.foxNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.foxNavGraph(navController: NavHostController, data: Data) {
 
     navigation(
         route = Graph.FOX,
-        startDestination = FoxScreen.Game.route
+        startDestination = FoxScreen.Greeting.route
     ) {
         composable(route = FoxScreen.Greeting.route) {
             CommunicationScreen(
@@ -36,7 +37,12 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController) {
                 imageDescription= "Fox",
                 text = stringResource(R.string.station_fox_bye_text),
                 btnText = stringResource(R.string.communication_btn),
-                onBtnClick = { navController.navigate(Graph.MAIN) }
+                onBtnClick = { navController.navigate(Graph.MAIN) {
+                    data.listStationsState.value[data.currentNumberState.value].isDone = true
+                    data.currentNumberState.value++
+                    data.currentStationState.value = data.listStationsState.value[data.currentNumberState.value]
+                    }
+                }
             )
         }
     }

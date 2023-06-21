@@ -6,15 +6,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.DeerScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
-fun NavGraphBuilder.deerNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.deerNavGraph(navController: NavHostController, data: Data) {
 
     navigation(
         route = Graph.DEER,
-        startDestination = DeerScreen.Game.route
+        startDestination = DeerScreen.Greeting.route
     ) {
         composable(route = DeerScreen.Greeting.route) {
             CommunicationScreen(
@@ -23,7 +24,7 @@ fun NavGraphBuilder.deerNavGraph(navController: NavHostController) {
                 imageDescription= "Deer",
                 text = stringResource(R.string.station_deer_greeting_text),
                 btnText = stringResource(R.string.station_deer_greeting_btn),
-                onBtnClick = { }
+                onBtnClick = { navController.navigate(DeerScreen.Game.route) }
             )
         }
         composable(route = DeerScreen.Game.route) {
@@ -36,7 +37,12 @@ fun NavGraphBuilder.deerNavGraph(navController: NavHostController) {
                 imageDescription= "Deer",
                 text = stringResource(R.string.station_deer_bye_text),
                 btnText = stringResource(R.string.communication_btn),
-                onBtnClick = { navController.navigate(Graph.MAIN) }
+                onBtnClick = { navController.navigate(Graph.MAIN) {
+                    data.listStationsState.value[data.currentNumberState.value].isDone = true
+                    data.currentNumberState.value++
+                    data.currentStationState.value = data.listStationsState.value[data.currentNumberState.value]
+                    }
+                }
             )
         }
     }

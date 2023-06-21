@@ -26,13 +26,12 @@ fun LevelScreen(data: Data) {
     Column(modifier = Modifier .fillMaxSize() .padding(top = 64.dp, bottom = 80.dp)){
 
         var i = 0
-        var posInLine = 0
         val itemsPerLine = 4
 
         if (data.listStationsState.value.isNotEmpty()) {
             while (i < data.listStationsState.value.size) {
                 Row(modifier = Modifier .fillMaxWidth()) {
-                    posInLine = 0
+                    var posInLine = 0
                     while ((posInLine < itemsPerLine)) {
                         if (i < data.listStationsState.value.size) {
                             val item = data.listStationsState.value[i]

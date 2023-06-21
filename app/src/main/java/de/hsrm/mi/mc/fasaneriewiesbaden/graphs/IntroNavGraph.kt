@@ -53,10 +53,11 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) 
                 text = stringResource(R.string.intro_departure_text),
                 btnText = stringResource(R.string.communication_btn),
                 onBtnClick = { navController.navigate(Graph.MAIN) {
-                    // TODO
-                    data.listStationsState.value[0].isDone = true
-                    data.currentStationState.value = data.listStationsState.value[1]
-                } },
+                    data.listStationsState.value[data.currentNumberState.value].isDone = true
+                    data.currentNumberState.value++
+                    data.currentStationState.value = data.listStationsState.value[data.currentNumberState.value]
+                    }
+                },
             )
         }
     }

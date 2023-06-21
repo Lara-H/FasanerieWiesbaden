@@ -6,15 +6,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.ChickenScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
-fun NavGraphBuilder.chickenNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.chickenNavGraph(navController: NavHostController, data: Data) {
 
     navigation(
         route = Graph.CHICKEN,
-        startDestination = ChickenScreen.Game.route
+        startDestination = ChickenScreen.Greeting.route
     ) {
         composable(route = ChickenScreen.Greeting.route) {
             CommunicationScreen(
@@ -23,7 +24,7 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController) {
                 imageDescription= "chicken",
                 text = stringResource(R.string.station_chicken_greeting_text),
                 btnText = stringResource(R.string.station_chicken_greeting_btn),
-                onBtnClick = { }
+                onBtnClick = { navController.navigate(ChickenScreen.Game.route) }
             )
         }
         composable(route = ChickenScreen.Game.route) {
@@ -36,7 +37,12 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController) {
                 imageDescription= "chicken",
                 text = stringResource(R.string.station_chicken_bye_text),
                 btnText = stringResource(R.string.communication_btn),
-                onBtnClick = { navController.navigate(Graph.MAIN) }
+                onBtnClick = { navController.navigate(Graph.MAIN) {
+                    data.listStationsState.value[data.currentNumberState.value].isDone = true
+                    data.currentNumberState.value++
+                    data.currentStationState.value = data.listStationsState.value[data.currentNumberState.value]
+                    }
+                }
             )
         }
     }

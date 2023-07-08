@@ -24,7 +24,7 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Bat",
                 text = stringResource(R.string.station_bat_greeting_text),
                 btnText = stringResource(R.string.station_bat_greeting_btn),
-                onBtnClick = { navController.navigate(BatScreen.Game.route) }
+                onBtnClick = { navController.navigate(BatScreen.Bye.route) }
             )
         }
         composable(route = BatScreen.Game.route) {

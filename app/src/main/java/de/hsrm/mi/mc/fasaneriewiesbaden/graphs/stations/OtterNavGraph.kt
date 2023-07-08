@@ -15,7 +15,7 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController, data: Data) 
 
     navigation(
         route = Graph.OTTER,
-        startDestination = OtterScreen.Greeting.route
+        startDestination = OtterScreen.Game.route
     ) {
         composable(route = OtterScreen.Greeting.route) {
             CommunicationScreen(

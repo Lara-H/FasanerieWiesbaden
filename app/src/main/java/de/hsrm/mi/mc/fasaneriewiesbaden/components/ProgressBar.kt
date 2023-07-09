@@ -27,7 +27,7 @@ fun ProcessBar(icon: ImageVector, numberTotal: Int, numberFull: Int) {
         items(numberTotal) { index ->
             var color = Color.White
             if (index < numberFull) {
-                color = Color.Magenta
+                color = MaterialTheme.colorScheme.primary
             }
             Icon(
                 imageVector = icon,

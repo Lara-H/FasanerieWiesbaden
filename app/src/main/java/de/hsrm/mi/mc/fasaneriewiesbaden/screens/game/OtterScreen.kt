@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,22 +30,29 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.Star
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun OtterScreen() {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
+    val imgSize = 150
 
     val viewModel = viewModel<OtterViewModel>(
         factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return OtterViewModel(
-                    screenWidth = screenWidth
+                    screenWidth = screenWidth,
+                    imgSize = imgSize
                 ) as T
             }
         }
     )
+
+    // detect any changes to data and recompose composable
+    viewModel.onUpdate.value
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -55,11 +60,11 @@ fun OtterScreen() {
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
+        // move fishes
         val mainHandler = Handler(Looper.getMainLooper())
-
         mainHandler.post(object : Runnable {
             override fun run() {
-                viewModel.moveFish()
+                viewModel.moveFishes()
                 mainHandler.postDelayed(this, 1000)
                 mainHandler.removeCallbacks(this)
             }
@@ -67,26 +72,24 @@ fun OtterScreen() {
 
         Column {
             TopBar(text = stringResource(R.string.title_location_otter), isMainNav = false)
-            Text(text = "Tippe auf die Fische, um sie zu fangen", modifier = Modifier .padding(all = MaterialTheme.spacing.medium))
-            Button(onClick = { viewModel.moveFish() }) {
-                Text(text = "Bg Color")
-
-            }
+            Text(text = stringResource(R.string.station_otter_game_text), modifier = Modifier .padding(all = MaterialTheme.spacing.medium))
         }
 
-        Image(
-            painter = painterResource(
-                id = R.drawable.fish),
-            contentDescription = "Fish",
-            modifier = Modifier
-                .size(150.dp)
-                .animatePlacement()
-                .offset(x = viewModel.fish.offsetX, y = viewModel.fish.offsetY)
-                .clickable { viewModel.addPoint() }
-        )
+        viewModel.fishes.forEach {
+            Image(
+                painter = painterResource(
+                    id = R.drawable.fish),
+                contentDescription = "Fish",
+                modifier = Modifier
+                    .size(imgSize.dp)
+                    .animatePlacement()
+                    .offset(x = it.offsetX, y = it.offsetY)
+                    .clickable { viewModel.addPoint() }
+            )
+        }
 
         ProcessBar(
-            icon = Icons.Default.Person,
+            icon = Icons.Rounded.Star,
             numberTotal = 5,
             numberFull = viewModel.currentPoints
         )

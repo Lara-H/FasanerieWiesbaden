@@ -24,6 +24,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
@@ -33,7 +36,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 @Composable
 fun RaccoonScreen() {
 
-    var isSelected by remember { mutableStateOf(false)}
+    val viewModel = viewModel<RaccoonViewModel>(
+        factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return RaccoonViewModel() as T
+            }
+        }
+    )
+
+    // detect any changes to data and recompose composable
+    viewModel.onUpdate.value
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -46,43 +58,45 @@ fun RaccoonScreen() {
                 text = stringResource(R.string.station_raccoon_game_text)
             )
 
-        Row() {
-            Image(
-                modifier = Modifier
-                    .weight(1f)
-                    .clickable { isSelected = !isSelected }
-                    .background(if (isSelected) { Color.Red } else { Color.Green })
-                    .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut_full),
-                contentDescription = "Item",
-                contentScale = ContentScale.Fit
-            )
-            Image(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut_full),
-                contentDescription = "Item",
-                contentScale = ContentScale.Fit
-            )
-            Image(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut_full),
-                contentDescription = "Item",
-                contentScale = ContentScale.Fit
-            )
-            Image(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(all = MaterialTheme.spacing.medium),
-                painter = painterResource(id = R.drawable.nut_full),
-                contentDescription = "Item",
-                contentScale = ContentScale.Fit
-            )
-        }
+        Column() {
 
+            var i = 0
+            val itemsPerLine = 3
+
+            if (viewModel.items.isNotEmpty()) {
+                while (i < viewModel.items.size) {
+                    Row(modifier = Modifier .fillMaxWidth()) {
+                        var posInLine = 0
+                        while ((posInLine < itemsPerLine)) {
+                            if ((i < viewModel.items.size) && (!viewModel.items[i].isFound)) {
+                                val item = viewModel.items[i]
+                                Image(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .clickable { viewModel.handleClick(item) }
+                                        .background(
+                                            if ((item.id == viewModel.selectedFirst.value.id) || (item.id == viewModel.selectedSecond.value.id))  {
+                                                viewModel.selectedColor.value
+                                            } else {
+                                                Color.Transparent
+                                            }
+                                        )
+                                        .padding(all = MaterialTheme.spacing.medium),
+                                    painter = painterResource(id = item.imgPath),
+                                    contentDescription = "Item",
+                                    contentScale = ContentScale.Fit
+                                )
+                            } else {
+                                Box(modifier = Modifier .weight(1f))
+                            }
+                            i++
+                            posInLine++
+                        }
+                    }
+                }
+            }
+
+        }
     }
 }
 

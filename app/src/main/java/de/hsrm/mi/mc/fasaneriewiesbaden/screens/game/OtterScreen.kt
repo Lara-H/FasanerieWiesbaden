@@ -30,7 +30,6 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
-import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Star
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

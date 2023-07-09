@@ -15,7 +15,7 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController, data: Data
 
     navigation(
         route = Graph.RACCOON,
-        startDestination = RaccoonScreen.Greeting.route
+        startDestination = RaccoonScreen.Game.route
     ) {
         composable(route = RaccoonScreen.Greeting.route) {
             CommunicationScreen(

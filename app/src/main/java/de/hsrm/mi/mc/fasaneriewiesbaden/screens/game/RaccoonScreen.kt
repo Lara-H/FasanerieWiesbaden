@@ -14,13 +14,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,7 +28,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
@@ -47,6 +44,9 @@ fun RaccoonScreen() {
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
 
+    // haptic feedback
+    val haptic = LocalHapticFeedback.current
+
     Column(modifier = Modifier
         .fillMaxSize()
         .background(MaterialTheme.colorScheme.background),
@@ -58,7 +58,7 @@ fun RaccoonScreen() {
                 text = stringResource(R.string.station_raccoon_game_text)
             )
 
-        Column() {
+        Column {
 
             var i = 0
             val itemsPerLine = 3
@@ -73,7 +73,8 @@ fun RaccoonScreen() {
                                 Image(
                                     modifier = Modifier
                                         .weight(1f)
-                                        .clickable { viewModel.handleClick(item) }
+                                        .clickable { viewModel.handleClick(item); haptic.performHapticFeedback(
+                                            HapticFeedbackType.LongPress) }
                                         .background(
                                             if ((item.id == viewModel.selectedFirst.value.id) || (item.id == viewModel.selectedSecond.value.id))  {
                                                 viewModel.selectedColor.value

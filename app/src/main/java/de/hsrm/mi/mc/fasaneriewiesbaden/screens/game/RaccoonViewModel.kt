@@ -1,7 +1,5 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
 
-import android.view.HapticFeedbackConstants
-import android.view.View
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color

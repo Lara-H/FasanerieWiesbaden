@@ -37,5 +37,5 @@ class OtterViewModel(val screenWidth: Dp, val imgSize: Int): ViewModel() {
         currentPoints++
     }
 
-    inner class Fish(var offsetX: Dp = (((imgSize*3)*(-1))..(imgSize*(-1))).shuffled().last().dp, var offsetY: Dp = ((-50)..50).shuffled().last().dp, var speed: Dp = (5..25).shuffled().last().dp)
+    inner class Fish(var offsetX: Dp = (((imgSize*3)*(-1))..(imgSize*(-1))).shuffled().last().dp, var offsetY: Dp = ((-50)..50).shuffled().last().dp, var speed: Dp = (0..10).shuffled().last().dp)
 }

@@ -15,7 +15,7 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: Data) {
 
     navigation(
         route = Graph.BAT,
-        startDestination = BatScreen.Greeting.route
+        startDestination = BatScreen.Game.route
     ) {
         composable(route = BatScreen.Greeting.route) {
             CommunicationScreen(

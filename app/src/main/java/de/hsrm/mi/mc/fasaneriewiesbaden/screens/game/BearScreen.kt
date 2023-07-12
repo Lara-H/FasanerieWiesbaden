@@ -30,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.rotate
@@ -42,6 +41,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
@@ -55,15 +57,18 @@ import kotlinx.coroutines.launch
 @Composable
 fun BearScreen(whenDone: () -> Unit) {
 
-    var currentPoints by remember { mutableStateOf(0) }
-    var currentRotation by remember { mutableStateOf(30f) }
-    val rotate: Float by animateFloatAsState(currentRotation)
+    val viewModel = viewModel<BearViewModel>(
+        factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return BearViewModel() as T
+            }
+        }
+    )
 
-    val currentAlignment by remember { mutableStateOf(mutableListOf(Alignment.TopCenter, Alignment.TopCenter, Alignment.TopCenter, Alignment.TopCenter, Alignment.TopCenter)) }
+    val rotate: Float by animateFloatAsState(viewModel.currentRotation)
 
-    if (currentPoints >= currentAlignment.size) {
-        whenDone()
-    }
+    // detect any changes to data and recompose composable
+    viewModel.onUpdate.value
 
     Scaffold(
         topBar = { TopBar(text = stringResource(R.string.title_location_bear), isMainNav = false) },
@@ -71,19 +76,21 @@ fun BearScreen(whenDone: () -> Unit) {
     }
 
     Box(modifier = Modifier .fillMaxSize() .background(MaterialTheme.colorScheme.secondary)) {
-        var i = 0
-        currentAlignment.forEach { _ ->
+        viewModel.drops.forEach {
+            var alignment = Alignment.TopCenter
+            if (it.isDropped) {
+                alignment = Alignment.BottomCenter
+            }
             Image(
                 painter = painterResource(
-                    id = R.drawable.beehoney),
+                    id = it.imgPath),
                 contentDescription = "Honey",
                 modifier = Modifier
                     .padding(top = MaterialTheme.spacing.extraLarge)
                     .animatePlacement()
                     .size(50.dp, 50.dp)
-                    .align(currentAlignment[i]),
+                    .align(alignment),
             )
-            i++
         }
     }
 
@@ -111,9 +118,9 @@ fun BearScreen(whenDone: () -> Unit) {
                             .padding(start = MaterialTheme.spacing.extraLarge, top = MaterialTheme.spacing.large, end = MaterialTheme.spacing.extraLarge)
                             .rotate(rotate)
                             .clickable {
-                                currentRotation *= (-1)
-                                currentPoints++
-                                currentAlignment[currentPoints-1] = BottomCenter
+                                viewModel.rotate()
+                                viewModel.addPoint()
+                                viewModel.drop()
                             }
                     )
                 }
@@ -122,8 +129,8 @@ fun BearScreen(whenDone: () -> Unit) {
 
         ProcessBar(
             icon = Icons.Default.Person,
-            numberTotal = currentAlignment.size,
-            numberFull = currentPoints
+            numberTotal = viewModel.drops.size,
+            numberFull = viewModel.currentPoints
         )
 
 

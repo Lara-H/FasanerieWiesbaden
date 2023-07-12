@@ -8,13 +8,14 @@ import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.LynxScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 
 fun NavGraphBuilder.lynxNavGraph(navController: NavHostController, data: Data) {
 
     navigation(
         route = Graph.LYNX,
-        startDestination = LynxScreen.Greeting.route
+        startDestination = LynxScreen.Game.route
     ) {
         composable(route = LynxScreen.Greeting.route) {
             CommunicationScreen(
@@ -25,6 +26,9 @@ fun NavGraphBuilder.lynxNavGraph(navController: NavHostController, data: Data) {
                 btnText = stringResource(R.string.station_lynx_greeting_btn),
                 onBtnClick = { }
             )
+        }
+        composable(route = LynxScreen.Game.route) {
+            LynxScreen()
         }
         composable(route = LynxScreen.Bye.route) {
             CommunicationScreen(
@@ -46,5 +50,6 @@ fun NavGraphBuilder.lynxNavGraph(navController: NavHostController, data: Data) {
 
 sealed class LynxScreen(val route: String) {
     object Greeting : LynxScreen(route = "GREETING")
+    object Game : LynxScreen(route = "GAME")
     object Bye : LynxScreen(route = "BYE")
 }

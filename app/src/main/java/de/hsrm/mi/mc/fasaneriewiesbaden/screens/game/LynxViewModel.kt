@@ -7,16 +7,20 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import java.util.UUID
 
 class LynxViewModel: ViewModel() {
-    val imgLst = listOf(R.drawable.lynx_1, R.drawable.lynx_1, R.drawable.lynx_2, R.drawable.lynx_3, R.drawable.lynx_4, R.drawable.lynx_5)
+    val itemImgAltText = "Item"
+    val imgLst = listOf(R.drawable.lynx_placeholder, R.drawable.lynx_1, R.drawable.lynx_2, R.drawable.lynx_3, R.drawable.lynx_4, R.drawable.lynx_5, R.drawable.lynx_6)
+
+    var isDone = mutableStateOf(false)
+        private set
     var onUpdate = mutableStateOf(0)
         private set
     var items = mutableStateListOf(
-        Item(imgLstKey = 0),
-        Item(imgLstKey = 0),
-        Item(imgLstKey = 0),
-        Item(imgLstKey = 0),
-        Item(imgLstKey = 0),
-        Item(imgLstKey = 0),
+        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_1),
+        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_2),
+        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_3),
+        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_4),
+        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_5),
+        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_6),
         )
         private set
 
@@ -32,14 +36,29 @@ class LynxViewModel: ViewModel() {
                 }
             }
         }
+        checkIfCorrect()
         updateUI()
+    }
+
+    private fun checkIfCorrect() {
+        var allRight = true
+        var i = 1
+        items.forEach {
+            if (it.imgLstKey != i) {
+                allRight = false
+            }
+            i++
+        }
+        if (allRight) {
+            isDone.value = true
+        }
     }
 
     private fun updateUI() {
         onUpdate.value = (0..1_000_000).random()
     }
 
-    inner class Item(val id: UUID = UUID.randomUUID(), var imgLstKey: Int) {
+    inner class Item(val id: UUID = UUID.randomUUID(), var imgLstKey: Int, val imgCube: Int) {
         var imgPath = imgLst[imgLstKey]
     }
 }

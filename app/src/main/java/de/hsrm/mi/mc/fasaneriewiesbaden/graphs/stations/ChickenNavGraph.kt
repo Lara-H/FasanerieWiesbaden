@@ -49,7 +49,7 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController, data: Data
 }
 
 sealed class ChickenScreen(val route: String) {
-    object Greeting : ChickenScreen(route = "GREETING")
-    object Game : ChickenScreen(route = "GAME")
-    object Bye : ChickenScreen(route = "BYE")
+    object Greeting : ChickenScreen(route = "CHICKEN_GREETING")
+    object Game : ChickenScreen(route = "CHICKEN_GAME")
+    object Bye : ChickenScreen(route = "CHICKEN_BYE")
 }

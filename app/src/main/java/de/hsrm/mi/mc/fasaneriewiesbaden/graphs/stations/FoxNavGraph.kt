@@ -49,7 +49,7 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController, data: Data) {
 }
 
 sealed class FoxScreen(val route: String) {
-    object Greeting : FoxScreen(route = "GREETING")
-    object Game : FoxScreen(route = "GAME")
-    object Bye : FoxScreen(route = "BYE")
+    object Greeting : FoxScreen(route = "FOX_GREETING")
+    object Game : FoxScreen(route = "FOX_GAME")
+    object Bye : FoxScreen(route = "FOX_BYE")
 }

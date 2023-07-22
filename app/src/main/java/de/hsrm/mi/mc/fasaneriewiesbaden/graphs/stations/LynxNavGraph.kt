@@ -15,7 +15,7 @@ fun NavGraphBuilder.lynxNavGraph(navController: NavHostController, data: Data) {
 
     navigation(
         route = Graph.LYNX,
-        startDestination = LynxScreen.Game.route
+        startDestination = LynxScreen.Greeting.route
     ) {
         composable(route = LynxScreen.Greeting.route) {
             CommunicationScreen(
@@ -24,11 +24,13 @@ fun NavGraphBuilder.lynxNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Lynx",
                 text = stringResource(R.string.station_lynx_greeting_text),
                 btnText = stringResource(R.string.station_lynx_greeting_btn),
-                onBtnClick = { }
+                onBtnClick = { navController.navigate(LynxScreen.Game.route) }
             )
         }
         composable(route = LynxScreen.Game.route) {
-            LynxScreen()
+            LynxScreen(
+                onDone = { navController.navigate(LynxScreen.Bye.route) }
+            )
         }
         composable(route = LynxScreen.Bye.route) {
             CommunicationScreen(
@@ -49,7 +51,7 @@ fun NavGraphBuilder.lynxNavGraph(navController: NavHostController, data: Data) {
 }
 
 sealed class LynxScreen(val route: String) {
-    object Greeting : LynxScreen(route = "GREETING")
-    object Game : LynxScreen(route = "GAME")
-    object Bye : LynxScreen(route = "BYE")
+    object Greeting : LynxScreen(route = "LYNX_GREETING")
+    object Game : LynxScreen(route = "LYNX_GAME")
+    object Bye : LynxScreen(route = "LYNX_BYE")
 }

@@ -55,8 +55,8 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController, data: Data) 
 }
 
 sealed class OutroScreen(val route: String) {
-    object Speech : OutroScreen(route = "SPEECH")
-    object Treasure : OutroScreen(route = "TREASURE")
-    object Thanks : OutroScreen(route = "THANKS")
-    object Code : OutroScreen(route = "CODE")
+    object Speech : OutroScreen(route = "OUTRO_SPEECH")
+    object Treasure : OutroScreen(route = "OUTRO_TREASURE")
+    object Thanks : OutroScreen(route = "OUTRO_THANKS")
+    object Code : OutroScreen(route = "OUTRO_CODE")
 }

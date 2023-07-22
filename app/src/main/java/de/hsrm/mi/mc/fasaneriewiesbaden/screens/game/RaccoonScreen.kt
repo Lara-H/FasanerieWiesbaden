@@ -31,8 +31,9 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun RaccoonScreen() {
+fun RaccoonScreen(onDone: () -> Unit) {
 
+    // viewmodel
     val viewModel = viewModel<RaccoonViewModel>(
         factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -40,6 +41,11 @@ fun RaccoonScreen() {
             }
         }
     )
+
+    // check if done
+    if (viewModel.isDone.value) {
+        onDone()
+    }
 
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
@@ -84,7 +90,7 @@ fun RaccoonScreen() {
                                         )
                                         .padding(all = MaterialTheme.spacing.medium),
                                     painter = painterResource(id = item.imgPath),
-                                    contentDescription = "Item",
+                                    contentDescription = viewModel.itemImgAltText,
                                     contentScale = ContentScale.Fit
                                 )
                             } else {
@@ -104,5 +110,5 @@ fun RaccoonScreen() {
 @Preview(showBackground = true)
 @Composable
 fun RaccoonScreenPreview() {
-    RaccoonScreen()
+    RaccoonScreen(onDone = {})
 }

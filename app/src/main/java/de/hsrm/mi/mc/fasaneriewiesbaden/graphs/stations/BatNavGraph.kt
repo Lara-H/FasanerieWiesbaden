@@ -15,7 +15,7 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: Data) {
 
     navigation(
         route = Graph.BAT,
-        startDestination = BatScreen.Game.route
+        startDestination = BatScreen.Greeting.route
     ) {
         composable(route = BatScreen.Greeting.route) {
             CommunicationScreen(
@@ -24,7 +24,7 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Bat",
                 text = stringResource(R.string.station_bat_greeting_text),
                 btnText = stringResource(R.string.station_bat_greeting_btn),
-                onBtnClick = { navController.navigate(BatScreen.Bye.route) }
+                onBtnClick = { navController.navigate(BatScreen.Game.route) }
             )
         }
         composable(route = BatScreen.Game.route) {
@@ -49,7 +49,7 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: Data) {
 }
 
 sealed class BatScreen(val route: String) {
-    object Greeting : BatScreen(route = "GREETING")
-    object Game : BatScreen(route = "GAME")
-    object Bye : BatScreen(route = "BYE")
+    object Greeting : BatScreen(route = "BAT_GREETING")
+    object Game : BatScreen(route = "BAT_GAME")
+    object Bye : BatScreen(route = "BAT_BYE")
 }

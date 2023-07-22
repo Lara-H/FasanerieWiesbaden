@@ -9,12 +9,16 @@ import java.util.Timer
 import java.util.UUID
 import kotlin.concurrent.schedule
 
-class RaccoonViewModel(): ViewModel() {
+class RaccoonViewModel: ViewModel() {
     private val emptyItem = Item(imgPath = 0)
     private val colorUndecided = Color.Gray
     private val colorWrong = Color.Red
     private val colorCorrect = Color.Green
 
+    val itemImgAltText = "SockItem"
+
+    var isDone = mutableStateOf(false)
+        private set
     var onUpdate = mutableStateOf(0)
         private set
     var items = mutableStateListOf(
@@ -59,6 +63,7 @@ class RaccoonViewModel(): ViewModel() {
                 selectedFirst = mutableStateOf(emptyItem)
                 selectedSecond = mutableStateOf(emptyItem)
                 selectedColor = mutableStateOf(colorUndecided)
+                checkIfAllFound()
                 updateUI()
             }
         }
@@ -66,7 +71,7 @@ class RaccoonViewModel(): ViewModel() {
 
     private fun foundPair(imgPath: Int) {
         val newItems = mutableStateListOf<Item>()
-        items.forEach() {
+        items.forEach {
             if (it.imgPath != imgPath) {
                 newItems.add(it)
             } else {
@@ -80,5 +85,18 @@ class RaccoonViewModel(): ViewModel() {
     private fun updateUI() {
         onUpdate.value = (0..1_000_000).random()
     }
+
+    private fun checkIfAllFound() {
+        var allFound = true
+        items.forEach {
+            if (!it.isFound) {
+                allFound = false
+            }
+        }
+        if (allFound) {
+            isDone.value = true
+        }
+    }
+
     inner class Item(val id: UUID = UUID.randomUUID(), val imgPath: Int, val isFound: Boolean = false)
 }

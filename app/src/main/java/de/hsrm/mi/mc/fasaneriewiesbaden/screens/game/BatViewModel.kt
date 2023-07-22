@@ -6,32 +6,74 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import kotlinx.coroutines.delay
+import java.util.Timer
 import java.util.UUID
+import kotlin.concurrent.schedule
 
-class BatViewModel(val screenWidth: Dp): ViewModel() {
+class BatViewModel(val doorWidth: Dp): ViewModel() {
+    private val paddingBorder = 10.dp
+    val drillWidth = doorWidth/2 - paddingBorder
+    var isDone = mutableStateOf(false)
+        private set
+    var gameIsDone = mutableStateOf(false)
+        private set
+    var offsetDoor = mutableStateOf(0.dp)
+        private set
+    var visible = mutableStateOf(true)
+        private set
     var onUpdate = mutableStateOf(0)
         private set
-    // TODO: Größen abhängig von Screengröße machen, nicht fest
+
     var drills = mutableStateListOf(
-        Drill(rotation = 0f, offsetX = 143.dp, offsetY = (-350).dp, size = 150.dp, imgPath = R.drawable.drill_1, isRotateable = false),
-        Drill(rotation = 123f, offsetX = 0.dp, offsetY = (-250).dp, size = 180.dp, imgPath = R.drawable.drill_2),
-        Drill(rotation = 321f, offsetX = 140.dp, offsetY = (-125).dp, size = 180.dp, imgPath = R.drawable.drill_3),
-        Drill(rotation = 147f, offsetX = 0.dp, offsetY = 0.dp, size = 180.dp, imgPath = R.drawable.drill_4),
+        Drill(rotation = 0f, offsetX = doorWidth-drillWidth-paddingBorder, offsetY = paddingBorder, imgPath = R.drawable.drill_1, isRotateable = false),
+        Drill(rotation = (10..350).random().toFloat(), offsetX = paddingBorder, offsetY = paddingBorder, imgPath = R.drawable.drill_2),
+        Drill(rotation = (10..350).random().toFloat(), offsetX = paddingBorder, offsetY = drillWidth+paddingBorder, imgPath = R.drawable.drill_3),
+        Drill(rotation = (10..350).random().toFloat(), offsetX = paddingBorder, offsetY = drillWidth*2+paddingBorder, imgPath = R.drawable.drill_4),
+        Drill(rotation = (10..350).random().toFloat(), offsetX = doorWidth-drillWidth-paddingBorder, offsetY = drillWidth*2+paddingBorder, imgPath = R.drawable.drill_5),
         )
         private set
 
     fun rotate(id: UUID, rotationChange: Float) {
-        drills.forEach() {
-            if ((it.id == id) && it.isRotateable) {
-                it.rotation += rotationChange
-                updateUI()
+        if (visible.value) {
+            drills.forEach {
+                if ((it.id == id) && it.isRotateable) {
+                    it.rotation += rotationChange
+                    checkIfDone()
+                    updateUI()
+                }
             }
         }
+    }
+
+    private fun checkIfDone() {
+        var allDone = true
+        drills.forEach {
+            if (it.rotation > 5 && it.rotation < 355) {
+                allDone = false
+            }
+        }
+        if (allDone) {
+            visible.value = false
+            updateUI()
+            Timer().schedule(5000) {
+                gameIsDone.value = true
+            }
+        }
+    }
+
+    fun openDoor() {
+        val newOffsetDoor = mutableStateOf(offsetDoor.value - 5.dp)
+        offsetDoor = newOffsetDoor
+        if (offsetDoor.value > doorWidth) {
+            isDone.value = true
+        }
+        updateUI()
     }
 
     private fun updateUI() {
         onUpdate.value = (0..1_000_000).random()
     }
 
-    inner class Drill(val id: UUID = UUID.randomUUID(), var rotation: Float, val offsetX: Dp, val offsetY: Dp, val size: Dp, val imgPath: Int, val isRotateable: Boolean = true)
+    inner class Drill(val id: UUID = UUID.randomUUID(), var rotation: Float, val offsetX: Dp, val offsetY: Dp, val size: Dp = drillWidth, val imgPath: Int, val isRotateable: Boolean = true)
 }

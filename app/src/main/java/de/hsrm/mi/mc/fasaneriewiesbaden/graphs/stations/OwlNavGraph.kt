@@ -45,6 +45,6 @@ fun NavGraphBuilder.owlNavGraph(navController: NavHostController, data: Data) {
 }
 
 sealed class OwlScreen(val route: String) {
-    object Greeting : OwlScreen(route = "GREETING")
-    object Bye : OwlScreen(route = "BYE")
+    object Greeting : OwlScreen(route = "OWL_GREETING")
+    object Bye : OwlScreen(route = "OWL_BYE")
 }

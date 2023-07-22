@@ -15,7 +15,7 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController, data: Data
 
     navigation(
         route = Graph.RACCOON,
-        startDestination = RaccoonScreen.Game.route
+        startDestination = RaccoonScreen.Greeting.route
     ) {
         composable(route = RaccoonScreen.Greeting.route) {
             CommunicationScreen(
@@ -28,7 +28,9 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController, data: Data
             )
         }
         composable(route = RaccoonScreen.Game.route) {
-            RaccoonScreen()
+            RaccoonScreen(
+                onDone = { navController.navigate(RaccoonScreen.Bye.route) }
+            )
         }
         composable(route = RaccoonScreen.Bye.route) {
             CommunicationScreen(
@@ -49,8 +51,7 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController, data: Data
 }
 
 sealed class RaccoonScreen(val route: String) {
-    object Greeting : RaccoonScreen(route = "GREETING")
-
-    object Game : RaccoonScreen(route = "GAME")
-    object Bye : RaccoonScreen(route = "BYE")
+    object Greeting : RaccoonScreen(route = "RACCOON_GREETING")
+    object Game : RaccoonScreen(route = "RACCOON_GAME")
+    object Bye : RaccoonScreen(route = "RACCOON_BYE")
 }

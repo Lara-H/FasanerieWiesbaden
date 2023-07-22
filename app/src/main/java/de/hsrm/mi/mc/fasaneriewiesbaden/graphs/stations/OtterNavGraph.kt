@@ -15,7 +15,7 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController, data: Data) 
 
     navigation(
         route = Graph.OTTER,
-        startDestination = OtterScreen.Game.route
+        startDestination = OtterScreen.Greeting.route
     ) {
         composable(route = OtterScreen.Greeting.route) {
             CommunicationScreen(
@@ -28,7 +28,9 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController, data: Data) 
             )
         }
         composable(route = OtterScreen.Game.route) {
-            OtterScreen()
+            OtterScreen(
+                onDone = { navController.navigate(OtterScreen.Bye.route) }
+            )
         }
         composable(route = OtterScreen.Bye.route) {
             CommunicationScreen(
@@ -49,8 +51,7 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController, data: Data) 
 }
 
 sealed class OtterScreen(val route: String) {
-    object Greeting : OtterScreen(route = "GREETING")
-
-    object Game : OtterScreen(route = "GAME")
-    object Bye : OtterScreen(route = "BYE")
+    object Greeting : OtterScreen(route = "OTTER_GREETING")
+    object Game : OtterScreen(route = "OTTER_GAME")
+    object Bye : OtterScreen(route = "OTTER_BYE")
 }

@@ -100,12 +100,12 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController, data: Data) {
 }
 
 sealed class GoatScreen(val route: String) {
-    object Greeting : GoatScreen(route = "GREETING")
+    object Greeting : GoatScreen(route = "GOAT_GREETING")
     object Game1 : GoatScreen(route = "GAME1")
     object Game2 : GoatScreen(route = "GAME2")
     object Game3 : GoatScreen(route = "GAME3")
     object Game4 : GoatScreen(route = "GAME4")
     object Game5 : GoatScreen(route = "GAME5")
-    object Bye : GoatScreen(route = "BYE")
+    object Bye : GoatScreen(route = "GOAT_BYE")
     object Error : GoatScreen(route = "ERROR")
 }

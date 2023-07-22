@@ -50,7 +50,7 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController, data: Data) {
 }
 
 sealed class BearScreen(val route: String) {
-    object Greeting : BearScreen(route = "GREETING")
-    object Game : BearScreen(route = "GAME")
-    object Bye : BearScreen(route = "BYE")
+    object Greeting : BearScreen(route = "BEAR_GREETING")
+    object Game : BearScreen(route = "BEAR_GAME")
+    object Bye : BearScreen(route = "BEAR_BYE")
 }

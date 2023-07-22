@@ -7,8 +7,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
+import de.hsrm.mi.mc.fasaneriewiesbaden.R
 
-class OtterViewModel(val screenWidth: Dp, val imgSize: Int): ViewModel() {
+class OtterViewModel(val screenWidth: Dp): ViewModel() {
+    val fishImgPath = R.drawable.fish
+    val fishImgSize = 150
+    val fishImgAltText = "Fish"
+
+    val totalPoints = 5
+
+    var isDone = mutableStateOf(false)
+        private set
     var onUpdate = mutableStateOf(0)
         private set
     var fishes = mutableStateListOf(Fish(), (Fish()), (Fish()))
@@ -35,7 +44,10 @@ class OtterViewModel(val screenWidth: Dp, val imgSize: Int): ViewModel() {
 
     fun addPoint() {
         currentPoints++
+        if (currentPoints >= totalPoints) {
+            isDone.value = true
+        }
     }
 
-    inner class Fish(var offsetX: Dp = (((imgSize*3)*(-1))..(imgSize*(-1))).shuffled().last().dp, var offsetY: Dp = ((-50)..50).shuffled().last().dp, var speed: Dp = (0..10).shuffled().last().dp)
+    inner class Fish(var offsetX: Dp = (((fishImgSize*3)*(-1))..(fishImgSize*(-1))).shuffled().last().dp, var offsetY: Dp = ((-50)..50).shuffled().last().dp, var speed: Dp = (0..10).shuffled().last().dp)
 }

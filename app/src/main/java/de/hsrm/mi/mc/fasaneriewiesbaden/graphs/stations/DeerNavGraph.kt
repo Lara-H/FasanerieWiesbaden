@@ -49,8 +49,8 @@ fun NavGraphBuilder.deerNavGraph(navController: NavHostController, data: Data) {
 }
 
 sealed class DeerScreen(val route: String) {
-    object Greeting : DeerScreen(route = "GREETING")
+    object Greeting : DeerScreen(route = "DEER_GREETING")
 
-    object Game : DeerScreen(route = "GAME")
-    object Bye : DeerScreen(route = "BYE")
+    object Game : DeerScreen(route = "DEER_GAME")
+    object Bye : DeerScreen(route = "DEER_BYE")
 }

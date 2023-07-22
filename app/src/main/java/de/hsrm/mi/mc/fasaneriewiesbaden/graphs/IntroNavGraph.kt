@@ -64,8 +64,8 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) 
 }
 
 sealed class IntroScreen(val route: String) {
-    object Greeting : IntroScreen(route = "GREETING")
-    object Explanation : IntroScreen(route = "EXPLANATION")
-    object Meeting : IntroScreen(route = "MEETING")
-    object Departure : IntroScreen(route = "DEPARTURE")
+    object Greeting : IntroScreen(route = "INTRO_GREETING")
+    object Explanation : IntroScreen(route = "INTRO_EXPLANATION")
+    object Meeting : IntroScreen(route = "INTRO_MEETING")
+    object Departure : IntroScreen(route = "INTRO_DEPARTURE")
 }

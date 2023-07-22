@@ -34,17 +34,17 @@ import androidx.compose.material.icons.rounded.Star
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun OtterScreen() {
+fun OtterScreen(onDone: () -> Unit) {
+    // screen size
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
-    val imgSize = 150
 
+    // viewmodel
     val viewModel = viewModel<OtterViewModel>(
         factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return OtterViewModel(
                     screenWidth = screenWidth,
-                    imgSize = imgSize
                 ) as T
             }
         }
@@ -52,6 +52,11 @@ fun OtterScreen() {
 
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
+
+    // check if done
+    if (viewModel.isDone.value) {
+        onDone()
+    }
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -77,10 +82,10 @@ fun OtterScreen() {
         viewModel.fishes.forEach {
             Image(
                 painter = painterResource(
-                    id = R.drawable.fish),
-                contentDescription = "Fish",
+                    id = viewModel.fishImgPath),
+                contentDescription = viewModel.fishImgAltText,
                 modifier = Modifier
-                    .size(imgSize.dp)
+                    .size(viewModel.fishImgSize.dp)
                     .animatePlacement()
                     .offset(x = it.offsetX, y = it.offsetY)
                     .clickable { viewModel.addPoint() }
@@ -89,7 +94,7 @@ fun OtterScreen() {
 
         ProcessBar(
             icon = Icons.Rounded.Star,
-            numberTotal = 5,
+            numberTotal = viewModel.totalPoints,
             numberFull = viewModel.currentPoints
         )
     }
@@ -98,5 +103,5 @@ fun OtterScreen() {
 @Preview(showBackground = true)
 @Composable
 fun OtterScreenPreview() {
-    OtterScreen()
+    OtterScreen(onDone = {})
 }

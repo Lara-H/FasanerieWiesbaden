@@ -28,7 +28,15 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: Data) {
             )
         }
         composable(route = BatScreen.Game.route) {
-            BatScreen()
+            BatScreen(
+                onDone = {
+                    navController.navigate(BatScreen.Bye.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
         composable(route = BatScreen.Bye.route) {
             CommunicationScreen(

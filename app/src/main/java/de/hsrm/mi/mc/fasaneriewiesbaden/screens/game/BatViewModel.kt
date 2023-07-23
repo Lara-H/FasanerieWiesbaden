@@ -12,13 +12,9 @@ import java.util.UUID
 import kotlin.concurrent.schedule
 
 class BatViewModel(val doorWidth: Dp): ViewModel() {
-    private val paddingBorder = 10.dp
+    val paddingBorder = 10.dp
     val drillWidth = doorWidth/2 - paddingBorder
     var isDone = mutableStateOf(false)
-        private set
-    var gameIsDone = mutableStateOf(false)
-        private set
-    var offsetDoor = mutableStateOf(0.dp)
         private set
     var visible = mutableStateOf(true)
         private set
@@ -56,19 +52,10 @@ class BatViewModel(val doorWidth: Dp): ViewModel() {
         if (allDone) {
             visible.value = false
             updateUI()
-            Timer().schedule(5000) {
-                gameIsDone.value = true
+            Timer().schedule(3000) {
+                isDone.value = true
             }
         }
-    }
-
-    fun openDoor() {
-        val newOffsetDoor = mutableStateOf(offsetDoor.value - 5.dp)
-        offsetDoor = newOffsetDoor
-        if (offsetDoor.value > doorWidth) {
-            isDone.value = true
-        }
-        updateUI()
     }
 
     private fun updateUI() {

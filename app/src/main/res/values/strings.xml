@@ -89,20 +89,20 @@
     <string name="station_owl_game_text">LOREM IPSUM</string>
     <string name="station_owl_bye_text">LOREM IPSUM</string>
 
-    <string name="station_chicken_greeting_text">LOREM IPSUM</string>
+    <string name="station_chicken_greeting_text">Hallo gack gack, schön dich kennenzulernen gack, ich bin Henry gack. Meine Hühner haben vor kurzem ganz viele Eier gelegt gack und jetzt herrscht hier ein großes Durcheinander gack. Wir brauchen deine Hilfe um die Eier wieder den passenden Hühnern zuzuordnen gaaack.</string>
     <string name="station_chicken_greeting_btn">Helfe Henry</string>
     <string name="station_chicken_game_text">LOREM IPSUM</string>
-    <string name="station_chicken_bye_text">LOREM IPSUM</string>
+    <string name="station_chicken_bye_text">Kikerikiii, wir sind dir überaus dankbar und meine Hühner sind glücklich gack, du hast uns sehr geholfen gack. Wir können nicht gut schwimmen und wissen daher nichts über Gold in unserem Teich. Aber die Otter waren hier schon tauchen. Viel Glück bei deiner Suche! Kikerikiiii</string>
 
-    <string name="station_otter_greeting_text">LOREM IPSUM</string>
+    <string name="station_otter_greeting_text">Hallo, darf ich mich vorstellen, ich bin Olli. Mein Papa hat heute Geburtstag und ich möchte ihn mit einer tollen Geburtstagsparty überraschen. Dafür brauchen wir noch ein paar leckere Fische. Kannst du mir helfen?</string>
     <string name="station_otter_greeting_btn">Helfe Olli</string>
     <string name="station_otter_game_text">Tippe auf die Fische, um sie zu fangen</string>
-    <string name="station_otter_bye_text">LOREM IPSUM</string>
+    <string name="station_otter_bye_text">Vielen lieben Dank, jetzt haben wir genügend Fische für die Party. Wir haben schon oft im Teich der Hühner gespielt und dabei ganze 5 Goldmünzen gefunden! Einmal haben wir auch eine geheime unterirdische Verbindung zur Fledermaushöhle entdeckt. Denkst du, der Schatz könnte sich in einer Höhle befinden?</string>
 
-    <string name="station_bat_greeting_text">LOREM IPSUM</string>
+    <string name="station_bat_greeting_text">Fiep fiep fiep. Hey du, ich bin Frieda. Herzlich willkommen in unserer Höhle. Der geheimnisvolle Schatz soll in einer Höhle sein? Fiep. Wir haben bislang auch nur davon gehört, aber gesehen haben wir ihn noch nicht. Wie du siehst fiep, gibt es da hinten eine verschlossene Tür, die bisher niemand öffnen konnte. Fiep fiep.</string>
     <string name="station_bat_greeting_btn">Helfe Frieda</string>
-    <string name="station_bat_game_text">Drehe dein Handy in die richtige Richtung, um Frieda durch die Höhle zu leiten</string>
-    <string name="station_bat_bye_text">LOREM IPSUM</string>
+    <string name="station_bat_game_text">Drehe die Zahnräder mit ZWEI Fingern, um die Tür zu entschlüsseln</string>
+    <string name="station_bat_bye_text">Du bist ja ein echter Profi im Knacken von kniffligen Türschlössern! Hier hast du eine Taschenlampe, damit kannst du in die dunkle Höhle leuchten!</string>
 
     <string name="outro_speech_text">LOREM IPSUM</string>
     <string name="outro_treasure_text">Gemeinsam gelingt es den Tieren den Schatz zu bergen…</string>

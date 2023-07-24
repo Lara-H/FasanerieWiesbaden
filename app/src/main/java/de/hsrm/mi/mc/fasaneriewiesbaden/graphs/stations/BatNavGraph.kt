@@ -24,11 +24,13 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Bat",
                 text = stringResource(R.string.station_bat_greeting_text),
                 btnText = stringResource(R.string.station_bat_greeting_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(BatScreen.Game.route) }
             )
         }
         composable(route = BatScreen.Game.route) {
             BatScreen(
+                onClose = { navController.navigate(Graph.MAIN) },
                 onDone = {
                     navController.navigate(BatScreen.Bye.route) {
                         popUpTo(navController.graph.id) {
@@ -45,6 +47,7 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Bat",
                 text = stringResource(R.string.station_bat_bye_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(Graph.MAIN) {
                     data.listStationsState.value[data.currentNumberState.value].isDone = true
                     data.currentNumberState.value++

@@ -1,8 +1,6 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
@@ -13,7 +11,6 @@ import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -35,20 +32,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.min
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
-import kotlinx.coroutines.delay
-import java.util.Timer
-import kotlin.concurrent.timer
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun BatScreen(onDone: () -> Unit) {
+fun BatScreen(onClose: () -> Unit, onDone: () -> Unit) {
     val configuration = LocalConfiguration.current
     val doorWidth = configuration.screenWidthDp.dp - (MaterialTheme.spacing.medium * 2)
 
@@ -77,7 +70,7 @@ fun BatScreen(onDone: () -> Unit) {
     ) {
 
         Column() {
-            TopBar(text = stringResource(R.string.title_location_bat), isMainNav = false)
+            TopBar(text = stringResource(R.string.title_location_bat), onClose = onClose)
             Text(
                 text = stringResource(R.string.station_bat_game_text),
                 Modifier.padding(
@@ -92,6 +85,8 @@ fun BatScreen(onDone: () -> Unit) {
             .fillMaxSize()
             .background(Color.Black)
         ) {
+
+            // door open animations
             val interpolated = FastOutLinearInEasing.transform(0.25f);
             val deg = 105f;
             val distort: Float by animateFloatAsState(if (viewModel.visible.value) 0f else kotlin.math.min(interpolated * deg, 90f))
@@ -132,7 +127,7 @@ fun BatScreen(onDone: () -> Unit) {
                                     )
                                     .size(it.size),
                                 painter = painterResource(id = it.imgPath),
-                                contentDescription = "Drill",
+                                contentDescription = viewModel.drillImgAltText,
                                 alpha = alpha
                             )
                         }
@@ -162,6 +157,7 @@ fun BatScreen(onDone: () -> Unit) {
 @Composable
 fun BatScreenPreview() {
     BatScreen(
+        onClose = {},
         onDone = {}
     )
 }

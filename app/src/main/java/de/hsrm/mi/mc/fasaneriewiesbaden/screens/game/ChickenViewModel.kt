@@ -7,7 +7,12 @@ import androidx.lifecycle.ViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 
 class ChickenViewModel(val screenHeightPx: Int, val screenWidthPx: Int, val offsetTop: Int, val offsetBottom: Int, val eggSizePx: Int, val chickenSizePx: Int): ViewModel() {
+    val eggImgAltText = "Egg"
+    val chickenImgAltText = "Chicken"
 
+    val totalPoints = 5
+    var isDone = mutableStateOf(false)
+        private set
     var egg by mutableStateOf(Egg(imgPath = getRandomEggColor()))
         private set
 
@@ -64,6 +69,9 @@ class ChickenViewModel(val screenHeightPx: Int, val screenWidthPx: Int, val offs
 
     private fun addPoint() {
         currentPoints++
+        if (currentPoints >= totalPoints) {
+            isDone.value = true
+        }
     }
 
     inner class Egg(var offsetX: Float = (0 until screenWidthPx-eggSizePx).shuffled().last().toFloat(), var offsetY: Float = (offsetTop until screenHeightPx-offsetBottom-chickenSizePx).shuffled().last().toFloat(), val imgPath: Int)

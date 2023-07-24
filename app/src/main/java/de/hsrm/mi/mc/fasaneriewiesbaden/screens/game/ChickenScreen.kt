@@ -36,7 +36,7 @@ import kotlin.math.roundToInt
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ChickenScreen() {
+fun ChickenScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // helpers to convert dp to px
     val density = LocalDensity.current
@@ -67,12 +67,17 @@ fun ChickenScreen() {
         }
     )
 
+    // check if done
+    if (viewModel.isDone.value) {
+        onDone()
+    }
+
     Box (modifier = Modifier .fillMaxSize() .background(MaterialTheme.colorScheme.background)) {
 
             Image(
                 painter = painterResource(
                     id = R.drawable.chicken_brown),
-                contentDescription = "Chicken",
+                contentDescription = viewModel.chickenImgAltText,
                 modifier = Modifier
                     .size(chickenSize)
                     .offset { IntOffset(0, screenHeightPx-chickenSizePx) }
@@ -81,7 +86,7 @@ fun ChickenScreen() {
             Image(
                 painter = painterResource(
                     id = R.drawable.chicken),
-                contentDescription = "Chicken",
+                contentDescription = viewModel.chickenImgAltText,
                 modifier = Modifier
                     .size(chickenSize)
                     .offset { IntOffset(screenWidthPx-chickenSizePx, screenHeightPx-chickenSizePx) }
@@ -89,7 +94,7 @@ fun ChickenScreen() {
 
             Image(
                 painter = painterResource(id = viewModel.egg.imgPath),
-                contentDescription = "Egg",
+                contentDescription = viewModel.eggImgAltText,
                 modifier = Modifier
                     .size(eggSize)
                     .offset { IntOffset(viewModel.egg.offsetX.roundToInt(), viewModel.egg.offsetY.roundToInt()) }
@@ -107,13 +112,13 @@ fun ChickenScreen() {
     ) {
 
         Column {
-            TopBar(text = stringResource(R.string.title_location_chicken), isMainNav = false)
-            Text(text = "Sammel die Eier ein und übergebe sie dem gleichfarbigen Huhn", modifier = Modifier .padding(all = MaterialTheme.spacing.medium))
+            TopBar(text = stringResource(R.string.title_location_chicken), onClose = onClose)
+            Text(text = stringResource(R.string.station_chicken_game_text), modifier = Modifier .padding(all = MaterialTheme.spacing.medium))
         }
 
         ProcessBar(
             icon = Icons.Default.Person,
-            numberTotal = 5,
+            numberTotal = viewModel.totalPoints,
             numberFull = viewModel.currentPoints
         )
     }
@@ -122,5 +127,8 @@ fun ChickenScreen() {
 @Preview(showBackground = true)
 @Composable
 fun ChickenScreenPreview() {
-    ChickenScreen()
+    ChickenScreen(
+        onClose = {},
+        onDone = {}
+    )
 }

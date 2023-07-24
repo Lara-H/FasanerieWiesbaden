@@ -55,7 +55,7 @@ import kotlinx.coroutines.launch
     "MutableCollectionMutableState"
 )
 @Composable
-fun BearScreen(whenDone: () -> Unit) {
+fun BearScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     val viewModel = viewModel<BearViewModel>(
         factory = object : ViewModelProvider.Factory {
@@ -71,7 +71,7 @@ fun BearScreen(whenDone: () -> Unit) {
     viewModel.onUpdate.value
 
     Scaffold(
-        topBar = { TopBar(text = stringResource(R.string.title_location_bear), isMainNav = false) },
+        topBar = { TopBar(text = stringResource(R.string.title_location_bear), onClose = onClose) },
     ) {
     }
 
@@ -167,5 +167,8 @@ fun Modifier.animatePlacement(): Modifier = composed {
 @Preview(showBackground = true)
 @Composable
 fun BearScreenPreview() {
-    BearScreen(whenDone = {})
+    BearScreen(
+        onClose = {},
+        onDone = {}
+    )
 }

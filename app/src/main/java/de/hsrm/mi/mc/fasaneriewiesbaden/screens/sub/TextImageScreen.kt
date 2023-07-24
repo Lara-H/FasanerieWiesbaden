@@ -24,9 +24,9 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun TextImageScreen(title: String, imagePath: Int, imageDescription: String, text: String, btnText: String, onBtnClick: () -> Unit) {
+fun TextImageScreen(title: String, imagePath: Int, imageDescription: String, text: String, btnText: String, onClose: () -> Unit, onBtnClick: () -> Unit) {
     Scaffold(
-        topBar = { TopBar(text=title, isMainNav = false) },
+        topBar = { TopBar(text=title, onClose = onClose) },
     ) {
     }
 
@@ -62,6 +62,7 @@ fun TextImageScreenPreview() {
         imageDescription = "Treasure",
         text = "Gemeinsam gelingt es den Tieren den Schatz zu bergen…",
         btnText = "Weiter",
+        onClose = {},
         onBtnClick = {}
     )
 }

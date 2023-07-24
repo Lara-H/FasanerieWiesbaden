@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
@@ -24,7 +25,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
@@ -32,14 +35,26 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun GoatScreen(isCorrect: Boolean, imagePath: Int, currentPoints: Int, onCorrectClick: () -> Unit, onFalseClick: () -> Unit) {
+fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit) {
+
+    // viewmodel
+    val viewModel = viewModel<GoatViewModel>()
+
+    // check if done
+    if (viewModel.isDone.value) {
+        onDone()
+    }
+
+    // detect any changes to data and recompose composable
+    viewModel.onUpdate.value
+
     Column(modifier = Modifier
         .fillMaxSize()
         .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            TopBar(text = stringResource(R.string.title_location_goat), isMainNav = false)
+            TopBar(text = stringResource(R.string.title_location_goat), onClose = onClose)
             Text(
                 modifier = Modifier .padding(all = MaterialTheme.spacing.medium),
                 text = stringResource(R.string.station_goat_game_text),
@@ -47,47 +62,54 @@ fun GoatScreen(isCorrect: Boolean, imagePath: Int, currentPoints: Int, onCorrect
             Text(
                 modifier = Modifier.padding(start = MaterialTheme.spacing.medium, end = MaterialTheme.spacing.medium, bottom = MaterialTheme.spacing.medium),
                 text = stringResource(R.string.station_goat_game_question),
-                color = MaterialTheme.colorScheme.tertiary
+                fontWeight = FontWeight.Bold
             )
         }
-        Column(modifier = Modifier
-            .padding(all = MaterialTheme.spacing.medium),
-        ) {
+
+        if (!viewModel.isDone.value) {
+            val currentItem = viewModel.items[viewModel.currentPoints]
+
             Image(
-                painter = painterResource(
-                id = imagePath),
-                contentDescription = "Animal",
+                painter = painterResource(id = currentItem.imgPath),
+                contentDescription = viewModel.goatImgAltText,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(bottom = MaterialTheme.spacing.large)
-            )
-            Row(modifier = Modifier.fillMaxWidth()) {
+                    .padding(all = MaterialTheme.spacing.medium)
+                )
+
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = MaterialTheme.spacing.medium)
+            ) {
                 Button(modifier = Modifier
                     .weight(1f)
                     .padding(end = MaterialTheme.spacing.medium / 2),
-                    onClick = { handleClick(true, isCorrect, onCorrectClick, onFalseClick) }) {
+                shape = RoundedCornerShape(0),
+                    onClick = { handleClick(true, currentItem.isGoat, viewModel, onFalseClick) }) {
                     Icon(Icons.Default.Check, "Icon", tint = Color.White)
                 }
                 Button(modifier = Modifier
                     .weight(1f)
                     .padding(start = MaterialTheme.spacing.medium / 2),
+                    shape = RoundedCornerShape(0),
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
-                    onClick = { handleClick(false, isCorrect, onCorrectClick, onFalseClick) }) {
+                    onClick = { handleClick(false, currentItem.isGoat, viewModel, onFalseClick) }) {
                     Icon(Icons.Default.Close, "Icon", tint = Color.White)
                 }
             }
         }
+
         ProcessBar(
             icon = Icons.Default.Person,
-            numberTotal = 5,
-            numberFull = currentPoints
+            numberTotal = viewModel.totalPoints,
+            numberFull = viewModel.currentPoints
         )
     }
 }
 
-fun handleClick(clickedValue: Boolean, correctValue: Boolean, onCorrectClick: () -> Unit, onFalseClick: () -> Unit) {
+fun handleClick(clickedValue: Boolean, correctValue: Boolean, viewModel: GoatViewModel, onFalseClick: () -> Unit) {
     if (clickedValue == correctValue) {
-        onCorrectClick()
+        viewModel.addPoint()
     }
     if (clickedValue != correctValue) {
         onFalseClick()
@@ -98,10 +120,8 @@ fun handleClick(clickedValue: Boolean, correctValue: Boolean, onCorrectClick: ()
 @Composable
 fun GoatScreenPreview() {
     GoatScreen(
-        isCorrect = false,
-        imagePath = R.drawable.goat_1,
-        currentPoints = 1,
-        onCorrectClick = {},
+        onDone = {},
+        onClose = {},
         onFalseClick = {}
     )
 }

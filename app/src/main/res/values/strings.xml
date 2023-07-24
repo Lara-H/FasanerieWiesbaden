@@ -16,7 +16,6 @@
     <string name="title_name_goat_child">Becky Bock</string>
     <string name="title_name_lynx">Ludwig Luchs</string>
     <string name="title_name_otter">Olli Otter</string>
-    <string name="title_name_owl">Emilia Eule</string>
     <string name="title_name_raccoon">Wilma Waschbär</string>
 
     <string name="title_location_bat">Fledermaushöhle</string>
@@ -27,7 +26,6 @@
     <string name="title_location_goat">Ziegenwiese</string>
     <string name="title_location_lynx">Luchsgehege</string>
     <string name="title_location_otter">Fischottergehege</string>
-    <string name="title_location_owl">Greifvogelanlage</string>
     <string name="title_location_raccoon">Waschbärgehege</string>
 
     <string name="map_text">Bewege dich von deinem Standort aus zum grünen Punkt auf der Karte</string>
@@ -59,39 +57,34 @@
     <string name="station_goat_game_error">Das war leider nicht richtig. Aber versuche es einfach noch einmal!</string>
     <string name="station_goat_bye_text">Vielen Dank für deine Hilfe mäh, nun können wir alle Ziegen zählen mäh! Ich höre du suchst nach einem Schatz mäh. Auf unseren Klettertouren konnten wir leider nichts finden mäh. Aber die Füchse nebenan sind gute Schnüffler und wissen vielleicht etwas määäähr.</string>
 
-    <string name="station_fox_greeting_text">LOREM IPSUM</string>
+    <string name="station_fox_greeting_text">Hallo, mein Name ist Fiona, es freut mich deine Bekanntschaft zu machen! Wir Füchse wollen unseren Fuchsbau erweitern und sind gerade fleißig am Bauen. Möchtest du uns beim Graben helfen? </string>
     <string name="station_fox_greeting_btn">Helfe Fiona</string>
     <string name="station_fox_game_text">Streiche über die Erde, um zu graben</string>
-    <string name="station_fox_bye_text">LOREM IPSUM</string>
+    <string name="station_fox_bye_text">Herzlichen Dank, mit deiner Hilfe konnten wir noch schneller an unserem Fuchsbau weiterarbeiten. Beim Graben haben wir schon viele Regenwürmer, aber noch keine Goldmünze entdeckt. Besuch doch auch mal die Bären, die haben in ihrer Höhle einmal eine Münze gefunden.</string>
 
-    <string name="station_bear_greeting_text">LOREM IPSUM</string>
+    <string name="station_bear_greeting_text">Hallo, ich bin Bruno der Bär. Mein Magen grummelt wieder ganz schön und ich habe Lust auf ein wenig Honig. Kannst du mir helfen, ein paar Tropfen aus dem Bienenstock zu schütteln?</string>
     <string name="station_bear_greeting_btn">Helfe Bruno</string>
     <string name="station_bear_game_text">Schüttet dein Smartphone, damit etwas Honig aus dem Bienennest tropft</string>
-    <string name="station_bear_bye_text">LOREM IPSUM</string>
+    <string name="station_bear_bye_text">Es ist so toll, dass mein Magen wieder gefüllt ist, danke dir! Laut einer alten Legende wurde der Schatz lange in unserer Höhle versteckt und dann in eine andere Höhle gebracht. Aber ich weis leider nicht, wo sich diese Höhle befinden könnte. Die Luchse sind sehr gerissen und haben vielleicht eine Idee.</string>
 
-    <string name="station_lynx_greeting_text">LOREM IPSUM</string>
+    <string name="station_lynx_greeting_text">Hey du, ich bin Ludwig der Luchs. Wir wollen unseren Kindern das Jagen beibringen, aber beim Spielen haben sie die ganze Anleitung durcheinander gebracht. Kannst du dabei helfen, die Bilder wieder in die richtige Reihenfolge zu bringen?</string>
     <string name="station_lynx_greeting_btn">Helfe Ludwig</string>
     <string name="station_lynx_game_text">Bringe die Bilder durch Vertauschen durch Antippen in die richtige Reihenfolge</string>
-    <string name="station_lynx_bye_text">LOREM IPSUM</string>
+    <string name="station_lynx_bye_text">Das hast du super gemacht, dank dir können wir unsere Kinder wieder auf die Jagd vorbereiten. Ich habe leider keine Ahnung, wo sich der Schatz befindet. Aber ich habe gehört, dass die Hirsche großen Hunger haben und deine Hilfe gebrauchen könnten.</string>
 
-    <string name="station_deer_greeting_text">LOREM IPSUM</string>
+    <string name="station_deer_greeting_text">Hallo, mein Name ist Hugo. Meine Freunde und ich haben Hunger. Kannst du uns aus dem Futterautomaten ein wenig Futter besorgen?</string>
     <string name="station_deer_greeting_btn">Helfe Hugo</string>
     <string name="station_deer_game_text">Scanne den QR-Code auf dem Futterautomaten</string>
-    <string name="station_deer_bye_text">LOREM IPSUM</string>
+    <string name="station_deer_bye_text">Vielen Dank, gibst du meinen Freunden ein wenig von dem Futter? Wir leben schon lange in diesem Gehege. Wenn es hier einen Schatz geben würde, hätten wir diesen sicher schon gefunden. Habt ihr es schon bei den Waschbären versucht?</string>
 
-    <string name="station_raccoon_greeting_text">LOREM IPSUM</string>
+    <string name="station_raccoon_greeting_text">Hallo, ich bin Wilma! Nach dem Waschen sind die Socken ganz durcheinander geraten. Kannst du mir helfen, die richtigen Paare zu finden?</string>
     <string name="station_raccoon_greeting_btn">Helfe Wilma</string>
     <string name="station_raccoon_game_text">Füge die gleichen Socken durch Antippen zusammen</string>
-    <string name="station_raccoon_bye_text">LOREM IPSUM</string>
-
-    <string name="station_owl_greeting_text">LOREM IPSUM</string>
-    <string name="station_owl_greeting_btn">Helfe Emilia</string>
-    <string name="station_owl_game_text">LOREM IPSUM</string>
-    <string name="station_owl_bye_text">LOREM IPSUM</string>
+    <string name="station_raccoon_bye_text">Dankeschön für die Hilfe beim Sortieren der Socken. Durch dich haben sich die Paare wieder gefunden und die Socken können ordentlich weggeräumt werden. Am Teich bei den Hühnern habe ich beim Waschen einmal eine Münze gefunden. Du solltest sie mal besuchen.</string>
 
     <string name="station_chicken_greeting_text">Hallo gack gack, schön dich kennenzulernen gack, ich bin Henry gack. Meine Hühner haben vor kurzem ganz viele Eier gelegt gack und jetzt herrscht hier ein großes Durcheinander gack. Wir brauchen deine Hilfe um die Eier wieder den passenden Hühnern zuzuordnen gaaack.</string>
     <string name="station_chicken_greeting_btn">Helfe Henry</string>
-    <string name="station_chicken_game_text">LOREM IPSUM</string>
+    <string name="station_chicken_game_text">Übergebe das Ei dem gleichfarbigen Huhn</string>
     <string name="station_chicken_bye_text">Kikerikiii, wir sind dir überaus dankbar und meine Hühner sind glücklich gack, du hast uns sehr geholfen gack. Wir können nicht gut schwimmen und wissen daher nichts über Gold in unserem Teich. Aber die Otter waren hier schon tauchen. Viel Glück bei deiner Suche! Kikerikiiii</string>
 
     <string name="station_otter_greeting_text">Hallo, darf ich mich vorstellen, ich bin Olli. Mein Papa hat heute Geburtstag und ich möchte ihn mit einer tollen Geburtstagsparty überraschen. Dafür brauchen wir noch ein paar leckere Fische. Kannst du mir helfen?</string>

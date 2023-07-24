@@ -6,12 +6,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
-import kotlinx.coroutines.delay
 import java.util.Timer
 import java.util.UUID
 import kotlin.concurrent.schedule
 
 class BatViewModel(val doorWidth: Dp): ViewModel() {
+    val drillImgAltText = "Drill"
+
     val paddingBorder = 10.dp
     val drillWidth = doorWidth/2 - paddingBorder
     var isDone = mutableStateOf(false)

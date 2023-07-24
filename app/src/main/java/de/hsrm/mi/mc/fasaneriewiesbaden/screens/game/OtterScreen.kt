@@ -34,7 +34,7 @@ import androidx.compose.material.icons.rounded.Star
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun OtterScreen(onDone: () -> Unit) {
+fun OtterScreen(onClose: () -> Unit, onDone: () -> Unit) {
     // screen size
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
@@ -75,7 +75,7 @@ fun OtterScreen(onDone: () -> Unit) {
         })
 
         Column {
-            TopBar(text = stringResource(R.string.title_location_otter), isMainNav = false)
+            TopBar(text = stringResource(R.string.title_location_otter), onClose = onClose)
             Text(text = stringResource(R.string.station_otter_game_text), modifier = Modifier .padding(all = MaterialTheme.spacing.medium))
         }
 
@@ -103,5 +103,8 @@ fun OtterScreen(onDone: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun OtterScreenPreview() {
-    OtterScreen(onDone = {})
+    OtterScreen(
+        onClose = {},
+        onDone = {}
+    )
 }

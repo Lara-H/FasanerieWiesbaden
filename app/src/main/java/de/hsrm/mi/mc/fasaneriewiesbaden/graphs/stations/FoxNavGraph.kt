@@ -24,11 +24,14 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Fox",
                 text = stringResource(R.string.station_fox_greeting_text),
                 btnText = stringResource(R.string.station_fox_greeting_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(FoxScreen.Game.route) }
             )
         }
         composable(route = FoxScreen.Game.route) {
-            FoxScreen()
+            FoxScreen(
+                onClose = { navController.navigate(Graph.MAIN) },
+            )
         }
         composable(route = FoxScreen.Bye.route) {
             CommunicationScreen(
@@ -37,6 +40,7 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Fox",
                 text = stringResource(R.string.station_fox_bye_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(Graph.MAIN) {
                     data.listStationsState.value[data.currentNumberState.value].isDone = true
                     data.currentNumberState.value++

@@ -8,6 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.MainNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.BottomBar
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.MainTopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 
@@ -17,7 +18,7 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 fun MainScreen(data: Data) {
     val navController = rememberNavController()
     Scaffold(
-        topBar = { TopBar("LOREM IPSUM", isMainNav = true) },
+        topBar = { MainTopBar("LOREM IPSUM", isMainNav = true) },
         bottomBar = { BottomBar(navController = navController)}
     ) {
         MainNavGraph(navController = navController, data = data)

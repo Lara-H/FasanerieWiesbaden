@@ -22,6 +22,7 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) 
                 imageDescription= "Squirrel",
                 text = stringResource(R.string.intro_greeting_text),
                 btnText = stringResource(R.string.intro_greeting_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(IntroScreen.Explanation.route) }
             )
         }
@@ -32,6 +33,7 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) 
                 imageDescription= "Squirrel",
                 text = stringResource(R.string.intro_explanation_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(IntroScreen.Meeting.route) }
             )
         }
@@ -42,6 +44,7 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) 
                 imageDescription= "Goat child",
                 text = stringResource(R.string.intro_meeting_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(IntroScreen.Departure.route) }
             )
         }
@@ -52,6 +55,7 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) 
                 imageDescription= "Squirrel",
                 text = stringResource(R.string.intro_departure_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(Graph.MAIN) {
                     data.listStationsState.value[data.currentNumberState.value].isDone = true
                     data.currentNumberState.value++

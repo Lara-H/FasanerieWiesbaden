@@ -14,7 +14,6 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.MainScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.goatNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.lynxNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.otterNavGraph
-import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.owlNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.raccoonNavGraph
 
 @Composable
@@ -22,7 +21,7 @@ fun RootNavGraph(navController: NavHostController, data: Data) {
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = Graph.BAT,
+        startDestination = Graph.GOAT,
     ) {
         introNavGraph(navController = navController, data = data)
 
@@ -32,7 +31,6 @@ fun RootNavGraph(navController: NavHostController, data: Data) {
         lynxNavGraph(navController = navController, data = data)
         deerNavGraph(navController = navController, data = data)
         raccoonNavGraph(navController = navController, data = data)
-        owlNavGraph(navController = navController, data = data)
         chickenNavGraph(navController = navController, data = data)
         otterNavGraph(navController = navController, data = data)
         batNavGraph(navController = navController, data = data)
@@ -53,7 +51,6 @@ object Graph {
     const val LYNX = "lynx_graph"
     const val DEER = "deer_graph"
     const val RACCOON = "raccoon_graph"
-    const val OWL = "owl_graph"
     const val CHICKEN = "chicken_graph"
     const val OTTER = "otter_graph"
     const val BAT = "bat_graph"

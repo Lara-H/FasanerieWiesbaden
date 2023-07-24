@@ -31,10 +31,10 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun CommunicationScreen(title: String, imagePath: Int, imageDescription: String, text: String, btnText: String, onBtnClick: () -> Unit) {
+fun CommunicationScreen(title: String, imagePath: Int, imageDescription: String, text: String, btnText: String, onBtnClick: () -> Unit, onClose: () -> Unit) {
 
     Scaffold(
-        topBar = { TopBar(text=title, isMainNav = false) },
+        topBar = { TopBar(text=title, onClose = onClose) },
     ) {
     }
 
@@ -80,6 +80,7 @@ fun CommunicationScreenPreview() {
                 "\n" +
                 "Mit diesem kannst du dir im Shop des Tierparks etwas Tolles aussuchen.",
         btnText = "Weiter",
-        onBtnClick = { }
+        onBtnClick = {},
+        onClose = {}
     )
 }

@@ -24,11 +24,15 @@ fun NavGraphBuilder.deerNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Deer",
                 text = stringResource(R.string.station_deer_greeting_text),
                 btnText = stringResource(R.string.station_deer_greeting_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(DeerScreen.Game.route) }
             )
         }
         composable(route = DeerScreen.Game.route) {
-            DeerScreen()
+            DeerScreen(
+                onClose = { navController.navigate(Graph.MAIN) },
+                onDone = { navController.navigate(DeerScreen.Bye.route) }
+            )
         }
         composable(route = DeerScreen.Bye.route) {
             CommunicationScreen(
@@ -37,6 +41,7 @@ fun NavGraphBuilder.deerNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Deer",
                 text = stringResource(R.string.station_deer_bye_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(Graph.MAIN) {
                     data.listStationsState.value[data.currentNumberState.value].isDone = true
                     data.currentNumberState.value++

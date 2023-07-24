@@ -24,12 +24,12 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun CodeScreen(id: String) {
+fun CodeScreen(onClose: () -> Unit, id: String) {
     Column(modifier = Modifier
         .fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        TopBar(text = stringResource(R.string.title_code), isMainNav = false)
+        TopBar(text = stringResource(R.string.title_code), onClose = onClose)
 
         if (BarcodeType.QR_CODE.isValueValid(id)) {
             Barcode(
@@ -53,5 +53,8 @@ fun CodeScreen(id: String) {
 @Preview(showBackground = true)
 @Composable
 fun CodeScreenPreview() {
-    CodeScreen(id = "12345")
+    CodeScreen(
+        onClose = {},
+        id = "12345"
+    )
 }

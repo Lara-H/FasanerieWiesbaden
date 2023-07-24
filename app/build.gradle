@@ -74,10 +74,14 @@ dependencies {
 
     //QR Code
     implementation("com.simonsickle:composed-barcodes:1.1.1")
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.1'
 
     // Maps
     implementation 'com.google.maps.android:maps-compose:2.7.2'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    // Google QR Scanner
+    implementation 'com.google.android.gms:play-services-code-scanner:16.0.0'
 
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'

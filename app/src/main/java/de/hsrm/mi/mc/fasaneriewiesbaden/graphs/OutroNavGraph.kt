@@ -23,6 +23,7 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController, data: Data) 
                 imageDescription= "Squirrel",
                 text = stringResource(R.string.outro_speech_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(OutroScreen.Treasure.route) }
             )
         }
@@ -33,6 +34,7 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController, data: Data) 
                 imageDescription= "Treasure",
                 text = stringResource(R.string.outro_treasure_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(OutroScreen.Thanks.route) }
             )
         }
@@ -43,11 +45,13 @@ fun NavGraphBuilder.outroNavGraph(navController: NavHostController, data: Data) 
                 imageDescription= "Squirrel",
                 text = stringResource(R.string.outro_thanks_text),
                 btnText = stringResource(R.string.outro_code_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(OutroScreen.Code.route) }
             )
         }
         composable(route = OutroScreen.Code.route) {
             CodeScreen(
+                onClose = { navController.navigate(Graph.MAIN) },
                 id = data.userID.toString()
             )
         }

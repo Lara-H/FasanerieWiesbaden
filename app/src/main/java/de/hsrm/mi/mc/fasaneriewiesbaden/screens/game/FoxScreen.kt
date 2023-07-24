@@ -28,11 +28,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
@@ -43,7 +47,27 @@ import kotlin.concurrent.schedule
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FoxScreen() {
+fun FoxScreen(onClose: () -> Unit, ) {
+
+    // viewmodel
+    val viewModel = viewModel<FoxViewModel>(
+        factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return FoxViewModel() as T
+            }
+        }
+    )
+
+    // detect any changes to data and recompose composable
+    viewModel.onUpdate.value
+
+    // check if done
+    if (viewModel.isDone.value) {
+        //onDone()
+    }
+
+    // haptic feedback
+    val haptic = LocalHapticFeedback.current
 
     // helpers to convert dp to px
     val density = LocalDensity.current
@@ -62,7 +86,6 @@ fun FoxScreen() {
     var oldroffsetX by remember { mutableStateOf(0f) }
     var distance by remember { mutableStateOf(0f) }
 
-    var currentPoints by remember { mutableStateOf(0) }
     var moneyVisible by remember { mutableStateOf(0f) }
 
     // Start
@@ -92,7 +115,7 @@ fun FoxScreen() {
             val random = (0..5).shuffled().last()
             if (random == 0) {
                 moneyVisible = 1f
-                currentPoints++
+                viewModel.addPoint()
                 Timer().schedule(5000){
                     moneyVisible = 0f
                 }
@@ -108,24 +131,24 @@ fun FoxScreen() {
     ) {
 
         Column() {
-            TopBar(text = stringResource(R.string.title_location_fox), isMainNav = false)
-            Text(text = "Bewege die Hände mit deinem Finger über das Erdloch, um zu graben", Modifier.padding(all = MaterialTheme.spacing.medium), color = Color.White)
+            TopBar(text = stringResource(R.string.title_location_fox), onClose = onClose)
+            Text(text = stringResource(R.string.station_fox_game_text), Modifier.padding(all = MaterialTheme.spacing.medium), color = Color.White)
         }
 
         Box(modifier = Modifier .fillMaxWidth()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.hole),
-                contentDescription = "Hole",
+                painter = painterResource(id = viewModel.holeImgPath),
+                contentDescription = viewModel.holeImgAltText,
                 modifier = Modifier
                     .align(Alignment.Center)
             )
             Image(
-                painter = painterResource(id = R.drawable.money),
-                contentDescription = "Money",
+                painter = painterResource(viewModel.itemImgPath),
+                contentDescription = viewModel.itemImgAltText,
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .size(30.dp)
+                    .size(viewModel.itemImgSize)
                     .alpha(moneyVisible)
                     .offset { IntOffset((imgSizePx*(-1) until imgSizePx).shuffled().last(), (imgSizePx*(-1) until imgSizePx).shuffled().last()) }
             )
@@ -139,17 +162,17 @@ fun FoxScreen() {
                             offsetY += dragAmount.y
                         }
                     }
-                    .size(100.dp)
+                    .size(viewModel.handsImgSize)
                     .align(Alignment.Center),
-                painter = painterResource(id = R.drawable.hands),
-                contentDescription = "Hands",
+                painter = painterResource(id = viewModel.handsImgPath),
+                contentDescription = viewModel.handsImgAltText,
             )
         }
 
         ProcessBar(
             icon = Icons.Default.Person,
-            numberTotal = 5,
-            numberFull = currentPoints
+            numberTotal = viewModel.totalPoints,
+            numberFull = viewModel.currentPoints
         )
     }
 
@@ -158,5 +181,7 @@ fun FoxScreen() {
 @Preview(showBackground = true)
 @Composable
 fun FoxScreenPreview() {
-    FoxScreen()
+    FoxScreen(
+        onClose = {}
+    )
 }

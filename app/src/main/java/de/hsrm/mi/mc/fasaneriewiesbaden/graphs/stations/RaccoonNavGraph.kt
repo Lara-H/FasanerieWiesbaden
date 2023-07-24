@@ -24,11 +24,13 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController, data: Data
                 imageDescription= "Raccoon",
                 text = stringResource(R.string.station_raccoon_greeting_text),
                 btnText = stringResource(R.string.station_raccoon_greeting_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(RaccoonScreen.Game.route) }
             )
         }
         composable(route = RaccoonScreen.Game.route) {
             RaccoonScreen(
+                onClose = { navController.navigate(Graph.MAIN) },
                 onDone = { navController.navigate(RaccoonScreen.Bye.route) }
             )
         }
@@ -39,6 +41,7 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController, data: Data
                 imageDescription= "Raccoon",
                 text = stringResource(R.string.station_raccoon_bye_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(Graph.MAIN) {
                     data.listStationsState.value[data.currentNumberState.value].isDone = true
                     data.currentNumberState.value++

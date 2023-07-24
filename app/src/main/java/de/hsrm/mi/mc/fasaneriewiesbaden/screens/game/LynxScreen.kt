@@ -4,13 +4,9 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,9 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -37,7 +31,7 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun LynxScreen(onDone: () -> Unit) {
+fun LynxScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // viewmodel
     val viewModel = viewModel<LynxViewModel>(
@@ -64,7 +58,7 @@ fun LynxScreen(onDone: () -> Unit) {
     ) {
 
         Column {
-            TopBar(text = stringResource(R.string.title_location_lynx), isMainNav = false)
+            TopBar(text = stringResource(R.string.title_location_lynx), onClose = onClose)
             Text(text = stringResource(R.string.station_lynx_game_text), modifier = Modifier .padding(all = MaterialTheme.spacing.medium))
         }
 
@@ -122,5 +116,8 @@ fun LynxScreen(onDone: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun LynxScreenPreview() {
-    LynxScreen(onDone = {})
+    LynxScreen(
+        onClose = {},
+        onDone = {}
+    )
 }

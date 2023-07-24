@@ -24,11 +24,15 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController, data: Data
                 imageDescription= "chicken",
                 text = stringResource(R.string.station_chicken_greeting_text),
                 btnText = stringResource(R.string.station_chicken_greeting_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(ChickenScreen.Game.route) }
             )
         }
         composable(route = ChickenScreen.Game.route) {
-            ChickenScreen()
+            ChickenScreen(
+                onClose = { navController.navigate(Graph.MAIN) },
+                onDone = { navController.navigate(ChickenScreen.Bye.route) }
+            )
         }
         composable(route = ChickenScreen.Bye.route) {
             CommunicationScreen(
@@ -37,6 +41,7 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController, data: Data
                 imageDescription= "chicken",
                 text = stringResource(R.string.station_chicken_bye_text),
                 btnText = stringResource(R.string.communication_btn),
+                onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(Graph.MAIN) {
                     data.listStationsState.value[data.currentNumberState.value].isDone = true
                     data.currentNumberState.value++

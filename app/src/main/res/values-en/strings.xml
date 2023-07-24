@@ -16,7 +16,6 @@
 <string name="title_name_goat_child">Becky</string>
 <string name="title_name_lynx">Ludwig</string>
 <string name="title_name_otter">Olli</string>
-<string name="title_name_owl">Emilia</string>
 <string name="title_name_raccoon">Wilma</string>
 
 <string name="title_location_bat">Bat cave</string>
@@ -27,7 +26,6 @@
 <string name="title_location_goat">Goat meadow</string>
 <string name="title_location_lynx">Lynx enclosure</string>
 <string name="title_location_otter">Otter enclosure</string>
-<string name="title_location_owl">Bird of prey facility</string>
 <string name="title_location_raccoon">Raccoon enclosure</string>
 
 <string name="map_text">From your location, move to the green dot on the map</string>
@@ -83,11 +81,6 @@
 <string name="station_raccoon_greeting_btn">Help Wilma</string>
 <string name="station_raccoon_game_text">Connect the same socks together by tapping</string>
 <string name="station_raccoon_bye_text">LOREM IPSUM</string>
-
-<string name="station_owl_greeting_text">LOREM IPSUM</string>
-<string name="station_owl_greeting_btn">Help Emilia</string>
-<string name="station_owl_game_text">LOREM IPSUM</string>
-<string name="station_owl_bye_text">LOREM IPSUM</string>
 
 <string name="station_chicken_greeting_text">LOREM IPSUM</string>
 <string name="station_chicken_greeting_btn">Help Henry</string>

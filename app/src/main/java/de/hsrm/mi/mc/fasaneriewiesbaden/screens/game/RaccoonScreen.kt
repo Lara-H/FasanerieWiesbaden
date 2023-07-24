@@ -31,7 +31,7 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun RaccoonScreen(onDone: () -> Unit) {
+fun RaccoonScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // viewmodel
     val viewModel = viewModel<RaccoonViewModel>(
@@ -58,7 +58,7 @@ fun RaccoonScreen(onDone: () -> Unit) {
         .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.Top
     ) {
-            TopBar(text = stringResource(R.string.title_location_raccoon), isMainNav = false)
+            TopBar(text = stringResource(R.string.title_location_raccoon), onClose = onClose)
             Text(
                 modifier = Modifier .padding(all = MaterialTheme.spacing.medium),
                 text = stringResource(R.string.station_raccoon_game_text)
@@ -110,5 +110,8 @@ fun RaccoonScreen(onDone: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun RaccoonScreenPreview() {
-    RaccoonScreen(onDone = {})
+    RaccoonScreen(
+        onClose = {},
+        onDone = {}
+    )
 }

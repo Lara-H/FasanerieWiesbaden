@@ -31,6 +31,7 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController, data: Data) {
         composable(route = FoxScreen.Game.route) {
             FoxScreen(
                 onClose = { navController.navigate(Graph.MAIN) },
+                onDone = { navController.navigate(FoxScreen.Bye.route) }
             )
         }
         composable(route = FoxScreen.Bye.route) {

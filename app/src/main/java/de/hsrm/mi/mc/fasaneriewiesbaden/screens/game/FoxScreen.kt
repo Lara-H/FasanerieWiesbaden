@@ -2,7 +2,6 @@ package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,15 +16,14 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -41,33 +39,12 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.FoxViewModel
 import kotlin.math.roundToInt
-import java.util.Timer
-import kotlin.concurrent.schedule
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FoxScreen(onClose: () -> Unit, ) {
-
-    // viewmodel
-    val viewModel = viewModel<FoxViewModel>(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return FoxViewModel() as T
-            }
-        }
-    )
-
-    // detect any changes to data and recompose composable
-    viewModel.onUpdate.value
-
-    // check if done
-    if (viewModel.isDone.value) {
-        //onDone()
-    }
-
-    // haptic feedback
-    val haptic = LocalHapticFeedback.current
+fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // helpers to convert dp to px
     val density = LocalDensity.current
@@ -80,53 +57,32 @@ fun FoxScreen(onClose: () -> Unit, ) {
     val imgSize = 100.dp
     val imgSizePx = with(density) {imgSize.roundToPx()}
 
-    var offsetX by remember { mutableStateOf(0f) }
-    var offsetY by remember { mutableStateOf(0f) }
-
-    var oldroffsetX by remember { mutableStateOf(0f) }
-    var distance by remember { mutableStateOf(0f) }
-
-    var moneyVisible by remember { mutableStateOf(0f) }
-
-    // Start
-    if (offsetX < ((screenWidthPx/2)-(imgSizePx/2))*(-1)) {
-        offsetX = ((screenWidthPx/2)-(imgSizePx/2))*(-1).toFloat()
-    }
-    // End
-    if (offsetX > (screenWidthPx/2)-(imgSizePx/2)) {
-        offsetX = (screenWidthPx/2)-(imgSizePx/2).toFloat()
-    }
-    // Top
-    if (offsetY < imgSizePx*(-1)) {
-        offsetY = imgSizePx*(-1).toFloat()
-    }
-    // Bottom
-    if (offsetY > imgSizePx) {
-        offsetY = imgSizePx.toFloat()
-    }
-
-    distance = oldroffsetX - offsetX
-    if (distance < 0) {
-        distance *= (-1)
-    }
-
-    if (distance > imgSizePx) {
-        if (moneyVisible == 0f) {
-            val random = (0..5).shuffled().last()
-            if (random == 0) {
-                moneyVisible = 1f
-                viewModel.addPoint()
-                Timer().schedule(5000){
-                    moneyVisible = 0f
-                }
+    // viewmodel
+    val viewModel = viewModel<FoxViewModel>(
+        factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return FoxViewModel(
+                    screenWidthPx = screenWidthPx,
+                    imgSizePx = imgSizePx
+                ) as T
             }
         }
-        oldroffsetX = offsetX
+    )
+
+    // check if done
+    if (viewModel.isDone.value) {
+        onDone()
     }
+
+    // haptic feedback
+    val haptic = LocalHapticFeedback.current
 
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(Color(0xFF5b452d)),
+        .paint(
+            painterResource(id = R.drawable.fox_ground),
+            contentScale = ContentScale.FillBounds
+        ),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
@@ -142,6 +98,14 @@ fun FoxScreen(onClose: () -> Unit, ) {
                 contentDescription = viewModel.holeImgAltText,
                 modifier = Modifier
                     .align(Alignment.Center)
+                    .alpha(viewModel.holeVisible.value)
+            )
+            Image(
+                painter = painterResource(id = viewModel.dustImgPath),
+                contentDescription = viewModel.dustImgAltText,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .alpha(viewModel.dustVisible.value)
             )
             Image(
                 painter = painterResource(viewModel.itemImgPath),
@@ -149,17 +113,15 @@ fun FoxScreen(onClose: () -> Unit, ) {
                 modifier = Modifier
                     .align(Alignment.Center)
                     .size(viewModel.itemImgSize)
-                    .alpha(moneyVisible)
+                    .alpha(viewModel.isItemVisible.value)
                     .offset { IntOffset((imgSizePx*(-1) until imgSizePx).shuffled().last(), (imgSizePx*(-1) until imgSizePx).shuffled().last()) }
             )
             Image(
                 modifier = Modifier
-                    .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
+                    .offset { IntOffset(viewModel.hands.value.offsetX.roundToInt(), viewModel.hands.value.offsetY.roundToInt()) }
                     .pointerInput(Unit) {
-                        detectDragGestures { change, dragAmount ->
-                            change.consume()
-                            offsetX += dragAmount.x
-                            offsetY += dragAmount.y
+                        detectDragGestures { change, dragAmount -> change.consume()
+                            viewModel.changeHandsPosition(dragAmount.x, dragAmount.y)
                         }
                     }
                     .size(viewModel.handsImgSize)
@@ -182,6 +144,7 @@ fun FoxScreen(onClose: () -> Unit, ) {
 @Composable
 fun FoxScreenPreview() {
     FoxScreen(
-        onClose = {}
+        onClose = {},
+        onDone = {}
     )
 }

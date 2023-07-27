@@ -1,4 +1,4 @@
-package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
+package de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -32,6 +32,7 @@ class GoatViewModel(): ViewModel() {
     }
 
     fun addPoint() {
+
         currentPoints++
         if (currentPoints >= totalPoints) {
             isDone.value = true
@@ -40,4 +41,5 @@ class GoatViewModel(): ViewModel() {
     }
 
     inner class Item(val imgPath: Int, val isGoat: Boolean)
+
 }

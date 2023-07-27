@@ -1,4 +1,4 @@
-package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
+package de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf

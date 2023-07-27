@@ -1,14 +1,11 @@
-package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
+package de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
-import java.util.UUID
 
 class BearViewModel(): ViewModel() {
     var onUpdate = mutableStateOf(0)

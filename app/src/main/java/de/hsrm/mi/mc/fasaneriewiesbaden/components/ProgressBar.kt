@@ -29,10 +29,11 @@ fun ProcessBar(icon: ImageVector, numberTotal: Int, numberFull: Int) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         items(numberTotal) { index ->
-            var color = Color.White
+            var color = Color.Gray
             if (index < numberFull) {
                 color = Color.White
             }
+            // TODO: Icons
             Icon(
                 imageVector = icon,
                 contentDescription = "Icon",

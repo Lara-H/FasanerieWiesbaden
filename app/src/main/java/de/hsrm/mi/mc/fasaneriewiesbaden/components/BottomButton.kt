@@ -2,8 +2,8 @@ package de.hsrm.mi.mc.fasaneriewiesbaden.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -23,9 +23,10 @@ fun BottomButton(text: String, onClick: () -> Unit) {
     // haptic feedback
     val haptic = LocalHapticFeedback.current
 
-    Button(
+    TextButton(
         modifier = Modifier
             .fillMaxWidth()
+            .height(70.dp)
             .background(MaterialTheme.colorScheme.primary),
         onClick = { onClick(); haptic.performHapticFeedback(HapticFeedbackType.LongPress) }
     ) {

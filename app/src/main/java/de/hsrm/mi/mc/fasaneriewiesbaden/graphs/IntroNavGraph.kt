@@ -8,8 +8,9 @@ import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
-fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) {
+fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: MainActivityViewModel) {
 
     navigation(
         route = Graph.INTRO,
@@ -55,13 +56,8 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: Data) 
                 imageDescription= "Squirrel",
                 text = stringResource(R.string.intro_departure_text),
                 btnText = stringResource(R.string.communication_btn),
-                onClose = { navController.navigate(Graph.MAIN) },
-                onBtnClick = { navController.navigate(Graph.MAIN) {
-                    data.listStationsState.value[data.currentNumberState.value].isDone = true
-                    data.currentNumberState.value++
-                    data.currentStationState.value = data.listStationsState.value[data.currentNumberState.value]
-                    }
-                },
+                onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
+                onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() },
             )
         }
     }

@@ -10,8 +10,9 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.GoatScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
-fun NavGraphBuilder.goatNavGraph(navController: NavHostController, data: Data) {
+fun NavGraphBuilder.goatNavGraph(navController: NavHostController, data: MainActivityViewModel) {
     navigation(
         route = Graph.GOAT,
         startDestination = GoatScreen.Greeting.route
@@ -52,8 +53,8 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Goat",
                 text = stringResource(R.string.station_goat_bye_text),
                 btnText = stringResource(R.string.communication_btn),
-                onClose = { navController.navigate(Graph.MAIN) },
-                onBtnClick = { navController.navigate(Graph.MAIN) }
+                onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
+                onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
             )
         }
     }

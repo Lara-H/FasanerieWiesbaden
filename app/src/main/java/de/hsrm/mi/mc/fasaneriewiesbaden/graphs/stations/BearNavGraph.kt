@@ -10,8 +10,9 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.game.BearScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
-fun NavGraphBuilder.bearNavGraph(navController: NavHostController, data: Data) {
+fun NavGraphBuilder.bearNavGraph(navController: NavHostController, data: MainActivityViewModel) {
 
     navigation(
         route = Graph.BEAR,
@@ -40,13 +41,8 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController, data: Data) {
                 imageDescription= "Bear",
                 text = stringResource(R.string.station_bear_bye_text),
                 btnText = stringResource(R.string.communication_btn),
-                onClose = { navController.navigate(Graph.MAIN) },
-                onBtnClick = { navController.navigate(Graph.MAIN) {
-                    data.listStationsState.value[data.currentNumberState.value].isDone = true
-                    data.currentNumberState.value++
-                    data.currentStationState.value = data.listStationsState.value[data.currentNumberState.value]
-                    }
-                }
+                onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
+                onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
             )
         }
     }

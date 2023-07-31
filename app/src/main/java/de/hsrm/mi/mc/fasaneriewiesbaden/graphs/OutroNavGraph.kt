@@ -10,8 +10,9 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CodeScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.TextImageScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
-fun NavGraphBuilder.outroNavGraph(navController: NavHostController, data: Data) {
+fun NavGraphBuilder.outroNavGraph(navController: NavHostController, data: MainActivityViewModel) {
     navigation(
         route = Graph.OUTRO,
         startDestination = OutroScreen.Speech.route

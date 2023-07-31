@@ -25,7 +25,6 @@ class Data() {
             Station("Luchse", "Ludwig Luchs", 50.106107, 8.194052, false, Graph.LYNX),
             Station("Hirsche", "Hugo Hirsch",50.105601, 8.192938, false, Graph.DEER),
             Station("Waschbären", "Wilma Waschbär", 50.105282, 8.193426, false, Graph.RACCOON),
-            //Station("Greifvögel", "Emilia Eule", 50.104350, 8.192898, false, Graph.OWL),
             Station("Teichvögel", "Henry Hahn", 50.104055, 8.190708, false, Graph.CHICKEN),
             Station("Fischotter", "Olli Otter",50.103602, 8.191567, false, Graph.OTTER),
             Station("Fledermäuse", "Frieda Fledermaus",50.102673, 8.191353, false, Graph.BAT)

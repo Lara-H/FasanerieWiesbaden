@@ -1,14 +1,23 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
@@ -26,13 +35,24 @@ fun BottomBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomAppBar(containerColor = MaterialTheme.colorScheme.secondary, contentColor = Color.White) {
+    BottomAppBar(
+        modifier = Modifier .height(70.dp),
+        containerColor = MaterialTheme.colorScheme.secondary,
+        contentColor = Color.White) {
+        var i = 0
         screens.forEach { screen ->
             AddItem(
                 screen = screen,
                 currentDestination = currentDestination,
                 navController = navController
             )
+            if (i < screens.size-1) {
+                Box(modifier = Modifier
+                    .size(1.dp, 50.dp)
+                    .background(MaterialTheme.colorScheme.onSecondary)
+                )
+            }
+            i++
         }
     }
 }
@@ -44,9 +64,11 @@ fun RowScope.AddItem(
     navController: NavHostController
 ) {
     NavigationBarItem(
+        modifier = Modifier
+            .size(30.dp),
         icon = {
             Icon(
-                imageVector = screen.icon,
+                painterResource(id = screen.icon),
                 contentDescription = "Navigation Icon",
             )
         },

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import de.hsrm.mi.mc.fasaneriewiesbaden.LocationDetails
 import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.batNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.bearNavGraph
@@ -15,13 +16,14 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.goatNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.lynxNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.otterNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.raccoonNavGraph
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 @Composable
-fun RootNavGraph(navController: NavHostController, data: Data) {
+fun RootNavGraph(navController: NavHostController, data: MainActivityViewModel, currentLocation: LocationDetails) {
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = Graph.FOX,
+        startDestination = Graph.MAIN,
     ) {
         introNavGraph(navController = navController, data = data)
 
@@ -36,7 +38,7 @@ fun RootNavGraph(navController: NavHostController, data: Data) {
         batNavGraph(navController = navController, data = data)
 
         composable(route = Graph.MAIN) {
-            MainScreen(data = data)
+            MainScreen(navController = navController, data = data, currentLocation = currentLocation)
         }
         outroNavGraph(navController = navController, data = data)
     }

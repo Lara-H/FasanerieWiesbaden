@@ -18,23 +18,24 @@ import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun LevelScreen(data: Data) {
+fun LevelScreen(data: MainActivityViewModel) {
 
     Column(modifier = Modifier .fillMaxSize() .padding(top = 64.dp, bottom = 80.dp)){
 
         var i = 0
         val itemsPerLine = 4
 
-        if (data.listStationsState.value.isNotEmpty()) {
-            while (i < data.listStationsState.value.size) {
+        if (data.stations.isNotEmpty()) {
+            while (i < data.stations.size) {
                 Row(modifier = Modifier .fillMaxWidth()) {
                     var posInLine = 0
                     while ((posInLine < itemsPerLine)) {
-                        if (i < data.listStationsState.value.size) {
-                            val item = data.listStationsState.value[i]
+                        if (i < data.stations.size) {
+                            val item = data.stations[i]
                             if (item.isDone) {
                                 Image(
                                     modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium),
@@ -65,5 +66,5 @@ fun LevelScreen(data: Data) {
 @Preview(showBackground = true)
 @Composable
 fun LevelScreenPreview() {
-    LevelScreen(data = Data())
+    LevelScreen(data = MainActivityViewModel())
 }

@@ -20,8 +20,8 @@ class FoxViewModel(val screenWidthPx: Int, val imgSizePx: Int): ViewModel() {
     val handsImgAltText = "Hands"
     val handsImgSize = 100.dp
 
-    val itemImgPath = R.drawable.money
-    val itemImgAltText = "Item"
+    val itemImgPath = R.drawable.fox_bug
+    val itemImgAltText = "Bug"
     val itemImgSize = 30.dp
 
     val totalPoints = 5

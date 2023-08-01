@@ -11,16 +11,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.paint
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
@@ -37,6 +35,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.FoxViewModel
@@ -48,9 +47,9 @@ fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // helpers to convert dp to px
     val density = LocalDensity.current
-    val configuration = LocalConfiguration.current
 
     // device size
+    val configuration = LocalConfiguration.current
     val screenWidthPx = with(density) {configuration.screenWidthDp.dp.roundToPx()}
 
     // image size
@@ -71,7 +70,9 @@ fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // check if done
     if (viewModel.isDone.value) {
-        onDone()
+        LaunchedEffect(Unit) {
+            onDone()
+        }
     }
 
     // haptic feedback
@@ -88,7 +89,7 @@ fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
         Column() {
             TopBar(text = stringResource(R.string.title_location_fox), onClose = onClose)
-            Text(text = stringResource(R.string.station_fox_game_text), Modifier.padding(all = MaterialTheme.spacing.medium), color = Color.White)
+            TextBox(text = stringResource(R.string.station_fox_game_text), colorText = Color.White)
         }
 
         Box(modifier = Modifier .fillMaxWidth()
@@ -132,7 +133,7 @@ fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
         }
 
         ProcessBar(
-            icon = Icons.Default.Person,
+            icon = R.drawable.icon_fox,
             numberTotal = viewModel.totalPoints,
             numberFull = viewModel.currentPoints
         )

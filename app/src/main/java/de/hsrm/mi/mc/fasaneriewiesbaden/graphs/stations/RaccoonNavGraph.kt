@@ -19,9 +19,7 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController, data: Main
     ) {
         composable(route = RaccoonScreen.Greeting.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_raccoon),
-                imagePath = R.drawable.raccoon,
-                imageDescription= "Raccoon",
+                data = data,
                 text = stringResource(R.string.station_raccoon_greeting_text),
                 btnText = stringResource(R.string.station_raccoon_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
@@ -31,16 +29,19 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController, data: Main
         composable(route = RaccoonScreen.Game.route) {
             RaccoonScreen(
                 onClose = { navController.navigate(Graph.MAIN) },
-                onDone = { navController.navigate(RaccoonScreen.Bye.route) }
+                onDone = {
+                    navController.navigate(RaccoonScreen.Bye.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
         composable(route = RaccoonScreen.Bye.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_raccoon),
-                imagePath = R.drawable.raccoon,
-                imageDescription= "Raccoon",
+                data = data,
                 text = stringResource(R.string.station_raccoon_bye_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
             )

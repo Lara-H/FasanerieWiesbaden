@@ -19,9 +19,7 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController, data: MainAct
     ) {
         composable(route = BearScreen.Greeting.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_bear),
-                imagePath = R.drawable.bear,
-                imageDescription= "Bear",
+                data = data,
                 text = stringResource(R.string.station_bear_greeting_text),
                 btnText = stringResource(R.string.station_bear_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
@@ -31,15 +29,19 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController, data: MainAct
         composable(route = BearScreen.Game.route) {
             BearScreen(
                 onClose = { navController.navigate(Graph.MAIN) },
-                onDone = { navController.navigate(BearScreen.Bye.route) })
+                onDone = {
+                    navController.navigate(BearScreen.Bye.route)  {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
         composable(route = BearScreen.Bye.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_bear),
-                imagePath = R.drawable.bear,
-                imageDescription= "Bear",
+                data = data,
                 text = stringResource(R.string.station_bear_bye_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
             )

@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -36,6 +37,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.BatViewModel
@@ -58,7 +60,9 @@ fun BatScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // check if done
     if (viewModel.isDone.value) {
-        onDone()
+        LaunchedEffect(Unit) {
+            onDone()
+        }
     }
 
     // detect any changes to data and recompose composable
@@ -72,13 +76,7 @@ fun BatScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
         Column() {
             TopBar(text = stringResource(R.string.title_location_bat), onClose = onClose)
-            Text(
-                text = stringResource(R.string.station_bat_game_text),
-                Modifier.padding(
-                    all = MaterialTheme.spacing.medium
-                ),
-                color = Color.White
-            )
+            TextBox(text = stringResource(R.string.station_bat_game_text), colorText = Color.White)
         }
 
         Box (modifier = Modifier

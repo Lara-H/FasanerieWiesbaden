@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +29,8 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
-import androidx.compose.material.icons.rounded.Star
+import androidx.compose.runtime.LaunchedEffect
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.OtterViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -56,7 +56,9 @@ fun OtterScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // check if done
     if (viewModel.isDone.value) {
-        onDone()
+        LaunchedEffect(Unit) {
+            onDone()
+        }
     }
 
     Column(modifier = Modifier
@@ -77,7 +79,7 @@ fun OtterScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
         Column {
             TopBar(text = stringResource(R.string.title_location_otter), onClose = onClose)
-            Text(text = stringResource(R.string.station_otter_game_text), modifier = Modifier .padding(all = MaterialTheme.spacing.medium))
+            TextBox(text = stringResource(R.string.station_otter_game_text))
         }
 
         viewModel.fishes.forEach {
@@ -94,7 +96,7 @@ fun OtterScreen(onClose: () -> Unit, onDone: () -> Unit) {
         }
 
         ProcessBar(
-            icon = Icons.Rounded.Star,
+            icon = R.drawable.icon_otter,
             numberTotal = viewModel.totalPoints,
             numberFull = viewModel.currentPoints
         )

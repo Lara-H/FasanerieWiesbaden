@@ -10,16 +10,13 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: MainActivityViewModel) {
-
     navigation(
         route = Graph.INTRO,
         startDestination = IntroScreen.Greeting.route
     ) {
         composable(route = IntroScreen.Greeting.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_squirrel),
-                imagePath = R.drawable.squirrel,
-                imageDescription= "Squirrel",
+                data = data,
                 text = stringResource(R.string.intro_greeting_text),
                 btnText = stringResource(R.string.intro_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
@@ -28,33 +25,26 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: MainAc
         }
         composable(route = IntroScreen.Explanation.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_squirrel),
-                imagePath = R.drawable.squirrel,
-                imageDescription= "Squirrel",
+                data = data,
                 text = stringResource(R.string.intro_explanation_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(IntroScreen.Meeting.route) }
             )
         }
         composable(route = IntroScreen.Meeting.route) {
             CommunicationScreen(
+                data = data,
                 title = stringResource(R.string.title_name_goat_child),
                 imagePath = R.drawable.goat_child,
-                imageDescription= "Goat child",
                 text = stringResource(R.string.intro_meeting_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(IntroScreen.Departure.route) }
             )
         }
         composable(route = IntroScreen.Departure.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_squirrel),
-                imagePath = R.drawable.squirrel,
-                imageDescription= "Squirrel",
+                data = data,
                 text = stringResource(R.string.intro_departure_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() },
             )

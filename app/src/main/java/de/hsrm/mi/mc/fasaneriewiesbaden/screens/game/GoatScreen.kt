@@ -14,13 +14,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.GoatViewModel
@@ -48,7 +49,9 @@ fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit
 
     // check if done
     if (viewModel.isDone.value) {
-        onDone()
+        LaunchedEffect(Unit) {
+            onDone()
+        }
     }
 
     // detect any changes to data and recompose composable
@@ -64,11 +67,7 @@ fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit
     ) {
         Column {
             TopBar(text = stringResource(R.string.title_location_goat), onClose = onClose)
-            Text(
-                modifier = Modifier .padding(all = MaterialTheme.spacing.medium),
-                text = stringResource(R.string.station_goat_game_text),
-                color = MaterialTheme.colorScheme.onBackground
-            )
+            TextBox(stringResource(R.string.station_goat_game_text))
             Text(
                 modifier = Modifier.padding(start = MaterialTheme.spacing.medium, end = MaterialTheme.spacing.medium, bottom = MaterialTheme.spacing.medium),
                 text = stringResource(R.string.station_goat_game_question),
@@ -113,7 +112,7 @@ fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit
         }
 
         ProcessBar(
-            icon = Icons.Default.Person,
+            icon = R.drawable.icon_goat,
             numberTotal = viewModel.totalPoints,
             numberFull = viewModel.currentPoints
         )

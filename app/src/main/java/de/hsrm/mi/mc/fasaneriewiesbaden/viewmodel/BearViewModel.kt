@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 
 class BearViewModel(): ViewModel() {
+
+    var isDone = mutableStateOf(false)
+        private set
     var onUpdate = mutableStateOf(0)
         private set
     var currentPoints by mutableStateOf(0)
@@ -43,6 +46,9 @@ class BearViewModel(): ViewModel() {
 
     fun addPoint() {
         currentPoints++
+        if (currentPoints >= drops.size) {
+            isDone.value = true
+        }
     }
 
     inner class Drop(val imgPath: Int = R.drawable.beehoney, var isDropped: Boolean = false)

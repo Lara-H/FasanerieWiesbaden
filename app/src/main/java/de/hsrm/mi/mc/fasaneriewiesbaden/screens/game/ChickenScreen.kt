@@ -11,11 +11,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
@@ -30,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.ChickenViewModel
@@ -70,7 +70,9 @@ fun ChickenScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // check if done
     if (viewModel.isDone.value) {
-        onDone()
+        LaunchedEffect(Unit) {
+            onDone()
+        }
     }
 
     Box (modifier = Modifier .fillMaxSize() .background(MaterialTheme.colorScheme.background)) {
@@ -114,11 +116,11 @@ fun ChickenScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
         Column {
             TopBar(text = stringResource(R.string.title_location_chicken), onClose = onClose)
-            Text(text = stringResource(R.string.station_chicken_game_text), modifier = Modifier .padding(all = MaterialTheme.spacing.medium))
+            TextBox(text = stringResource(R.string.station_chicken_game_text))
         }
 
         ProcessBar(
-            icon = Icons.Default.Person,
+            icon = R.drawable.icon_chicken,
             numberTotal = viewModel.totalPoints,
             numberFull = viewModel.currentPoints
         )

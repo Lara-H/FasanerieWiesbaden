@@ -19,9 +19,7 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController, data: Main
     ) {
         composable(route = ChickenScreen.Greeting.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_chicken),
-                imagePath = R.drawable.chicken,
-                imageDescription= "chicken",
+                data = data,
                 text = stringResource(R.string.station_chicken_greeting_text),
                 btnText = stringResource(R.string.station_chicken_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
@@ -31,16 +29,19 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController, data: Main
         composable(route = ChickenScreen.Game.route) {
             ChickenScreen(
                 onClose = { navController.navigate(Graph.MAIN) },
-                onDone = { navController.navigate(ChickenScreen.Bye.route) }
+                onDone = {
+                    navController.navigate(ChickenScreen.Bye.route)  {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
         composable(route = ChickenScreen.Bye.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_chicken),
-                imagePath = R.drawable.chicken,
-                imageDescription= "chicken",
+                data = data,
                 text = stringResource(R.string.station_chicken_bye_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
             )

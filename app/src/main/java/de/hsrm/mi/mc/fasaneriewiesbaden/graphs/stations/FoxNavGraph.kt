@@ -12,16 +12,13 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 fun NavGraphBuilder.foxNavGraph(navController: NavHostController, data: MainActivityViewModel) {
-
     navigation(
         route = Graph.FOX,
         startDestination = FoxScreen.Greeting.route
     ) {
         composable(route = FoxScreen.Greeting.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_fox),
-                imagePath = R.drawable.fox,
-                imageDescription= "Fox",
+                data = data,
                 text = stringResource(R.string.station_fox_greeting_text),
                 btnText = stringResource(R.string.station_fox_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
@@ -31,16 +28,19 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController, data: MainActi
         composable(route = FoxScreen.Game.route) {
             FoxScreen(
                 onClose = { navController.navigate(Graph.MAIN) },
-                onDone = { navController.navigate(FoxScreen.Bye.route) }
+                onDone = {
+                    navController.navigate(FoxScreen.Bye.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
         composable(route = FoxScreen.Bye.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_fox),
-                imagePath = R.drawable.fox,
-                imageDescription= "Fox",
+                data = data,
                 text = stringResource(R.string.station_fox_bye_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
             )

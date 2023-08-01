@@ -19,9 +19,7 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController, data: MainAc
     ) {
         composable(route = OtterScreen.Greeting.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_otter),
-                imagePath = R.drawable.otter,
-                imageDescription= "Otter",
+                data = data,
                 text = stringResource(R.string.station_otter_greeting_text),
                 btnText = stringResource(R.string.station_otter_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
@@ -31,16 +29,19 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController, data: MainAc
         composable(route = OtterScreen.Game.route) {
             OtterScreen(
                 onClose = { navController.navigate(Graph.MAIN) },
-                onDone = { navController.navigate(OtterScreen.Bye.route) }
+                onDone = {
+                    navController.navigate(OtterScreen.Bye.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
         composable(route = OtterScreen.Bye.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_otter),
-                imagePath = R.drawable.otter,
-                imageDescription= "Otter",
+                data = data,
                 text = stringResource(R.string.station_otter_bye_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
             )

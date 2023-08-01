@@ -17,13 +17,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.res.painterResource
@@ -46,12 +43,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.BearViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType",
     "MutableCollectionMutableState"
 )
@@ -66,17 +63,19 @@ fun BearScreen(onClose: () -> Unit, onDone: () -> Unit) {
         }
     )
 
+    // check if done
+    if (viewModel.isDone.value) {
+        LaunchedEffect(Unit) {
+            onDone()
+        }
+    }
+
     val rotate: Float by animateFloatAsState(viewModel.currentRotation)
 
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
 
-    Scaffold(
-        topBar = { TopBar(text = stringResource(R.string.title_location_bear), onClose = onClose) },
-    ) {
-    }
-
-    Box(modifier = Modifier .fillMaxSize() .background(MaterialTheme.colorScheme.secondary)) {
+    Box(modifier = Modifier .fillMaxSize() .background(color = Color(0xFFC8DBEB)) ) {
         viewModel.drops.forEach {
             var alignment = Alignment.TopCenter
             if (it.isDropped) {
@@ -101,7 +100,8 @@ fun BearScreen(onClose: () -> Unit, onDone: () -> Unit) {
         Box(modifier = Modifier) {
 
             Column {
-                Text(text = "Schüttet dein Smartphone, damit etwas Honig aus dem Bienennest tropft")
+                TopBar(text = stringResource(R.string.title_location_bear), onClose = onClose)
+                TextBox(stringResource(R.string.station_bear_game_text), Color.White, MaterialTheme.colorScheme.onBackground)
                 Box {
                     Image(
                         painter = painterResource(
@@ -129,7 +129,7 @@ fun BearScreen(onClose: () -> Unit, onDone: () -> Unit) {
         }
 
         ProcessBar(
-            icon = Icons.Default.Person,
+            icon = R.drawable.icon_bear,
             numberTotal = viewModel.drops.size,
             numberFull = viewModel.currentPoints
         )

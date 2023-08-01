@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
@@ -17,11 +18,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @Composable
-fun ProcessBar(icon: ImageVector, numberTotal: Int, numberFull: Int) {
+fun ProcessBar(icon: Int, numberTotal: Int, numberFull: Int) {
     LazyRow(modifier = Modifier
         .fillMaxWidth()
         .background(Color.DarkGray)
@@ -33,11 +35,10 @@ fun ProcessBar(icon: ImageVector, numberTotal: Int, numberFull: Int) {
             if (index < numberFull) {
                 color = Color.White
             }
-            // TODO: Icons
             Icon(
-                imageVector = icon,
+                painterResource(id = icon),
+                modifier = Modifier.size(30.dp),
                 contentDescription = "Icon",
-                modifier = Modifier,
                 tint = color
             )
         }
@@ -48,7 +49,7 @@ fun ProcessBar(icon: ImageVector, numberTotal: Int, numberFull: Int) {
 @Composable
 fun ProcessBarPreview() {
     ProcessBar(
-        icon = Icons.Default.Person,
+        icon = R.drawable.icon_map,
         numberTotal = 5,
         numberFull = 1
     )

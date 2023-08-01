@@ -12,6 +12,7 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: MainActivityViewModel) {
+    val currentStation = data.stations[data.nextStationKey.value]
 
     navigation(
         route = Graph.BAT,
@@ -19,9 +20,7 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: MainActi
     ) {
         composable(route = BatScreen.Greeting.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_bat),
-                imagePath = R.drawable.bat,
-                imageDescription= "Bat",
+                data = data,
                 text = stringResource(R.string.station_bat_greeting_text),
                 btnText = stringResource(R.string.station_bat_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
@@ -42,13 +41,10 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: MainActi
         }
         composable(route = BatScreen.Bye.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_bat),
-                imagePath = R.drawable.bat,
-                imageDescription= "Bat",
+                data = data,
                 text = stringResource(R.string.station_bat_bye_text),
-                btnText = stringResource(R.string.communication_btn),
-                onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
-                onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
+                onClose = { navController.navigate(Graph.OUTRO); data.stationDone() },
+                onBtnClick = { navController.navigate(Graph.OUTRO); data.stationDone() }
             )
         }
     }

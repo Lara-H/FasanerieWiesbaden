@@ -27,7 +27,7 @@ fun MainScreen(navController: NavHostController, data: MainActivityViewModel) {
     val viewModel = viewModel<MainViewModel>()
 
     Scaffold(
-        topBar = { MainTopBar(viewModel = viewModel) },
+        topBar = { MainTopBar(viewModel = viewModel, data = data) },
 
     ) {
         Box(
@@ -37,7 +37,6 @@ fun MainScreen(navController: NavHostController, data: MainActivityViewModel) {
             MainNavGraph(navController = navController, mainNavController = mainNavController, data = data, viewModelMain = viewModel)
             BottomBar(navController = mainNavController, viewModelMain = viewModel)
         }
-
     }
 
 }

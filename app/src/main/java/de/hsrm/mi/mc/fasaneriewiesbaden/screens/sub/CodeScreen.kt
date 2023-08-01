@@ -1,6 +1,7 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,7 +27,8 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 @Composable
 fun CodeScreen(onClose: () -> Unit, id: String) {
     Column(modifier = Modifier
-        .fillMaxSize(),
+        .fillMaxSize()
+        .background(Color.White),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         TopBar(text = stringResource(R.string.title_code), onClose = onClose)
@@ -43,10 +45,10 @@ fun CodeScreen(onClose: () -> Unit, id: String) {
             )
         }
         if (!BarcodeType.CODE_128.isValueValid(id)) {
-            Text("Technischer Fehler, bitte melde dich im Shop", color = Color.Red)
+            Text(stringResource(R.string.outro_code_error), color = Color.Red)
         }
 
-        Text(text = "Einzulösen im Shop oder Kiosk der Fasanerie Wiesbaden. Einfach an der Kasse vorzeigen und einmalig 10% Rabatt erhalten.", Modifier.padding(all = MaterialTheme.spacing.medium))
+        Text(text = stringResource(R.string.outro_code_text), Modifier.padding(all = MaterialTheme.spacing.medium), color = MaterialTheme.colorScheme.onBackground)
     }
 }
 

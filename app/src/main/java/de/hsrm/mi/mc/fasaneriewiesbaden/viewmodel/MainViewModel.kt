@@ -32,8 +32,4 @@ class MainViewModel(): ViewModel() {
         updateUI()
     }
 
-    fun resetGame() {
-        updateUI()
-    }
-
 }

@@ -4,11 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,25 +15,43 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopBar(viewModel: MainViewModel) {
+fun MainTopBar(viewModel: MainViewModel, data: MainActivityViewModel) {
+
+    // device width
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
 
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
 
+    // dark background when expanded
     if (viewModel.isExpanded.value) {
         Box(modifier = Modifier
             .fillMaxSize()
@@ -65,33 +82,50 @@ fun MainTopBar(viewModel: MainViewModel) {
             },
         )
         if (viewModel.isExpanded.value) {
-            NavMenu(viewModel)
+            NavMenu(viewModel, data, screenWidth)
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavMenu(viewModel: MainViewModel) {
+fun NavMenu(viewModel: MainViewModel, data: MainActivityViewModel, screenWidth: Dp) {
     Column(modifier = Modifier
-        .background(Color.White)
+        .background(MaterialTheme.colorScheme.background)
         .fillMaxHeight()
         .padding(all = MaterialTheme.spacing.medium)
-        .defaultMinSize(minWidth = 200.dp)
+        .width(screenWidth-100.dp)
 
     ) {
 
-
-
-        TextButton(onClick = { viewModel.changeLanguage() }) {
-            Row {
-                Text(text = "DE")
-                Text(text = " | ")
-                Text(text = "EN")
+        // Reset
+        Text(text = stringResource(R.string.maintopbar_reset_headline), fontWeight = FontWeight.Bold)
+        Text(
+            modifier = Modifier .padding(top = MaterialTheme.spacing.extraSmall),
+            text = stringResource(R.string.maintopbar_reset_text),
+        )
+        var isError by remember { mutableStateOf(false) }
+        var textInput by remember { mutableStateOf(TextFieldValue("")) }
+        TextField(
+            modifier = Modifier .padding(top = MaterialTheme.spacing.medium, bottom = MaterialTheme.spacing.medium),
+            singleLine = true,
+            value = textInput,
+            isError = isError,
+            colors = TextFieldDefaults.outlinedTextFieldColors(errorBorderColor = Red, containerColor = Color.White, textColor = MaterialTheme.colorScheme.onBackground),
+            onValueChange = { newText ->
+                textInput = newText
             }
-        }
-        TextButton(onClick = { viewModel.resetGame() }) {
-            Text(text = "Zurücksetzen".uppercase())
-        }
+        )
+        PrimaryButton(text = stringResource(R.string.maintopbar_reset_btn), onClick = {
+            if (textInput.text == "RESET") {
+                data.resetGame()
+                isError = false
+                viewModel.changeExpanded()
+            } else {
+                isError = true
+            }
+            textInput = TextFieldValue("")
+        })
     }
 }
 
@@ -99,6 +133,7 @@ fun NavMenu(viewModel: MainViewModel) {
 @Composable
 fun MainTopBarPreview() {
     MainTopBar(
-        viewModel = MainViewModel()
+        viewModel = MainViewModel(),
+        data = MainActivityViewModel()
     )
 }

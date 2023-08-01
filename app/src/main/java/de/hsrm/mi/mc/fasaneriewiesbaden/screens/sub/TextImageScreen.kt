@@ -7,44 +7,34 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.BottomButton
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun TextImageScreen(title: String, imagePath: Int, imageDescription: String, text: String, btnText: String, onClose: () -> Unit, onBtnClick: () -> Unit) {
-    Scaffold(
-        topBar = { TopBar(text=title, onClose = onClose) },
-    ) {
-    }
-
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(MaterialTheme.colorScheme.background),
+        .background(MaterialTheme.colorScheme.onBackground),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(
-            modifier = Modifier
-                .padding(all = MaterialTheme.spacing.medium),
-            text = text,
-        )
-        Image(painter = painterResource(
-            id = imagePath),
+        Column {
+            TopBar(text=title, onClose = onClose)
+            TextBox(text = text, colorText = Color.White)
+        }
+        Image(
+            painter = painterResource(id = imagePath),
             contentDescription = imageDescription,
-            modifier = Modifier
-                .align(Alignment.End)
+            modifier = Modifier .padding(MaterialTheme.spacing.medium)
         )
         BottomButton(
             onClick = { onBtnClick() },
@@ -57,11 +47,11 @@ fun TextImageScreen(title: String, imagePath: Int, imageDescription: String, tex
 @Composable
 fun TextImageScreenPreview() {
     TextImageScreen(
-        title = "Fledermaushöhle",
+        title = "Titel",
         imagePath = R.drawable.treasure,
-        imageDescription = "Treasure",
-        text = "Gemeinsam gelingt es den Tieren den Schatz zu bergen…",
-        btnText = "Weiter",
+        imageDescription = "Bild",
+        text = "Lorem ipsum dolor sit amet",
+        btnText = "Lorem ipsum",
         onClose = {},
         onBtnClick = {}
     )

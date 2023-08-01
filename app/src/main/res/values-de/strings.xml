@@ -30,6 +30,12 @@
     <string name="title_location_squirrel">Eingang</string>
 
     <string name="map_text">Bewege dich von deinem Standort aus zum grünen Punkt auf der Karte</string>
+    <string name="map_own_location">Dein Standort</string>
+    <string name="map_station_btn">Öffnen</string>
+
+    <string name="maintopbar_reset_headline">Zurücksetzen</string>
+    <string name="maintopbar_reset_text">Tippe in das Textfeld \"RESET\" ein, wenn du deinen Spielstand wirklich unwiederuflich löschen möchtest.</string>
+    <string name="maintopbar_reset_btn">Ja, ich bin sicher</string>
 
     <string name="info_headline">Täglich außer freitags</string>
     <string name="info_time_early">11:00 Uhr</string>
@@ -98,9 +104,9 @@
     <string name="station_bat_game_text">Drehe die Zahnräder mit ZWEI Fingern, um die Tür zu entschlüsseln</string>
     <string name="station_bat_bye_text">Du bist ja ein echter Profi im Knacken von kniffligen Türschlössern! Hier hast du eine Taschenlampe, damit kannst du in die dunkle Höhle leuchten!</string>
 
-    <string name="outro_speech_text">LOREM IPSUM</string>
-    <string name="outro_treasure_text">Gemeinsam gelingt es den Tieren den Schatz zu bergen…</string>
-    <string name="outro_explanation_text">LOREM IPSUM</string>
-    <string name="outro_thanks_text">LOREM IPSUM</string>
-    <string name="outro_code_btn">Code einlösen</string>
+    <string name="outro_treasure_text">In der Höhle befindet sich tatsächlich der Schatz!</string>
+    <string name="outro_thanks_text">Hurra, der Park ist gerettet! Vielen Dank für deine Hilfe! Als kleines Dankeschön möchten wir dir natürlich auch etwas von unserem Fund abgeben. Mit diesem kannst du dir im Shop des Tierparks etwas Tolles aussuchen.</string>
+    <string name="outro_thanks_btn">Code einlösen</string>
+    <string name="outro_code_text">Einzulösen im Shop oder Kiosk der Fasanerie Wiesbaden. Einfach an der Kasse vorzeigen und einmalig 10% Rabatt erhalten.</string>
+    <string name="outro_code_error">Technischer Fehler, bitte melde dich im Shop.</string>
 </resources>

@@ -18,9 +18,7 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController, data: MainAct
     ) {
         composable(route = GoatScreen.Greeting.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_goat),
-                imagePath = R.drawable.goat,
-                imageDescription= "Goat",
+                data = data,
                 text = stringResource(R.string.station_goat_greeting_text),
                 btnText = stringResource(R.string.station_goat_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
@@ -30,28 +28,28 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController, data: MainAct
         composable(route = GoatScreen.Game.route) {
             GoatScreen(
                 onClose = { navController.navigate(Graph.MAIN) },
-                onDone = { navController.navigate(GoatScreen.Bye.route) },
+                onDone = {
+                    navController.navigate(GoatScreen.Bye.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    };
+                },
                 onFalseClick = { navController.navigate(GoatScreen.Error.route) }
             )
         }
         composable(route = GoatScreen.Error.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_goat),
-                imagePath = R.drawable.goat,
-                imageDescription= "Goat",
+                data = data,
                 text = stringResource(R.string.station_goat_game_error),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
                 onBtnClick = { navController.navigate(GoatScreen.Game.route) }
             )
         }
         composable(route = GoatScreen.Bye.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_goat),
-                imagePath = R.drawable.goat,
-                imageDescription= "Goat",
+                data = data,
                 text = stringResource(R.string.station_goat_bye_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
             )

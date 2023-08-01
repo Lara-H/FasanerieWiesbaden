@@ -10,17 +10,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 
 @Composable
-fun TextBox(text: String, colorText: Color, colorBg: Color) {
-    Box(modifier = Modifier .background(colorBg)) {
+fun TextBox(text: String, colorText: Color? = null, colorBg: Color? = null) {
+    Box(modifier = Modifier .background(createColorBg(colorBg))) {
         Text(
-            modifier = Modifier .fillMaxWidth() .padding(top = 64.dp) .padding(all = MaterialTheme.spacing.medium),
-            text = text, color = colorText
+            modifier = Modifier .fillMaxWidth() .padding(all = MaterialTheme.spacing.medium),
+            text = text, color = createColorText(colorText)
         )
     }
+}
+
+@Composable
+fun createColorText(colorText: Color?): Color {
+    var newColorText = MaterialTheme.colorScheme.onBackground
+    if (colorText != null) {
+        return colorText
+    }
+    return newColorText
+}
+
+@Composable
+fun createColorBg(colorBg: Color?): Color {
+    var newColorBg = Color.Transparent
+    if (colorBg != null) {
+        return colorBg
+    }
+    return newColorBg
 }
 
 @Preview(showBackground = true)

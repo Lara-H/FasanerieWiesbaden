@@ -19,9 +19,7 @@ fun NavGraphBuilder.lynxNavGraph(navController: NavHostController, data: MainAct
     ) {
         composable(route = LynxScreen.Greeting.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_lynx),
-                imagePath = R.drawable.lynx,
-                imageDescription= "Lynx",
+                data = data,
                 text = stringResource(R.string.station_lynx_greeting_text),
                 btnText = stringResource(R.string.station_lynx_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
@@ -31,16 +29,19 @@ fun NavGraphBuilder.lynxNavGraph(navController: NavHostController, data: MainAct
         composable(route = LynxScreen.Game.route) {
             LynxScreen(
                 onClose = { navController.navigate(Graph.MAIN) },
-                onDone = { navController.navigate(LynxScreen.Bye.route) }
+                onDone = {
+                    navController.navigate(LynxScreen.Bye.route)  {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
         composable(route = LynxScreen.Bye.route) {
             CommunicationScreen(
-                title = stringResource(R.string.title_name_lynx),
-                imagePath = R.drawable.lynx,
-                imageDescription= "Lynx",
+                data = data,
                 text = stringResource(R.string.station_lynx_bye_text),
-                btnText = stringResource(R.string.communication_btn),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }
             )

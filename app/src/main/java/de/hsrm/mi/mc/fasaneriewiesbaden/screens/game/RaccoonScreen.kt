@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -26,6 +27,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.RaccoonViewModel
@@ -45,7 +47,9 @@ fun RaccoonScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     // check if done
     if (viewModel.isDone.value) {
-        onDone()
+        LaunchedEffect(Unit) {
+            onDone()
+        }
     }
 
     // detect any changes to data and recompose composable
@@ -56,14 +60,11 @@ fun RaccoonScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(MaterialTheme.colorScheme.background),
+        .background(Color(0xFF9C9C9C)),
         verticalArrangement = Arrangement.Top
     ) {
             TopBar(text = stringResource(R.string.title_location_raccoon), onClose = onClose)
-            Text(
-                modifier = Modifier .padding(all = MaterialTheme.spacing.medium),
-                text = stringResource(R.string.station_raccoon_game_text)
-            )
+            TextBox(text = stringResource(R.string.station_raccoon_game_text), Color.White, Color(0x99000000))
 
         Column {
 

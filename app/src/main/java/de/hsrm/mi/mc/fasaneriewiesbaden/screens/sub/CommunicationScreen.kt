@@ -25,16 +25,19 @@ import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.BottomButton
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import androidx.compose.runtime.*
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun CommunicationScreen(title: String, imagePath: Int, imageDescription: String, text: String, btnText: String, onBtnClick: () -> Unit, onClose: () -> Unit) {
-
+fun CommunicationScreen(data: MainActivityViewModel, title: String? = null, imagePath: Int? = null, text: String, btnText: String? = null, onBtnClick: () -> Unit, onClose: () -> Unit) {
     Scaffold(
-        topBar = { TopBar(text=title, onClose = onClose) },
+        topBar = {
+            TopBar(text=createTitle(data, title), onClose = onClose)
+        },
     ) {
     }
 
@@ -42,9 +45,9 @@ fun CommunicationScreen(title: String, imagePath: Int, imageDescription: String,
         .fillMaxSize(),
         verticalArrangement = Arrangement.Bottom
     ) {
-        Image(painter = painterResource(
-            id = imagePath),
-            contentDescription = imageDescription,
+        Image(
+            painter = painterResource(id = createImgPath(data, imagePath)),
+            contentDescription = createTitle(data, title),
             modifier = Modifier
                 .align(Alignment.End)
         )
@@ -62,25 +65,45 @@ fun CommunicationScreen(title: String, imagePath: Int, imageDescription: String,
 
         BottomButton(
             onClick = { onBtnClick() },
-            text = btnText,
+            text = createBtnText(btnText),
         )
     }
+}
+
+@Composable
+fun createTitle(data: MainActivityViewModel, title: String?): String {
+    var newTitle = data.stations[data.nextStationKey.value].animalName.asString()
+    if (title != null) {
+        return title
+    }
+    return newTitle
+}
+
+@Composable
+fun createImgPath(data: MainActivityViewModel, imagePath: Int?): Int {
+    var newImgPath = data.stations[data.nextStationKey.value].imgPath
+    if (imagePath != null) {
+        return imagePath
+    }
+    return newImgPath
+}
+
+@Composable
+fun createBtnText(btnText: String?): String {
+    var newBtnText = stringResource(R.string.communication_btn)
+    if (btnText != null) {
+        return btnText
+    }
+    return newBtnText
 }
 
 @Preview(showBackground = true)
 @Composable
 fun CommunicationScreenPreview() {
     CommunicationScreen(
-        title = "Elli Eichhorn",
-        imagePath = R.drawable.squirrel,
-        imageDescription= "Squirrel",
-        text = "Hurra, der Park ist gerettet!\n" +
-                "\n" +
-                "Vielen Dank für deine Hilfe! Als kleines Dankeschön möchten wir dir natürlich auch etwas von unserem Fund abgeben. \n" +
-                "\n" +
-                "Mit diesem kannst du dir im Shop des Tierparks etwas Tolles aussuchen.",
-        btnText = "Weiter",
+        data = MainActivityViewModel(),
+        text = "Lorem ipsum dolor sit amet",
         onBtnClick = {},
-        onClose = {}
+        onClose = {},
     )
 }

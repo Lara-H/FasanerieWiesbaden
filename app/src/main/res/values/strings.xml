@@ -6,7 +6,6 @@
     <string name="title_info">Fütterungszeiten</string>
     <string name="title_code">Code</string>
 
-    <string name="title_name_squirrel">Elli Eichhorn</string>
     <string name="title_name_bat">Frieda Fledermaus</string>
     <string name="title_name_bear">Bruno Bär</string>
     <string name="title_name_chicken">Henry Hahn</string>
@@ -17,6 +16,7 @@
     <string name="title_name_lynx">Ludwig Luchs</string>
     <string name="title_name_otter">Olli Otter</string>
     <string name="title_name_raccoon">Wilma Waschbär</string>
+    <string name="title_name_squirrel">Elli Eichhorn</string>
 
     <string name="title_location_bat">Fledermaushöhle</string>
     <string name="title_location_bear">Wolf-Bär-Gehege</string>
@@ -27,6 +27,7 @@
     <string name="title_location_lynx">Luchsgehege</string>
     <string name="title_location_otter">Fischottergehege</string>
     <string name="title_location_raccoon">Waschbärgehege</string>
+    <string name="title_location_squirrel">Eingang</string>
 
     <string name="map_text">Bewege dich von deinem Standort aus zum grünen Punkt auf der Karte</string>
 

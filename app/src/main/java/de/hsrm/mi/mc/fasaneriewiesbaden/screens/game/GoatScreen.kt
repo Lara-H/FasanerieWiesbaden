@@ -67,10 +67,12 @@ fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit
             Text(
                 modifier = Modifier .padding(all = MaterialTheme.spacing.medium),
                 text = stringResource(R.string.station_goat_game_text),
+                color = MaterialTheme.colorScheme.onBackground
             )
             Text(
                 modifier = Modifier.padding(start = MaterialTheme.spacing.medium, end = MaterialTheme.spacing.medium, bottom = MaterialTheme.spacing.medium),
                 text = stringResource(R.string.station_goat_game_question),
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
             )
         }

@@ -3,8 +3,6 @@ package de.hsrm.mi.mc.fasaneriewiesbaden.screens.main
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
-import android.os.Handler
-import android.os.Looper
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,10 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.applyCanvas
 import androidx.navigation.NavHostController
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -31,18 +27,15 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
-import de.hsrm.mi.mc.fasaneriewiesbaden.LocationDetails
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.PrimaryButton
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
-import java.io.File
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun MapScreen(navController: NavHostController, data: MainActivityViewModel, currentLocation: LocationDetails) {
-
+fun MapScreen(navController: NavHostController, data: MainActivityViewModel) {
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(LatLng(data.stations[data.nextStationKey.value].mapLatitude, data.stations[data.nextStationKey.value].mapLongitude), 18f)
     }
@@ -62,8 +55,9 @@ fun MapScreen(navController: NavHostController, data: MainActivityViewModel, cur
         ) {
 
         MapMarker(
-            position = LatLng(currentLocation.latitude, currentLocation.longitude),
+            position = LatLng(data.currentLocation.value.latitude, data.currentLocation.value.longitude),
             title = "Dein Standort",
+            snippet = data.currentLocation.value.latitude.toString() + ", " + data.currentLocation.value.longitude.toString(),
             iconResourceId = R.drawable.marker_my_location
         )
 
@@ -71,19 +65,21 @@ fun MapScreen(navController: NavHostController, data: MainActivityViewModel, cur
             if (it.isDone) {
                 MapMarker(
                     position = LatLng(it.mapLatitude, it.mapLongitude),
-                    title = it.locationName,
+                    title = it.locationName.asString(),
+                    snippet = it.animalName.asString(),
                     iconResourceId = R.drawable.marker_location_done
                 )
             } else if (it == data.stations[data.nextStationKey.value]) {
                 MapMarker(
                     position = LatLng(it.mapLatitude, it.mapLongitude),
-                    title = it.locationName,
+                    title = it.locationName.asString(),
+                    snippet = it.animalName.asString(),
                     iconResourceId = R.drawable.marker_location_next
                 )
             }
         }
 
-        data.openNextStation(currentLocation, navController)
+        data.openNextStation(navController)
     }
 
     Column {
@@ -101,6 +97,7 @@ fun MapScreen(navController: NavHostController, data: MainActivityViewModel, cur
 fun MapMarker(
     position: LatLng,
     title: String,
+    snippet: String,
     @DrawableRes iconResourceId: Int
 ) {
     val context = LocalContext.current
@@ -109,6 +106,7 @@ fun MapMarker(
     Marker(
         state = MarkerState(position = position),
         title = title,
+        snippet = snippet,
         icon = icon,
     )
 }

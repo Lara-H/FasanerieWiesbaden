@@ -16,14 +16,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
-import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun LevelScreen(data: MainActivityViewModel) {
-
     Column(modifier = Modifier .fillMaxSize() .padding(top = 64.dp, bottom = 80.dp)){
 
         var i = 0
@@ -66,5 +65,7 @@ fun LevelScreen(data: MainActivityViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun LevelScreenPreview() {
-    LevelScreen(data = MainActivityViewModel())
+    LevelScreen(
+        data = MainActivityViewModel(),
+    )
 }

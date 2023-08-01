@@ -1,12 +1,11 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -15,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,14 +24,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.MainScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 
 @Composable
-fun BottomBar(navController: NavHostController) {
+fun BottomBar(navController: NavHostController, viewModelMain: MainViewModel) {
     val screens = listOf(
         MainScreen.Map,
         MainScreen.Level,
         MainScreen.Info,
     )
+
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
@@ -44,7 +46,8 @@ fun BottomBar(navController: NavHostController) {
             AddItem(
                 screen = screen,
                 currentDestination = currentDestination,
-                navController = navController
+                navController = navController,
+                viewModelMain = viewModelMain
             )
             if (i < screens.size-1) {
                 Box(modifier = Modifier
@@ -61,8 +64,10 @@ fun BottomBar(navController: NavHostController) {
 fun RowScope.AddItem(
     screen: MainScreen,
     currentDestination: NavDestination?,
-    navController: NavHostController
+    navController: NavHostController,
+    viewModelMain: MainViewModel,
 ) {
+    val context = LocalContext.current
     NavigationBarItem(
         modifier = Modifier
             .size(30.dp),
@@ -76,6 +81,7 @@ fun RowScope.AddItem(
             it.route == screen.route
         } == true,
         onClick = {
+            viewModelMain.updateTitle(screen.title.asString(context))
             navController.navigate(screen.route)
         },
         colors = androidx.compose.material3.NavigationBarItemDefaults.colors(
@@ -90,5 +96,8 @@ fun RowScope.AddItem(
 @Composable
 fun BottomBarPreview() {
     val navController = rememberNavController()
-    BottomBar(navController = navController)
+    BottomBar(
+        navController = navController,
+        viewModelMain = MainViewModel(),
+    )
 }

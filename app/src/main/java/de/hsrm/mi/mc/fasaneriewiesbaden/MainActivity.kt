@@ -11,8 +11,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
@@ -20,8 +18,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.FasanerieWiesbadenTheme
 import android.Manifest
 import android.content.pm.ActivityInfo
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -69,14 +65,13 @@ class MainActivity : ComponentActivity() {
 
                     // Location Tracking
                     val context = LocalContext.current
-                    var currentLocation by remember { mutableStateOf(LocationDetails(0.toDouble(), 0.toDouble())) }
                     fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
                     locationCallback = object : LocationCallback() {
                         override fun onLocationResult(p0: LocationResult) {
                             for (lo in p0.locations) {
 
                                 // Update UI with location data
-                                currentLocation = LocationDetails(lo.latitude, lo.longitude)
+                                viewModel.updateCurrentLocation(LocationDetails(lo.latitude, lo.longitude))
                             }
                         }
                     }
@@ -107,7 +102,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     // RootNavigation
-                    RootNavGraph(navController = rememberNavController(), data = viewModel, currentLocation = currentLocation)
+                    RootNavGraph(navController = rememberNavController(), data = viewModel)
 
                 }
             }

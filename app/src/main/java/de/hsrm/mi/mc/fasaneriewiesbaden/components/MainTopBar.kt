@@ -22,30 +22,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
-import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainTopBarViewModel
-import java.util.Locale
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopBar(text: String, isMainNav: Boolean) {
-
-    // viewmodel
-    val viewModel = viewModel<MainTopBarViewModel>(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return MainTopBarViewModel() as T
-            }
-        }
-    )
+fun MainTopBar(viewModel: MainViewModel) {
 
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
@@ -64,7 +49,7 @@ fun MainTopBar(text: String, isMainNav: Boolean) {
     ) {
         TopAppBar(
             title = { Text(
-                text = text,
+                text = viewModel.topBarTitle.value,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             ) },
@@ -86,7 +71,7 @@ fun MainTopBar(text: String, isMainNav: Boolean) {
 }
 
 @Composable
-fun NavMenu(viewModel: MainTopBarViewModel) {
+fun NavMenu(viewModel: MainViewModel) {
     Column(modifier = Modifier
         .background(Color.White)
         .fillMaxHeight()
@@ -113,5 +98,7 @@ fun NavMenu(viewModel: MainTopBarViewModel) {
 @Preview
 @Composable
 fun MainTopBarPreview() {
-    MainTopBar(text = "Hello World", isMainNav = true)
+    MainTopBar(
+        viewModel = MainViewModel()
+    )
 }

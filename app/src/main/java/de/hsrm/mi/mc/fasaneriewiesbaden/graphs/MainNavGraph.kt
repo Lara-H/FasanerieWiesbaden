@@ -1,24 +1,25 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.graphs
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Place
+import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import de.hsrm.mi.mc.fasaneriewiesbaden.LocationDetails
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
-import de.hsrm.mi.mc.fasaneriewiesbaden.data.Data
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.UiText
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.InfoScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.LevelScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.MapScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
+import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
+import java.nio.channels.Channel
 
 @Composable
-fun MainNavGraph(navController: NavHostController, mainNavController: NavHostController, data: MainActivityViewModel, currentLocation: LocationDetails) {
+fun MainNavGraph(navController: NavHostController, mainNavController: NavHostController, data: MainActivityViewModel, viewModelMain: MainViewModel) {
+
+    // title on first visit
+    viewModelMain.updateTitle(MainScreen.Map.title.asString())
+
     NavHost(
         navController = mainNavController,
         route = Graph.MAIN,
@@ -30,13 +31,14 @@ fun MainNavGraph(navController: NavHostController, mainNavController: NavHostCon
             MapScreen(
                 navController = navController,
                 data = data,
-                currentLocation = currentLocation
             )
         }
         composable(
             route = MainScreen.Level.route
         ) {
-            LevelScreen(data = data)
+            LevelScreen(
+                data = data,
+            )
         }
         composable(
             route = MainScreen.Info.route
@@ -46,8 +48,8 @@ fun MainNavGraph(navController: NavHostController, mainNavController: NavHostCon
     }
 }
 
-sealed class MainScreen(val route: String, val icon: Int) {
-    object Map: MainScreen(route = "map_screen", icon = R.drawable.icon_map)
-    object Level: MainScreen(route = "level_screen", icon = R.drawable.icon_level)
-    object Info: MainScreen(route = "info_screen", icon = R.drawable.icon_info)
+sealed class MainScreen(val route: String, val icon: Int, val title: UiText) {
+    object Map: MainScreen(route = "map_screen", icon = R.drawable.icon_map, title = UiText.StringResource(resId = R.string.title_map))
+    object Level: MainScreen(route = "level_screen", icon = R.drawable.icon_level, title = UiText.StringResource(resId = R.string.title_level))
+    object Info: MainScreen(route = "info_screen", icon = R.drawable.icon_info, title = UiText.StringResource(resId = R.string.title_info))
 }

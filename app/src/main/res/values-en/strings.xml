@@ -77,7 +77,8 @@
 
     <string name="station_lynx_greeting_text">Hey du, ich bin Ludwig der Luchs. Wir wollen unseren Kindern das Jagen beibringen, aber beim Spielen haben sie die ganze Anleitung durcheinander gebracht. Kannst du dabei helfen, die Bilder wieder in die richtige Reihenfolge zu bringen?</string>
     <string name="station_lynx_greeting_btn">Helfe Ludwig</string>
-    <string name="station_lynx_game_text">Bringe die Bilder durch Antippen in die richtige Reihenfolge</string>
+    <string name="station_lynx_game_text">Schau dir das Infoschild genau an und bringe die Bilder durch Antippen in die richtige Reihenfolge</string>
+    <string name="station_lynx_game_label">Bild Nr.</string>
     <string name="station_lynx_bye_text">Das hast du super gemacht, dank dir können wir unsere Kinder wieder auf die Jagd vorbereiten. Ich habe leider keine Ahnung, wo sich der Schatz befindet. Aber ich habe gehört, dass die Hirsche großen Hunger haben und deine Hilfe gebrauchen könnten.</string>
 
     <string name="station_deer_greeting_text">Hallo, mein Name ist Hugo. Meine Freunde und ich haben Hunger. Kannst du uns aus dem Futterautomaten ein wenig Futter besorgen?</string>

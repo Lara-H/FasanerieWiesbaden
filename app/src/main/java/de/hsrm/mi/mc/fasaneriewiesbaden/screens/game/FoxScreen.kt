@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
 
 import android.annotation.SuppressLint

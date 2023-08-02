@@ -17,15 +17,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
@@ -36,15 +31,7 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.LynxViewModel
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LynxScreen(onClose: () -> Unit, onDone: () -> Unit) {
-
-    // viewmodel
-    val viewModel = viewModel<LynxViewModel>(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return LynxViewModel() as T
-            }
-        }
-    )
+    val viewModel = viewModel<LynxViewModel>()
 
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
@@ -55,9 +42,6 @@ fun LynxScreen(onClose: () -> Unit, onDone: () -> Unit) {
             onDone()
         }
     }
-
-    // haptic feedback
-    val haptic = LocalHapticFeedback.current
 
     Column(modifier = Modifier
         .background(MaterialTheme.colorScheme.background),
@@ -86,21 +70,18 @@ fun LynxScreen(onClose: () -> Unit, onDone: () -> Unit) {
                                 Box(modifier = Modifier .weight(1f) .padding(all = MaterialTheme.spacing.medium/2)) {
                                     Column {
                                         Row(modifier = Modifier .padding(bottom = MaterialTheme.spacing.extraSmall)) {
-                                            Text(modifier = Modifier .padding(end = MaterialTheme.spacing.extraSmall), text = "Bild Nr.", color = MaterialTheme.colorScheme.onBackground)
+                                            Text(modifier = Modifier .padding(end = MaterialTheme.spacing.extraSmall), text = stringResource(R.string.station_lynx_game_label), color = MaterialTheme.colorScheme.onBackground)
                                             Image(
                                                 modifier = Modifier .size(20.dp),
-                                                painter = painterResource(id = item.imgCube),
-                                                contentDescription = viewModel.itemImgAltText
+                                                painter = painterResource(id = item.cubeImgPath),
+                                                contentDescription = "Cube"
                                             )
                                         }
                                         Image(
                                             modifier = Modifier
-                                                .clickable {
-                                                    viewModel.handleClick(item); haptic.performHapticFeedback(
-                                                    HapticFeedbackType.LongPress
-                                                ) },
-                                            painter = painterResource(id = item.imgPath),
-                                            contentDescription = viewModel.itemImgAltText,
+                                                .clickable { viewModel.handleClick(item) },
+                                            painter = painterResource(id = item.currentImgPath),
+                                            contentDescription = "Item",
                                         )
                                     }
                                 }

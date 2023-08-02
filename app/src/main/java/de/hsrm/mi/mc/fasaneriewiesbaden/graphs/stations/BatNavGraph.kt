@@ -36,7 +36,8 @@ fun NavGraphBuilder.batNavGraph(navController: NavHostController, data: MainActi
                             inclusive = true
                         }
                     }
-                }
+                },
+                screenSize = data.screenSize,
             )
         }
         composable(route = BatScreen.Bye.route) {

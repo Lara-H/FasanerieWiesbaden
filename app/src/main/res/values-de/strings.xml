@@ -51,7 +51,7 @@
 
     <string name="communication_btn">Weiter</string>
 
-    <string name="intro_greeting_text">Hallo, mein Name ist Elli und ich die Parkwächterin. Unser Park ist in Geldnot und soll verkauft werden! Jetzt kann uns nur noch der Goldschatz retten, der laut einer alten Legende irgendwo im Park versteckt ist. Hilfst du uns ihn zu finden?</string>
+    <string name="intro_greeting_text">Hallo, mein Name ist Elli und ich bin die Parkwächterin. Unser Park ist in Geldnot und soll verkauft werden! Jetzt kann uns nur noch der Goldschatz retten, der laut einer alten Legende irgendwo im Park versteckt ist. Hilfst du uns ihn zu finden?</string>
     <string name="intro_greeting_btn">Ja, ich helfe gerne!</string>
     <string name="intro_explanation_text">Vielen Dank, du scheinst ein echter Tierfreund zu sein! Um den Schatz zu finden sollten wir die Tiere befragen, diese kennen sich hier am besten aus und zusammen können wir den Schatz bestimmt finden. Moment, was ist das für ein Geräusch…</string>
     <string name="intro_meeting_text">Määääh, mein Name ist Becky. Schau nur mäh, ich übe gerade meine neuen Tanzschritte mäh, um Profitänzerin zu werden mäh!</string>
@@ -77,7 +77,8 @@
 
     <string name="station_lynx_greeting_text">Hey du, ich bin Ludwig der Luchs. Wir wollen unseren Kindern das Jagen beibringen, aber beim Spielen haben sie die ganze Anleitung durcheinander gebracht. Kannst du dabei helfen, die Bilder wieder in die richtige Reihenfolge zu bringen?</string>
     <string name="station_lynx_greeting_btn">Helfe Ludwig</string>
-    <string name="station_lynx_game_text">Bringe die Bilder durch Antippen in die richtige Reihenfolge</string>
+    <string name="station_lynx_game_text">Schau dir das Infoschild genau an und bringe die Bilder durch Antippen in die richtige Reihenfolge</string>
+    <string name="station_lynx_game_label">Bild Nr.</string>
     <string name="station_lynx_bye_text">Das hast du super gemacht, dank dir können wir unsere Kinder wieder auf die Jagd vorbereiten. Ich habe leider keine Ahnung, wo sich der Schatz befindet. Aber ich habe gehört, dass die Hirsche großen Hunger haben und deine Hilfe gebrauchen könnten.</string>
 
     <string name="station_deer_greeting_text">Hallo, mein Name ist Hugo. Meine Freunde und ich haben Hunger. Kannst du uns aus dem Futterautomaten ein wenig Futter besorgen?</string>

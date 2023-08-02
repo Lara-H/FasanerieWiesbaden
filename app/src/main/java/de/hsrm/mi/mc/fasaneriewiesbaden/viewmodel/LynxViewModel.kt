@@ -7,47 +7,48 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import java.util.UUID
 
 class LynxViewModel: ViewModel() {
-    val itemImgAltText = "Item"
-    val imgLst = listOf(R.drawable.lynx_placeholder, R.drawable.lynx_1, R.drawable.lynx_2, R.drawable.lynx_3, R.drawable.lynx_4, R.drawable.lynx_5, R.drawable.lynx_6)
+    val imgLst = listOf(R.drawable.lynx_5, R.drawable.lynx_2, R.drawable.lynx_6, R.drawable.lynx_1, R.drawable.lynx_4, R.drawable.lynx_3)
 
     var isDone = mutableStateOf(false)
         private set
     var onUpdate = mutableStateOf(0)
         private set
     var items = mutableStateListOf(
-        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_1),
-        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_2),
-        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_3),
-        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_4),
-        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_5),
-        Item(imgLstKey = 0, imgCube = R.drawable.lynx_cube_6),
+        Item(correctImgPath = R.drawable.lynx_1, cubeImgPath = R.drawable.lynx_cube_1),
+        Item(correctImgPath = R.drawable.lynx_2, cubeImgPath = R.drawable.lynx_cube_2),
+        Item(correctImgPath = R.drawable.lynx_3, cubeImgPath = R.drawable.lynx_cube_3),
+        Item(correctImgPath = R.drawable.lynx_4, cubeImgPath = R.drawable.lynx_cube_4),
+        Item(correctImgPath = R.drawable.lynx_5, cubeImgPath = R.drawable.lynx_cube_5),
+        Item(correctImgPath = R.drawable.lynx_6, cubeImgPath = R.drawable.lynx_cube_6),
         )
         private set
 
     fun handleClick(item: Item) {
         items.forEach {
             if (it.id == item.id) {
-                if (it.imgLstKey < imgLst.size-1) {
-                    it.imgLstKey += 1
-                    it.imgPath = imgLst[it.imgLstKey]
-                } else {
-                    it.imgLstKey = 1
-                    it.imgPath = imgLst[it.imgLstKey]
-                }
+                switchToNextCard(it)
             }
         }
         checkIfCorrect()
         updateUI()
     }
 
+    private fun switchToNextCard(it: Item) {
+        if (it.currentImgLstKey < imgLst.size-1) {
+            it.currentImgLstKey += 1
+            it.currentImgPath = imgLst[it.currentImgLstKey]
+        } else {
+            it.currentImgLstKey = 0
+            it.currentImgPath = imgLst[0]
+        }
+    }
+
     private fun checkIfCorrect() {
         var allRight = true
-        var i = 1
         items.forEach {
-            if (it.imgLstKey != i) {
+            if (it.currentImgPath != it.correctImgPath) {
                 allRight = false
             }
-            i++
         }
         if (allRight) {
             isDone.value = true
@@ -58,7 +59,7 @@ class LynxViewModel: ViewModel() {
         onUpdate.value = (0..1_000_000).random()
     }
 
-    inner class Item(val id: UUID = UUID.randomUUID(), var imgLstKey: Int, val imgCube: Int) {
-        var imgPath = imgLst[imgLstKey]
+    inner class Item(val id: UUID = UUID.randomUUID(), val correctImgPath: Int, var currentImgLstKey: Int = (imgLst.indices).random(), val cubeImgPath: Int) {
+        var currentImgPath = imgLst[currentImgLstKey]
     }
 }

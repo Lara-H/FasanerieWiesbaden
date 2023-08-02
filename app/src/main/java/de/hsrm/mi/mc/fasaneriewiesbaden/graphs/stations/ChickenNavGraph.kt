@@ -35,7 +35,8 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController, data: Main
                             inclusive = true
                         }
                     }
-                }
+                },
+                screenSize = data.screenSize,
             )
         }
         composable(route = ChickenScreen.Bye.route) {

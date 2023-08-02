@@ -7,13 +7,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
-import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
 
-class OtterViewModel(val screenWidth: Dp): ViewModel() {
-    val fishImgPath = R.drawable.fish
+class OtterViewModel(val screenSize: ScreenSize): ViewModel() {
     val fishImgSize = 150
-    val fishImgAltText = "Fish"
-
     val totalPoints = 5
 
     var isDone = mutableStateOf(false)
@@ -31,9 +28,9 @@ class OtterViewModel(val screenWidth: Dp): ViewModel() {
 
     fun moveFishes() {
         val newFishes = mutableStateListOf<Fish>()
-        fishes.forEach() {
+        fishes.forEach {
             var newFish = Fish(it.offsetX + 10.dp, it.offsetY, it.speed)
-            if (it.offsetX > screenWidth) {
+            if (it.offsetX > screenSize.screenWidth) {
                 newFish = Fish()
             }
             newFishes.add(newFish)
@@ -49,5 +46,5 @@ class OtterViewModel(val screenWidth: Dp): ViewModel() {
         }
     }
 
-    inner class Fish(var offsetX: Dp = (((fishImgSize*3)*(-1))..(fishImgSize*(-1))).shuffled().last().dp, var offsetY: Dp = ((-50)..50).shuffled().last().dp, var speed: Dp = (0..10).shuffled().last().dp)
+    inner class Fish(var offsetX: Dp = (((fishImgSize*3)*(-1))..(fishImgSize*(-1))).random().dp, var offsetY: Dp = ((-50)..50).random().dp, var speed: Dp = (0..10).random().dp)
 }

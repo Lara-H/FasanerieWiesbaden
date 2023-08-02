@@ -36,7 +36,7 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController, data: MainAct
                         }
                     }
                 },
-                screenSize = data.screenSize
+                screenSize = data.screenSize,
             )
         }
         composable(route = BearScreen.Bye.route) {

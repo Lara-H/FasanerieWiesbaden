@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
 
 import android.annotation.SuppressLint
@@ -9,15 +11,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,34 +30,34 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
-import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.sizing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.ChickenViewModel
 import kotlin.math.roundToInt
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ChickenScreen(onClose: () -> Unit, onDone: () -> Unit) {
+fun ChickenScreen(onClose: () -> Unit, onDone: () -> Unit, screenSize: ScreenSize) {
 
-    // device size
+    // helper to convert dp to px
     val density = LocalDensity.current
-    val configuration = LocalConfiguration.current
-    val screenHeightPx = with(density) {configuration.screenHeightDp.dp.roundToPx()}
-    val screenWidthPx = with(density) {configuration.screenWidthDp.dp.roundToPx()}
 
     // image size
     val chickenSize = 200.dp
     val chickenSizePx = with(density) {chickenSize.roundToPx()}
     val eggSize = 50.dp
     val eggSizePx = with(density) {eggSize.roundToPx()}
+    val topBarPx = with(density) {MaterialTheme.sizing.topBar.roundToPx()}
+    val progressBarPx = with(density) {MaterialTheme.sizing.progressBar.roundToPx()}
 
+    // viewModel
     val viewModel = viewModel<ChickenViewModel>(
         factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return ChickenViewModel(
-                    screenHeightPx = screenHeightPx,
-                    screenWidthPx = screenWidthPx,
-                    offsetTop = 400,
-                    offsetBottom = 300,
+                    screenSize = screenSize,
+                    offsetTop = topBarPx * 2,
+                    offsetBottom = progressBarPx,
                     eggSizePx = eggSizePx,
                     chickenSizePx = chickenSizePx
                 ) as T
@@ -74,37 +73,35 @@ fun ChickenScreen(onClose: () -> Unit, onDone: () -> Unit) {
     }
 
     Box (modifier = Modifier .fillMaxSize() .background(MaterialTheme.colorScheme.background)) {
-
-            Image(
-                painter = painterResource(
-                    id = R.drawable.chicken_brown),
-                contentDescription = viewModel.chickenImgAltText,
-                modifier = Modifier
-                    .size(chickenSize)
-                    .offset { IntOffset(0, screenHeightPx-chickenSizePx) }
-            )
-
-            Image(
-                painter = painterResource(
-                    id = R.drawable.chicken),
-                contentDescription = viewModel.chickenImgAltText,
-                modifier = Modifier
-                    .size(chickenSize)
-                    .offset { IntOffset(screenWidthPx-chickenSizePx, screenHeightPx-chickenSizePx) }
-            )
-
-            Image(
-                painter = painterResource(id = viewModel.egg.imgPath),
-                contentDescription = viewModel.eggImgAltText,
-                modifier = Modifier
-                    .size(eggSize)
-                    .offset { IntOffset(viewModel.egg.offsetX.roundToInt(), viewModel.egg.offsetY.roundToInt()) }
-                    .pointerInput(Unit) {
-                        detectDragGestures { change, dragAmount -> change.consume()
-                            viewModel.changeEggPosition(dragAmount.x, dragAmount.y)
-                        }
-                    }
-            )
+        // Brown chicken
+        Image(
+            painter = painterResource(id = R.drawable.chicken_brown),
+            contentDescription = "Brown Chicken",
+            modifier = Modifier
+                .size(chickenSize)
+                .offset { IntOffset(0, screenSize.screenHeightPx-chickenSizePx) }
+        )
+        // White chicken
+        Image(
+            painter = painterResource(id = R.drawable.chicken),
+            contentDescription = "White chicken",
+            modifier = Modifier
+                .size(chickenSize)
+                .offset { IntOffset(screenSize.screenWidthPx-chickenSizePx, screenSize.screenHeightPx-chickenSizePx) }
+        )
+        // Egg
+        Image(
+            painter = painterResource(id = viewModel.egg.imgPath),
+            contentDescription = "Egg",
+            modifier = Modifier
+                .size(eggSize)
+                .offset { IntOffset(viewModel.egg.offsetX.roundToInt(), viewModel.egg.offsetY.roundToInt()) }
+                .pointerInput(Unit) {
+                    detectDragGestures { change, dragAmount -> change.consume()
+                        viewModel.changeEggPosition(dragAmount.x, dragAmount.y)
+                }
+            }
+        )
     }
 
     Column(modifier = Modifier
@@ -130,6 +127,7 @@ fun ChickenScreen(onClose: () -> Unit, onDone: () -> Unit) {
 fun ChickenScreenPreview() {
     ChickenScreen(
         onClose = {},
-        onDone = {}
+        onDone = {},
+        screenSize = ScreenSize(0.dp, 0.dp, 0, 0),
     )
 }

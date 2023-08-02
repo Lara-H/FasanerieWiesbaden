@@ -35,7 +35,8 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController, data: MainAc
                             inclusive = true
                         }
                     }
-                }
+                },
+                screenSize = data.screenSize,
             )
         }
         composable(route = OtterScreen.Bye.route) {

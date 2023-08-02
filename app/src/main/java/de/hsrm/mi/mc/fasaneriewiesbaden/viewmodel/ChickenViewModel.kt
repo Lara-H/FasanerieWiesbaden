@@ -5,17 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
 
-class ChickenViewModel(val screenHeightPx: Int, val screenWidthPx: Int, val offsetTop: Int, val offsetBottom: Int, val eggSizePx: Int, val chickenSizePx: Int): ViewModel() {
-    val eggImgAltText = "Egg"
-    val chickenImgAltText = "Chicken"
-
+class ChickenViewModel(val screenSize: ScreenSize, val offsetTop: Int, val offsetBottom: Int, val eggSizePx: Int, val chickenSizePx: Int): ViewModel() {
     val totalPoints = 5
+
     var isDone = mutableStateOf(false)
         private set
     var egg by mutableStateOf(Egg(imgPath = getRandomEggColor()))
         private set
-
     var currentPoints by mutableStateOf(0)
         private set
 
@@ -27,27 +25,27 @@ class ChickenViewModel(val screenHeightPx: Int, val screenWidthPx: Int, val offs
             newEgg.offsetX = 0f
         }
         // End
-        if (newEgg.offsetX > (screenWidthPx-eggSizePx).toFloat()) {
-            newEgg.offsetX = (screenWidthPx-eggSizePx).toFloat()
+        if (newEgg.offsetX > (screenSize.screenWidthPx-eggSizePx).toFloat()) {
+            newEgg.offsetX = (screenSize.screenWidthPx-eggSizePx).toFloat()
         }
         // Top
         if (newEgg.offsetY <= offsetTop) {
             newEgg.offsetY = offsetTop.toFloat()
         }
         // Bottom
-        if (newEgg.offsetY > (screenHeightPx-offsetBottom).toFloat()) {
-            newEgg.offsetY = (screenHeightPx-offsetBottom).toFloat()
+        if (newEgg.offsetY > (screenSize.screenHeightPx-offsetBottom).toFloat()) {
+            newEgg.offsetY = (screenSize.screenHeightPx-offsetBottom).toFloat()
         }
 
         // onLeftChicken
-        if (newEgg.offsetX < (screenWidthPx/2) && newEgg.offsetY > screenHeightPx-chickenSizePx) {
+        if (newEgg.offsetX < (screenSize.screenWidthPx/2) && newEgg.offsetY > screenSize.screenHeightPx-chickenSizePx) {
             if (newEgg.imgPath == R.drawable.egg_brown) {
                 addPoint()
             }
             newEgg = Egg(imgPath = getRandomEggColor())
         }
         // onRightChicken
-        if (newEgg.offsetX > (screenWidthPx/2) && newEgg.offsetY > screenHeightPx-chickenSizePx) {
+        if (newEgg.offsetX > (screenSize.screenWidthPx/2) && newEgg.offsetY > screenSize.screenHeightPx-chickenSizePx) {
             if (newEgg.imgPath == R.drawable.egg) {
                 addPoint()
             }
@@ -58,8 +56,8 @@ class ChickenViewModel(val screenHeightPx: Int, val screenWidthPx: Int, val offs
     }
 
     private fun getRandomEggColor(): Int {
-        val random = (0..1).shuffled().last()
-        var imgPath = if (random == 0) {
+        val random = (0..1).random()
+        val imgPath = if (random == 0) {
             R.drawable.egg
         } else {
             R.drawable.egg_brown
@@ -74,6 +72,6 @@ class ChickenViewModel(val screenHeightPx: Int, val screenWidthPx: Int, val offs
         }
     }
 
-    inner class Egg(var offsetX: Float = (0 until screenWidthPx-eggSizePx).shuffled().last().toFloat(), var offsetY: Float = (offsetTop until screenHeightPx-offsetBottom-chickenSizePx).shuffled().last().toFloat(), val imgPath: Int)
+    inner class Egg(var offsetX: Float = (0 until screenSize.screenWidthPx-eggSizePx).random().toFloat(), var offsetY: Float = (offsetTop until screenSize.screenHeightPx-offsetBottom-chickenSizePx).random().toFloat(), val imgPath: Int)
 
 }

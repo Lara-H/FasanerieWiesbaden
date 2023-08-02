@@ -12,38 +12,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.colorpalette
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.RaccoonViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun RaccoonScreen(onClose: () -> Unit, onDone: () -> Unit) {
-
-    // viewmodel
-    val viewModel = viewModel<RaccoonViewModel>(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return RaccoonViewModel() as T
-            }
-        }
-    )
+    val viewModel = viewModel<RaccoonViewModel>()
 
     // check if done
     if (viewModel.isDone.value) {
@@ -55,16 +43,13 @@ fun RaccoonScreen(onClose: () -> Unit, onDone: () -> Unit) {
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
 
-    // haptic feedback
-    val haptic = LocalHapticFeedback.current
-
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(Color(0xFF9C9C9C)),
+        .background(MaterialTheme.colorpalette.gray_500),
         verticalArrangement = Arrangement.Top
     ) {
             TopBar(text = stringResource(R.string.title_location_raccoon), onClose = onClose)
-            TextBox(text = stringResource(R.string.station_raccoon_game_text), Color.White, Color(0x99000000))
+            TextBox(text = stringResource(R.string.station_raccoon_game_text), Color.White, MaterialTheme.colorpalette.alphaDark)
 
         Column {
 
@@ -81,8 +66,7 @@ fun RaccoonScreen(onClose: () -> Unit, onDone: () -> Unit) {
                                 Image(
                                     modifier = Modifier
                                         .weight(1f)
-                                        .clickable { viewModel.handleClick(item); haptic.performHapticFeedback(
-                                            HapticFeedbackType.LongPress) }
+                                        .clickable { viewModel.handleClick(item) }
                                         .background(
                                             if ((item.id == viewModel.selectedFirst.value.id) || (item.id == viewModel.selectedSecond.value.id))  {
                                                 viewModel.selectedColor.value
@@ -92,7 +76,7 @@ fun RaccoonScreen(onClose: () -> Unit, onDone: () -> Unit) {
                                         )
                                         .padding(all = MaterialTheme.spacing.medium),
                                     painter = painterResource(id = item.imgPath),
-                                    contentDescription = viewModel.itemImgAltText,
+                                    contentDescription = "Sock",
                                     contentScale = ContentScale.Fit
                                 )
                             } else {

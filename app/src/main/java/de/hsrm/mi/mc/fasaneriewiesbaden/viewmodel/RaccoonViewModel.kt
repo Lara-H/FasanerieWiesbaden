@@ -15,8 +15,6 @@ class RaccoonViewModel: ViewModel() {
     private val colorWrong = Color.Red
     private val colorCorrect = Color.Green
 
-    val itemImgAltText = "SockItem"
-
     var isDone = mutableStateOf(false)
         private set
     var onUpdate = mutableStateOf(0)

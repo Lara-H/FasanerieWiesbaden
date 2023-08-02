@@ -11,8 +11,6 @@ import java.util.UUID
 import kotlin.concurrent.schedule
 
 class BatViewModel(val doorWidth: Dp): ViewModel() {
-    val drillImgAltText = "Drill"
-
     val paddingBorder = 10.dp
     val drillWidth = doorWidth/2 - paddingBorder
     var isDone = mutableStateOf(false)
@@ -23,7 +21,7 @@ class BatViewModel(val doorWidth: Dp): ViewModel() {
         private set
 
     var drills = mutableStateListOf(
-        Drill(rotation = 0f, offsetX = doorWidth-drillWidth-paddingBorder, offsetY = paddingBorder, imgPath = R.drawable.drill_1, isRotateable = false),
+        Drill(rotation = 0f, offsetX = doorWidth-drillWidth-paddingBorder, offsetY = paddingBorder, imgPath = R.drawable.drill_1, isRotatable = false),
         Drill(rotation = (10..350).random().toFloat(), offsetX = paddingBorder, offsetY = paddingBorder, imgPath = R.drawable.drill_2),
         Drill(rotation = (10..350).random().toFloat(), offsetX = paddingBorder, offsetY = drillWidth+paddingBorder, imgPath = R.drawable.drill_3),
         Drill(rotation = (10..350).random().toFloat(), offsetX = paddingBorder, offsetY = drillWidth*2+paddingBorder, imgPath = R.drawable.drill_4),
@@ -34,7 +32,7 @@ class BatViewModel(val doorWidth: Dp): ViewModel() {
     fun rotate(id: UUID, rotationChange: Float) {
         if (visible.value) {
             drills.forEach {
-                if ((it.id == id) && it.isRotateable) {
+                if ((it.id == id) && it.isRotatable) {
                     it.rotation += rotationChange
                     checkIfDone()
                     updateUI()
@@ -63,5 +61,5 @@ class BatViewModel(val doorWidth: Dp): ViewModel() {
         onUpdate.value = (0..1_000_000).random()
     }
 
-    inner class Drill(val id: UUID = UUID.randomUUID(), var rotation: Float, val offsetX: Dp, val offsetY: Dp, val size: Dp = drillWidth, val imgPath: Int, val isRotateable: Boolean = true)
+    inner class Drill(val id: UUID = UUID.randomUUID(), var rotation: Float, val offsetX: Dp, val offsetY: Dp, val size: Dp = drillWidth, val imgPath: Int, val isRotatable: Boolean = true)
 }

@@ -14,7 +14,6 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.goatNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.lynxNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.otterNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.stations.raccoonNavGraph
-import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.GoogleMaps
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 @Composable

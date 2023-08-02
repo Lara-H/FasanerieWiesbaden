@@ -1,9 +1,5 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
 
-import android.annotation.SuppressLint
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,14 +20,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.hapticfeedback.HapticFeedback
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -45,11 +37,8 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.GoatViewModel
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit) {
-
-    // viewModel
     val viewModel = viewModel<GoatViewModel>()
 
     // check if done
@@ -61,9 +50,6 @@ fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit
 
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
-
-    // haptic feedback
-    val haptic = LocalHapticFeedback.current
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -86,7 +72,7 @@ fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit
 
             Image(
                 painter = painterResource(id = currentItem.imgPath),
-                contentDescription = viewModel.goatImgAltText,
+                contentDescription = "Goat",
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(all = MaterialTheme.spacing.medium)
@@ -96,23 +82,25 @@ fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit
                 .fillMaxWidth()
                 .padding(all = MaterialTheme.spacing.medium)
             ) {
-                Button(modifier = Modifier
-                    .weight(1f)
-                    .padding(end = MaterialTheme.spacing.medium / 2),
-                    shape = RoundedCornerShape(0),
-                    contentPadding = PaddingValues(all = 5.dp),
-                    onClick = { handleClick(true, currentItem.isGoat, viewModel, onFalseClick, haptic) }) {
-                    Icon(Icons.Default.Check, "Icon", tint = Color.White)
-                }
-                Button(modifier = Modifier
-                    .weight(1f)
-                    .padding(start = MaterialTheme.spacing.medium / 2),
-                    shape = RoundedCornerShape(0),
-                    contentPadding = PaddingValues(all = 5.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
-                    onClick = { handleClick(false, currentItem.isGoat, viewModel, onFalseClick, haptic) }) {
-                    Icon(Icons.Default.Close, "Icon", tint = Color.White)
-                }
+                CreateButton(
+                    modifier = Modifier .weight(1f) .padding(end = MaterialTheme.spacing.medium / 2),
+                    bgColor = MaterialTheme.colorScheme.primary,
+                    icon = Icons.Default.Check,
+                    clickedValue = true,
+                    correctValue = currentItem.isGoat,
+                    viewModel = viewModel,
+                    onFalseClick = onFalseClick,
+                )
+                CreateButton(
+                    modifier = Modifier .weight(1f) .padding(start = MaterialTheme.spacing.medium / 2),
+                    bgColor = MaterialTheme.colorScheme.tertiary,
+                    icon = Icons.Default.Close,
+                    clickedValue = false,
+                    correctValue = currentItem.isGoat,
+                    viewModel = viewModel,
+                    onFalseClick = onFalseClick,
+                )
+
             }
         }
 
@@ -124,9 +112,20 @@ fun GoatScreen(onClose: () -> Unit, onDone: () -> Unit, onFalseClick: () -> Unit
     }
 }
 
-fun handleClick(clickedValue: Boolean, correctValue: Boolean, viewModel: GoatViewModel, onFalseClick: () -> Unit, haptic: HapticFeedback) {
-    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+@Composable
+fun CreateButton(modifier: Modifier, bgColor: Color, icon: ImageVector, clickedValue: Boolean, correctValue: Boolean, viewModel: GoatViewModel, onFalseClick: () -> Unit) {
+    Button(
+        modifier = modifier,
+        shape = RoundedCornerShape(0),
+        contentPadding = PaddingValues(all = 5.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = bgColor),
+        onClick = { handleClick(clickedValue, correctValue, viewModel, onFalseClick) }
+    ) {
+        Icon(icon, "Icon", tint = Color.White)
+    }
+}
 
+fun handleClick(clickedValue: Boolean, correctValue: Boolean, viewModel: GoatViewModel, onFalseClick: () -> Unit) {
     if (clickedValue == correctValue) {
         viewModel.addPoint()
     }

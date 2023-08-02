@@ -34,7 +34,8 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController, data: MainActi
                             inclusive = true
                         }
                     }
-                }
+                },
+                screenSize = data.screenSize,
             )
         }
         composable(route = FoxScreen.Bye.route) {

@@ -7,9 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 
-class GoatViewModel(): ViewModel() {
-    val goatImgAltText = "Goat"
-
+class GoatViewModel: ViewModel() {
     val totalPoints = 5
 
     var isDone = mutableStateOf(false)

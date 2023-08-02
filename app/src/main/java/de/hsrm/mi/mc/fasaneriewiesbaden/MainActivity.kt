@@ -18,6 +18,10 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.FasanerieWiesbadenTheme
 import android.Manifest
 import android.content.pm.ActivityInfo
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -28,11 +32,11 @@ import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.location.*
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.LockScreenOrientation
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.RootNavGraph
-import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.GoogleMaps
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.LocationDetails
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 class MainActivity : ComponentActivity() {
-
     private var locationCallback: LocationCallback? = null
     var fusedLocationClient: FusedLocationProviderClient? = null
     private var locationRequired = false
@@ -42,20 +46,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             FasanerieWiesbadenTheme {
                 LockScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-
-                // hide phone bars
-                WindowCompat.setDecorFitsSystemWindows(window, false)
-                WindowInsetsControllerCompat(window, window.decorView).apply {
-                    hide(WindowInsetsCompat.Type.navigationBars())
-                    hide(WindowInsetsCompat.Type.statusBars())
-                    systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-                }
+                hidePhoneBars()
+                val screenSize = getScreenSize()
 
                 // viewmodel
                 val viewModel = viewModel<MainActivityViewModel>(
                     factory = object : ViewModelProvider.Factory {
                         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                            return MainActivityViewModel() as T
+                            return MainActivityViewModel(screenSize) as T
                         }
                     }
                 )
@@ -102,16 +100,34 @@ class MainActivity : ComponentActivity() {
                         launcherMultiplePermissions.launch(permissions)
                     }
 
-                    val navController = rememberNavController()
-
-
                     // RootNavigation
-                    RootNavGraph(navController, viewModel)
+                    RootNavGraph(rememberNavController(), viewModel)
 
                 }
             }
         }
 
+    }
+
+    private fun hidePhoneBars() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            hide(WindowInsetsCompat.Type.navigationBars())
+            hide(WindowInsetsCompat.Type.statusBars())
+            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+    }
+
+    @Composable
+    private fun getScreenSize(): ScreenSize {
+        val density = LocalDensity.current
+        val configuration = LocalConfiguration.current
+        return ScreenSize(
+            screenHeight = configuration.screenHeightDp.dp,
+            screenWidth = configuration.screenWidthDp.dp,
+            screenHeightPx = with(density) { configuration.screenHeightDp.dp.roundToPx() },
+            screenWidthPx = with(density) { configuration.screenWidthDp.dp.roundToPx() },
+        )
     }
 
     @SuppressLint("MissingPermission")
@@ -145,5 +161,3 @@ class MainActivity : ComponentActivity() {
     }
 
 }
-
-data class LocationDetails(val latitude: Double, val longitude: Double)

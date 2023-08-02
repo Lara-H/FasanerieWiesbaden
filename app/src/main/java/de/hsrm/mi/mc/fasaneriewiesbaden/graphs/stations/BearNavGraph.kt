@@ -15,7 +15,7 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController, data: MainAct
 
     navigation(
         route = Graph.BEAR,
-        startDestination = BearScreen.Game.route
+        startDestination = BearScreen.Greeting.route
     ) {
         composable(route = BearScreen.Greeting.route) {
             CommunicationScreen(
@@ -35,7 +35,8 @@ fun NavGraphBuilder.bearNavGraph(navController: NavHostController, data: MainAct
                             inclusive = true
                         }
                     }
-                }
+                },
+                screenSize = data.screenSize
             )
         }
         composable(route = BearScreen.Bye.route) {

@@ -14,10 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.sizing
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
-import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 
 @Composable
 fun InfoScreen() {
@@ -26,7 +25,7 @@ fun InfoScreen() {
         .background(color = MaterialTheme.colorScheme.background))
     Column(
         modifier = Modifier
-            .padding(top = 64.dp, bottom = 70.dp)
+            .padding(top = MaterialTheme.sizing.topBar, bottom = MaterialTheme.sizing.bottomBar)
             .padding(all = MaterialTheme.spacing.medium)
     ) {
         Text(text = stringResource(R.string.info_headline), color = MaterialTheme.colorScheme.tertiary, fontWeight = FontWeight.Bold)

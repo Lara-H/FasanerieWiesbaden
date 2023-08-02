@@ -9,10 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -22,9 +19,7 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,32 +32,28 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.ProcessBar
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
-import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.FoxViewModel
 import kotlin.math.roundToInt
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
+fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit, screenSize: ScreenSize) {
 
-    // helpers to convert dp to px
+    // helper to convert dp to px
     val density = LocalDensity.current
 
-    // device size
-    val configuration = LocalConfiguration.current
-    val screenWidthPx = with(density) {configuration.screenWidthDp.dp.roundToPx()}
-
     // image size
-    val imgSize = 100.dp
-    val imgSizePx = with(density) {imgSize.roundToPx()}
+    val handsImgSize = 100.dp
+    val handsImgSizePx = with(density) {handsImgSize.roundToPx()}
 
-    // viewmodel
+    // viewModel
     val viewModel = viewModel<FoxViewModel>(
         factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return FoxViewModel(
-                    screenWidthPx = screenWidthPx,
-                    imgSizePx = imgSizePx
+                    screenSize = screenSize,
+                    handsImgSizePx = handsImgSizePx
                 ) as T
             }
         }
@@ -75,9 +66,6 @@ fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
         }
     }
 
-    // haptic feedback
-    val haptic = LocalHapticFeedback.current
-
     Column(modifier = Modifier
         .fillMaxSize()
         .paint(
@@ -87,36 +75,40 @@ fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
-        Column() {
+        Column {
             TopBar(text = stringResource(R.string.title_location_fox), onClose = onClose)
             TextBox(text = stringResource(R.string.station_fox_game_text), colorText = Color.White)
         }
 
         Box(modifier = Modifier .fillMaxWidth()
         ) {
+            // Hole
             Image(
-                painter = painterResource(id = viewModel.holeImgPath),
-                contentDescription = viewModel.holeImgAltText,
+                painter = painterResource(id = R.drawable.fox_hole),
+                contentDescription = "Hole",
                 modifier = Modifier
                     .align(Alignment.Center)
                     .alpha(viewModel.holeVisible.value)
             )
+            // Dust
             Image(
-                painter = painterResource(id = viewModel.dustImgPath),
-                contentDescription = viewModel.dustImgAltText,
+                painter = painterResource(id = R.drawable.fox_dust),
+                contentDescription = "Dust",
                 modifier = Modifier
                     .align(Alignment.Center)
                     .alpha(viewModel.dustVisible.value)
             )
+            // Bug
             Image(
-                painter = painterResource(viewModel.itemImgPath),
-                contentDescription = viewModel.itemImgAltText,
+                painter = painterResource(R.drawable.fox_bug),
+                contentDescription = "Bug",
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .size(viewModel.itemImgSize)
-                    .alpha(viewModel.isItemVisible.value)
-                    .offset { IntOffset((imgSizePx*(-1) until imgSizePx).shuffled().last(), (imgSizePx*(-1) until imgSizePx).shuffled().last()) }
+                    .size(50.dp)
+                    .alpha(viewModel.bugVisible.value)
+                    .offset { IntOffset((handsImgSizePx*(-1) until handsImgSizePx).random(), (handsImgSizePx*(-1) until handsImgSizePx).random()) }
             )
+            // Hands
             Image(
                 modifier = Modifier
                     .offset { IntOffset(viewModel.hands.value.offsetX.roundToInt(), viewModel.hands.value.offsetY.roundToInt()) }
@@ -125,10 +117,10 @@ fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
                             viewModel.changeHandsPosition(dragAmount.x, dragAmount.y)
                         }
                     }
-                    .size(viewModel.handsImgSize)
+                    .size(handsImgSize)
                     .align(Alignment.Center),
-                painter = painterResource(id = viewModel.handsImgPath),
-                contentDescription = viewModel.handsImgAltText,
+                painter = painterResource(R.drawable.hands),
+                contentDescription = "Hands",
             )
         }
 
@@ -146,6 +138,7 @@ fun FoxScreen(onClose: () -> Unit, onDone: () -> Unit) {
 fun FoxScreenPreview() {
     FoxScreen(
         onClose = {},
-        onDone = {}
+        onDone = {},
+        screenSize = ScreenSize(0.dp, 0.dp, 0, 0),
     )
 }

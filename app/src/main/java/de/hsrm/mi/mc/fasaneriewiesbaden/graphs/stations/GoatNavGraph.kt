@@ -33,7 +33,7 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController, data: MainAct
                         popUpTo(navController.graph.id) {
                             inclusive = true
                         }
-                    };
+                    }
                 },
                 onFalseClick = { navController.navigate(GoatScreen.Error.route) }
             )

@@ -1,20 +1,17 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
-import de.hsrm.mi.mc.fasaneriewiesbaden.LocationDetails
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.UiText
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.LocationDetails
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
 import java.util.UUID
 
-class MainActivityViewModel(): ViewModel() {
+class MainActivityViewModel(val screenSize: ScreenSize): ViewModel() {
 
     var userID: UUID = UUID.randomUUID()
     var currentLocation = mutableStateOf(LocationDetails(0.toDouble(), 0.toDouble()))
@@ -38,6 +35,10 @@ class MainActivityViewModel(): ViewModel() {
     )
         private set
 
+    fun updateCurrentLocation(newLocation: LocationDetails) {
+        currentLocation = mutableStateOf(newLocation)
+    }
+
     private fun checkIfNextStationInNear(currentLocation: LocationDetails): Boolean {
         val distanceRadius = 0.000005
 
@@ -55,7 +56,6 @@ class MainActivityViewModel(): ViewModel() {
             return true
         }
         return false
-
     }
 
     fun openNextStation(navController: NavHostController) {
@@ -83,10 +83,6 @@ class MainActivityViewModel(): ViewModel() {
             it.wasAlreadyOpened = false
             it.isDone = false
         }
-    }
-
-    fun updateCurrentLocation(newLocation: LocationDetails) {
-        currentLocation = mutableStateOf(newLocation)
     }
 
     inner class Station(

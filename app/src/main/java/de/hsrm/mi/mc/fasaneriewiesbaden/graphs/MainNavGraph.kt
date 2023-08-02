@@ -1,22 +1,16 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.graphs
 
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.rememberCameraPositionState
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.UiText
-import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.GoogleMaps
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.InfoScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.LevelScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.MapScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
-import java.nio.channels.Channel
 
 @Composable
 fun MainNavGraph(navController: NavHostController, mainNavController: NavHostController, data: MainActivityViewModel, viewModelMain: MainViewModel) {

@@ -66,17 +66,18 @@
 
     <string name="station_fox_greeting_text">Hallo, mein Name ist Fiona, es freut mich deine Bekanntschaft zu machen! Wir Füchse wollen unseren Fuchsbau erweitern und sind gerade fleißig am Bauen. Möchtest du uns beim Graben helfen? </string>
     <string name="station_fox_greeting_btn">Helfe Fiona</string>
-    <string name="station_fox_game_text">Streiche über die Erde, um zu graben</string>
+    <string name="station_fox_game_text">Ziehe die Hände über die Erde, um zu graben</string>
     <string name="station_fox_bye_text">Herzlichen Dank, mit deiner Hilfe konnten wir noch schneller an unserem Fuchsbau weiterarbeiten. Beim Graben haben wir schon viele Regenwürmer, aber noch keine Goldmünze entdeckt. Besuch doch auch mal die Bären, die haben in ihrer Höhle einmal eine Münze gefunden.</string>
 
     <string name="station_bear_greeting_text">Hallo, ich bin Bruno der Bär. Mein Magen grummelt wieder ganz schön und ich habe Lust auf ein wenig Honig. Kannst du mir helfen, ein paar Tropfen aus dem Bienenstock zu schütteln?</string>
     <string name="station_bear_greeting_btn">Helfe Bruno</string>
-    <string name="station_bear_game_text">Schüttet dein Smartphone, damit etwas Honig aus dem Bienennest tropft</string>
+    <string name="station_bear_game_text">Verschiebe das Honigglas, um den Honig aufzufangen. Meide dabei die Bienen!</string>
+    <string name="station_bear_game_btn">Starten</string>
     <string name="station_bear_bye_text">Es ist so toll, dass mein Magen wieder gefüllt ist, danke dir! Laut einer alten Legende wurde der Schatz lange in unserer Höhle versteckt und dann in eine andere Höhle gebracht. Aber ich weis leider nicht, wo sich diese Höhle befinden könnte. Die Luchse sind sehr gerissen und haben vielleicht eine Idee.</string>
 
     <string name="station_lynx_greeting_text">Hey du, ich bin Ludwig der Luchs. Wir wollen unseren Kindern das Jagen beibringen, aber beim Spielen haben sie die ganze Anleitung durcheinander gebracht. Kannst du dabei helfen, die Bilder wieder in die richtige Reihenfolge zu bringen?</string>
     <string name="station_lynx_greeting_btn">Helfe Ludwig</string>
-    <string name="station_lynx_game_text">Bringe die Bilder durch Vertauschen durch Antippen in die richtige Reihenfolge</string>
+    <string name="station_lynx_game_text">Bringe die Bilder durch Antippen in die richtige Reihenfolge</string>
     <string name="station_lynx_bye_text">Das hast du super gemacht, dank dir können wir unsere Kinder wieder auf die Jagd vorbereiten. Ich habe leider keine Ahnung, wo sich der Schatz befindet. Aber ich habe gehört, dass die Hirsche großen Hunger haben und deine Hilfe gebrauchen könnten.</string>
 
     <string name="station_deer_greeting_text">Hallo, mein Name ist Hugo. Meine Freunde und ich haben Hunger. Kannst du uns aus dem Futterautomaten ein wenig Futter besorgen?</string>

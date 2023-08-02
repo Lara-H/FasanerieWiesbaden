@@ -17,9 +17,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.sizing
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
-import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
@@ -27,7 +28,7 @@ fun LevelScreen(data: MainActivityViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 64.dp, bottom = 70.dp)
+            .padding(top = MaterialTheme.sizing.topBar, bottom = MaterialTheme.sizing.bottomBar)
             .background(color = MaterialTheme.colorScheme.background)
     ){
 
@@ -72,6 +73,6 @@ fun LevelScreen(data: MainActivityViewModel) {
 @Composable
 fun LevelScreenPreview() {
     LevelScreen(
-        data = MainActivityViewModel(),
+        data = MainActivityViewModel(screenSize = ScreenSize(0.dp, 0.dp, 0, 0)),
     )
 }

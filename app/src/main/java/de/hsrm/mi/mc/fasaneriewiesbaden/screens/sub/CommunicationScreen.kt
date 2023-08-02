@@ -1,17 +1,8 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
 import androidx.compose.animation.Animatable
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,12 +26,10 @@ import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.BottomButton
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import androidx.compose.runtime.*
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
-import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.GoogleMaps
+import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -123,7 +111,7 @@ fun createBtnText(btnText: String?): String {
 @Composable
 fun CommunicationScreenPreview() {
     CommunicationScreen(
-        data = MainActivityViewModel(),
+        data = MainActivityViewModel(screenSize = ScreenSize(0.dp, 0.dp, 0, 0)),
         text = "Lorem ipsum dolor sit amet",
         onBtnClick = {},
         onClose = {},

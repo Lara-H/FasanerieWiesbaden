@@ -79,7 +79,9 @@ fun FasanerieWiesbadenTheme(
     }
 
     CompositionLocalProvider(
-        LocalSpacing provides Spacing()
+        LocalSpacing provides Spacing(),
+        LocalSizing provides Sizing(),
+        LocalColorPalette provides ColorPalette(),
     ) {
         MaterialTheme(
             colorScheme = mycolorScheme,

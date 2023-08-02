@@ -15,7 +15,7 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController, data: Main
 
     navigation(
         route = Graph.CHICKEN,
-        startDestination = ChickenScreen.Game.route
+        startDestination = ChickenScreen.Greeting.route
     ) {
         composable(route = ChickenScreen.Greeting.route) {
             CommunicationScreen(

@@ -102,7 +102,7 @@
     <string name="station_otter_bye_text">Vielen lieben Dank, jetzt haben wir genügend Fische für die Party. Wir haben schon oft im Teich der Hühner gespielt und dabei ganze 5 Goldmünzen gefunden! Einmal haben wir auch eine geheime unterirdische Verbindung zur Fledermaushöhle entdeckt. Denkst du, der Schatz könnte sich in einer Höhle befinden?</string>
 
     <string name="station_bat_greeting_text">Fiep fiep fiep. Hey du, ich bin Frieda. Herzlich willkommen in unserer Höhle. Der geheimnisvolle Schatz soll in einer Höhle sein? Fiep. Wir haben bislang auch nur davon gehört, aber gesehen haben wir ihn noch nicht. Wie du siehst fiep, gibt es da hinten eine verschlossene Tür, die bisher niemand öffnen konnte. Fiep fiep.</string>
-    <string name="station_bat_greeting_btn">Helfe Frieda</string>
+    <string name="station_bat_greeting_btn">Tür ansehen</string>
     <string name="station_bat_game_text">Drehe die Zahnräder mit ZWEI Fingern, um die Tür zu entschlüsseln</string>
     <string name="station_bat_bye_text">Du bist ja ein echter Profi im Knacken von kniffligen Türschlössern! Hier hast du eine Taschenlampe, damit kannst du in die dunkle Höhle leuchten!</string>
 

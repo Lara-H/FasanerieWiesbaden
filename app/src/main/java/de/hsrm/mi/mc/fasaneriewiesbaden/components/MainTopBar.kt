@@ -5,10 +5,6 @@ import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkHorizontally
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -36,15 +32,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Red
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
@@ -52,11 +49,7 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopBar(viewModel: MainViewModel, data: MainActivityViewModel) {
-
-    // device width
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp.dp
+fun MainTopBar(viewModel: MainViewModel, data: MainActivityViewModel, navController: NavHostController) {
 
     // detect any changes to data and recompose composable
     viewModel.onUpdate.value
@@ -99,19 +92,19 @@ fun MainTopBar(viewModel: MainViewModel, data: MainActivityViewModel) {
             exit = shrinkHorizontally() + fadeOut()
 
         ) {
-            NavMenu(viewModel, data, screenWidth)
+            NavMenu(viewModel, data, navController)
          }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavMenu(viewModel: MainViewModel, data: MainActivityViewModel, screenWidth: Dp) {
+fun NavMenu(viewModel: MainViewModel, data: MainActivityViewModel, navController: NavHostController) {
     Column(modifier = Modifier
         .background(MaterialTheme.colorScheme.background)
         .fillMaxHeight()
         .padding(all = MaterialTheme.spacing.medium)
-        .width(screenWidth - 100.dp)
+        .width(data.screenSize.screenWidth - 100.dp)
 
     ) {
 
@@ -138,6 +131,7 @@ fun NavMenu(viewModel: MainViewModel, data: MainActivityViewModel, screenWidth: 
                 data.resetGame()
                 isError = false
                 viewModel.changeExpanded()
+                navController.navigate(Graph.INTRO)
             } else {
                 isError = true
             }
@@ -152,5 +146,6 @@ fun MainTopBarPreview() {
     MainTopBar(
         viewModel = MainViewModel(),
         data = MainActivityViewModel(screenSize = ScreenSize(0.dp, 0.dp, 0, 0)),
+        navController = rememberNavController()
     )
 }

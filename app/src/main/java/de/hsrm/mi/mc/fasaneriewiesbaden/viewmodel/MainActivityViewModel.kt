@@ -14,6 +14,8 @@ import java.util.UUID
 class MainActivityViewModel(val screenSize: ScreenSize): ViewModel() {
 
     var userID: UUID = UUID.randomUUID()
+    var gameDone = mutableStateOf(false)
+        private set
     var currentLocation = mutableStateOf(LocationDetails(0.toDouble(), 0.toDouble()))
         private set
     var nextStationKey = mutableStateOf(0)
@@ -23,7 +25,10 @@ class MainActivityViewModel(val screenSize: ScreenSize): ViewModel() {
 
     var stations = mutableStateListOf(
         Station(UiText.StringResource(resId = R.string.title_location_squirrel), UiText.StringResource(resId = R.string.title_name_squirrel),R.drawable.squirrel, 50.10296712995634, 8.19239066804138, Graph.INTRO),
-        Station(UiText.StringResource(resId = R.string.title_location_goat), UiText.StringResource(resId = R.string.title_name_goat), R.drawable.goat, 50.103323, 8.192826, Graph.GOAT),
+
+        //Station(UiText.StringResource(resId = R.string.title_location_goat), UiText.StringResource(resId = R.string.title_name_goat), R.drawable.goat, 50.103323, 8.192826, Graph.GOAT),
+        Station(UiText.StringResource(resId = R.string.title_location_goat), UiText.StringResource(resId = R.string.title_name_goat), R.drawable.goat, 50.0457609, 8.2426477, Graph.GOAT),
+
         Station(UiText.StringResource(resId = R.string.title_location_fox), UiText.StringResource(resId = R.string.title_name_fox), R.drawable.fox, 50.104116, 8.194161, Graph.FOX),
         Station(UiText.StringResource(resId = R.string.title_location_bear), UiText.StringResource(resId = R.string.title_name_bear), R.drawable.bear, 50.106387, 8.196074, Graph.BEAR),
         Station(UiText.StringResource(resId = R.string.title_location_lynx), UiText.StringResource(resId = R.string.title_name_lynx), R.drawable.lynx, 50.106107, 8.194052, Graph.LYNX),
@@ -40,7 +45,7 @@ class MainActivityViewModel(val screenSize: ScreenSize): ViewModel() {
     }
 
     private fun checkIfNextStationInNear(currentLocation: LocationDetails): Boolean {
-        val distanceRadius = 0.000005
+        val distanceRadius = 0.0002
 
         var distanceLatitude = currentLocation.latitude - stations[nextStationKey.value].mapLatitude
         if (distanceLatitude < 0) {
@@ -59,25 +64,34 @@ class MainActivityViewModel(val screenSize: ScreenSize): ViewModel() {
     }
 
     fun openNextStation(navController: NavHostController) {
-        if (checkIfNextStationInNear(currentLocation.value)) {
-            if (!stations[nextStationKey.value].wasAlreadyOpened) {
-                stations[nextStationKey.value].wasAlreadyOpened = true
-                navController.navigate(stations[nextStationKey.value].graph)
-            } else {
-                nextStationButtonVisible = mutableStateOf(true)
-            }
+        if (gameDone.value) {
+            nextStationButtonVisible = mutableStateOf(true)
         } else {
-            nextStationButtonVisible = mutableStateOf(false)
+            if (checkIfNextStationInNear(currentLocation.value)) {
+                if (!stations[nextStationKey.value].wasAlreadyOpened) {
+                    stations[nextStationKey.value].wasAlreadyOpened = true
+                    navController.navigate(stations[nextStationKey.value].graph)
+                } else {
+                    nextStationButtonVisible = mutableStateOf(true)
+                }
+            } else {
+                nextStationButtonVisible = mutableStateOf(false)
+            }
         }
     }
 
     fun stationDone() {
         stations[nextStationKey.value].isDone = true
-        nextStationKey.value++
+        if (nextStationKey.value < stations.size-1) {
+            nextStationKey.value++
+        } else {
+            gameDone.value = true
+        }
     }
 
     fun resetGame() {
         userID = UUID.randomUUID()
+        gameDone.value = false
         nextStationKey.value = 0
         stations.forEach() {
             it.wasAlreadyOpened = false

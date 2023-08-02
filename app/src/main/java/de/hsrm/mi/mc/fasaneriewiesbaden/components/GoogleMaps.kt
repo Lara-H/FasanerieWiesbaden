@@ -29,7 +29,7 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 @Composable
 fun GoogleMaps(navController: NavHostController, data: MainActivityViewModel) {
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(LatLng(data.stations[data.nextStationKey.value].mapLatitude, data.stations[data.nextStationKey.value].mapLongitude), 18f)
+        position = CameraPosition.fromLatLngZoom(LatLng(data.stations[data.nextStationKey.value].mapLatitude, data.stations[data.nextStationKey.value].mapLongitude), 15f)
     }
 
     GoogleMap(

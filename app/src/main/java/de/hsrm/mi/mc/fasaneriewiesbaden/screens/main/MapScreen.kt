@@ -4,18 +4,31 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.Animatable
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.core.view.drawToBitmap
 import androidx.navigation.NavHostController
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -37,6 +50,26 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun MapScreen(navController: NavHostController, data: MainActivityViewModel) {
+
+    GoogleMaps(navController, data)
+
+    Column {
+        Box(modifier = Modifier .padding(top = 64.dp)) {
+            TextBox(stringResource(R.string.map_text), Color.White, Color(0x99000000))
+        }
+        //if (data.nextStationButtonVisible.value) {
+        Box(modifier = Modifier .padding(MaterialTheme.spacing.medium)) {
+            PrimaryButton(text = stringResource(R.string.map_station_btn), onClick = { navController.navigate(data.stations[data.nextStationKey.value].graph) })
+        }
+        //}
+    }
+
+}
+
+
+
+@Composable
+fun GoogleMaps(navController: NavHostController, data: MainActivityViewModel) {
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(LatLng(data.stations[data.nextStationKey.value].mapLatitude, data.stations[data.nextStationKey.value].mapLongitude), 18f)
     }
@@ -53,8 +86,7 @@ fun MapScreen(navController: NavHostController, data: MainActivityViewModel) {
             compassEnabled = false,
             mapToolbarEnabled = false,
         )
-        ) {
-
+    ) {
         MapMarker(
             position = LatLng(data.currentLocation.value.latitude, data.currentLocation.value.longitude),
             title = stringResource(R.string.map_own_location),
@@ -82,18 +114,32 @@ fun MapScreen(navController: NavHostController, data: MainActivityViewModel) {
 
         data.openNextStation(navController)
     }
+}
 
-    Column {
-        Box(modifier = Modifier .padding(top = 64.dp)) {
-            TextBox(stringResource(R.string.map_text), Color.White, Color(0x99000000))
-        }
-        //if (data.nextStationButtonVisible.value) {
-        Box(modifier = Modifier .padding(MaterialTheme.spacing.medium)) {
-            PrimaryButton(text = stringResource(R.string.map_station_btn), onClick = { navController.navigate(data.stations[data.nextStationKey.value].graph) })
-        }
-        //}
+@Composable
+fun GoogleMaps(data: MainActivityViewModel) {
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(LatLng(data.stations[data.nextStationKey.value].mapLatitude, data.stations[data.nextStationKey.value].mapLongitude), 18f)
     }
 
+    GoogleMap(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 64.dp, bottom = 70.dp),
+        cameraPositionState = cameraPositionState,
+        properties = MapProperties(
+            mapType = MapType.SATELLITE
+        ),
+        uiSettings = MapUiSettings(
+            compassEnabled = false,
+            rotationGesturesEnabled = false,
+            scrollGesturesEnabled = false,
+            scrollGesturesEnabledDuringRotateOrZoom = false,
+            tiltGesturesEnabled = false,
+            zoomControlsEnabled = false,
+            zoomGesturesEnabled = false
+        )
+    )
 }
 
 @Composable

@@ -39,11 +39,9 @@ import kotlin.math.roundToInt
 @Composable
 fun ChickenScreen(onClose: () -> Unit, onDone: () -> Unit) {
 
-    // helpers to convert dp to px
+    // device size
     val density = LocalDensity.current
     val configuration = LocalConfiguration.current
-
-    // device size
     val screenHeightPx = with(density) {configuration.screenHeightDp.dp.roundToPx()}
     val screenWidthPx = with(density) {configuration.screenWidthDp.dp.roundToPx()}
 

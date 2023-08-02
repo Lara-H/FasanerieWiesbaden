@@ -2,6 +2,7 @@ package de.hsrm.mi.mc.fasaneriewiesbaden.screens.main
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,7 +24,12 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun LevelScreen(data: MainActivityViewModel) {
-    Column(modifier = Modifier .fillMaxSize() .padding(top = 64.dp, bottom = 80.dp)){
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 64.dp, bottom = 70.dp)
+            .background(color = MaterialTheme.colorScheme.background)
+    ){
 
         var i = 0
         val itemsPerLine = 4

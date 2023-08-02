@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.location.*
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.LockScreenOrientation
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.RootNavGraph
+import de.hsrm.mi.mc.fasaneriewiesbaden.screens.main.GoogleMaps
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 class MainActivity : ComponentActivity() {
@@ -101,8 +102,11 @@ class MainActivity : ComponentActivity() {
                         launcherMultiplePermissions.launch(permissions)
                     }
 
+                    val navController = rememberNavController()
+
+
                     // RootNavigation
-                    RootNavGraph(navController = rememberNavController(), data = viewModel)
+                    RootNavGraph(navController, viewModel)
 
                 }
             }

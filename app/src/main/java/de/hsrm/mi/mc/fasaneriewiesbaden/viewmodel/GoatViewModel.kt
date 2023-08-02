@@ -16,6 +16,7 @@ class GoatViewModel(): ViewModel() {
         private set
     var onUpdate = mutableStateOf(0)
         private set
+
     var items = mutableStateListOf(
         Item(imgPath = R.drawable.goat_1, isGoat = true),
         Item(imgPath = R.drawable.goat_2, isGoat = false),
@@ -32,7 +33,6 @@ class GoatViewModel(): ViewModel() {
     }
 
     fun addPoint() {
-
         currentPoints++
         if (currentPoints >= totalPoints) {
             isDone.value = true

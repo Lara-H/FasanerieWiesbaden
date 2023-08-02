@@ -1,5 +1,7 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.main
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +21,14 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 
 @Composable
 fun InfoScreen() {
-    Column(modifier = Modifier .fillMaxSize() .padding(top = 64.dp, bottom = 80.dp) .padding(all = MaterialTheme.spacing.medium)) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(color = MaterialTheme.colorScheme.background))
+    Column(
+        modifier = Modifier
+            .padding(top = 64.dp, bottom = 70.dp)
+            .padding(all = MaterialTheme.spacing.medium)
+    ) {
         Text(text = stringResource(R.string.info_headline), color = MaterialTheme.colorScheme.tertiary, fontWeight = FontWeight.Bold)
         Row(modifier = Modifier .fillMaxWidth() .padding(top = MaterialTheme.spacing.medium)) {
             Column(modifier = Modifier .weight(1f)) {

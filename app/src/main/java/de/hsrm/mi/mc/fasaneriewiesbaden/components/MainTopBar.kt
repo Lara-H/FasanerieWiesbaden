@@ -1,5 +1,14 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -76,14 +85,21 @@ fun MainTopBar(viewModel: MainViewModel, data: MainActivityViewModel) {
                 actionIconContentColor = Color.White
             ),
             actions = {
-                IconButton(onClick = { viewModel.changeExpanded() }) {
+                IconButton(onClick = {
+                    viewModel.changeExpanded()
+                }) {
                     Icon(Icons.Default.Menu, "Menu")
                 }
             },
         )
-        if (viewModel.isExpanded.value) {
+        AnimatedVisibility(
+            visible = viewModel.isExpanded.value,
+            enter = expandHorizontally() + fadeIn(),
+            exit = shrinkHorizontally() + fadeOut()
+
+        ) {
             NavMenu(viewModel, data, screenWidth)
-        }
+         }
     }
 }
 
@@ -94,7 +110,7 @@ fun NavMenu(viewModel: MainViewModel, data: MainActivityViewModel, screenWidth: 
         .background(MaterialTheme.colorScheme.background)
         .fillMaxHeight()
         .padding(all = MaterialTheme.spacing.medium)
-        .width(screenWidth-100.dp)
+        .width(screenWidth - 100.dp)
 
     ) {
 

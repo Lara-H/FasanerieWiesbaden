@@ -24,7 +24,7 @@ fun TextBox(text: String, colorText: Color? = null, colorBg: Color? = null) {
 
 @Composable
 fun createColorText(colorText: Color?): Color {
-    var newColorText = MaterialTheme.colorScheme.onBackground
+    val newColorText = MaterialTheme.colorScheme.onBackground
     if (colorText != null) {
         return colorText
     }
@@ -33,7 +33,7 @@ fun createColorText(colorText: Color?): Color {
 
 @Composable
 fun createColorBg(colorBg: Color?): Color {
-    var newColorBg = Color.Transparent
+    val newColorBg = Color.Transparent
     if (colorBg != null) {
         return colorBg
     }
@@ -44,7 +44,7 @@ fun createColorBg(colorBg: Color?): Color {
 @Composable
 fun TextBoxPreview() {
     TextBox(
-        text = "Bewege dich von deinem Standort aus zum grünen Punkt auf der Karte",
+        text = "Lorem ipsum dolor sit amet",
         colorBg = Color.Black,
         colorText = Color.White
     )

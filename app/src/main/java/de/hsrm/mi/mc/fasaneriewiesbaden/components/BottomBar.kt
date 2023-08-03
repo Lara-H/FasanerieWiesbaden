@@ -4,14 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +23,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.MainScreen
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.sizing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
 
 @Composable
@@ -39,7 +38,7 @@ fun BottomBar(navController: NavHostController, viewModelMain: MainViewModel) {
     val currentDestination = navBackStackEntry?.destination
 
     BottomAppBar(
-        modifier = Modifier .height(70.dp),
+        modifier = Modifier .height(MaterialTheme.sizing.bottomBar),
         containerColor = MaterialTheme.colorScheme.secondary,
         contentColor = Color.White) {
         var i = 0

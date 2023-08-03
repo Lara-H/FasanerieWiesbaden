@@ -3,15 +3,11 @@ package de.hsrm.mi.mc.fasaneriewiesbaden.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.hapticfeedback.HapticFeedback
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -29,7 +25,7 @@ fun PrimaryButton(text: String, onClick: () -> Unit, bgColor: Color? = null) {
 
 @Composable
 fun createBgColor(bgColor: Color?): Color {
-    var newBgColor = MaterialTheme.colorScheme.primary
+    val newBgColor = MaterialTheme.colorScheme.primary
     if (bgColor != null) {
         return bgColor
     }

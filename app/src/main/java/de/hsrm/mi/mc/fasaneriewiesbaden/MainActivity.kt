@@ -36,9 +36,10 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.model.LocationDetails
 import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
+@Suppress("UNCHECKED_CAST")
 class MainActivity : ComponentActivity() {
     private var locationCallback: LocationCallback? = null
-    var fusedLocationClient: FusedLocationProviderClient? = null
+    private var fusedLocationClient: FusedLocationProviderClient? = null
     private var locationRequired = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +50,7 @@ class MainActivity : ComponentActivity() {
                 hidePhoneBars()
                 val screenSize = getScreenSize()
 
-                // viewmodel
+                // viewModel
                 val viewModel = viewModel<MainActivityViewModel>(
                     factory = object : ViewModelProvider.Factory {
                         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -57,6 +58,9 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 )
+
+                // detect any changes to data and recompose composable
+                viewModel.onUpdate.value
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -68,8 +72,6 @@ class MainActivity : ComponentActivity() {
                     locationCallback = object : LocationCallback() {
                         override fun onLocationResult(p0: LocationResult) {
                             for (lo in p0.locations) {
-
-                                // Update UI with location data
                                 viewModel.updateCurrentLocation(LocationDetails(lo.latitude, lo.longitude))
                             }
                         }

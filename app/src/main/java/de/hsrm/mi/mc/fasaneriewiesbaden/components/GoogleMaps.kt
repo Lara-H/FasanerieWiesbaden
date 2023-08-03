@@ -5,11 +5,11 @@ import android.graphics.Bitmap
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -24,6 +24,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.sizing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 @Composable
@@ -35,7 +36,7 @@ fun GoogleMaps(navController: NavHostController, data: MainActivityViewModel) {
     GoogleMap(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 64.dp, bottom = 70.dp),
+            .padding(top = MaterialTheme.sizing.topBar, bottom = MaterialTheme.sizing.bottomBar),
         cameraPositionState = cameraPositionState,
         properties = MapProperties(
             mapType = MapType.HYBRID
@@ -72,32 +73,6 @@ fun GoogleMaps(navController: NavHostController, data: MainActivityViewModel) {
 
         data.openNextStation(navController)
     }
-}
-
-@Composable
-fun GoogleMaps(data: MainActivityViewModel) {
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(LatLng(data.stations[data.nextStationKey.value].mapLatitude, data.stations[data.nextStationKey.value].mapLongitude), 18f)
-    }
-
-    GoogleMap(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 64.dp, bottom = 70.dp),
-        cameraPositionState = cameraPositionState,
-        properties = MapProperties(
-            mapType = MapType.SATELLITE
-        ),
-        uiSettings = MapUiSettings(
-            compassEnabled = false,
-            rotationGesturesEnabled = false,
-            scrollGesturesEnabled = false,
-            scrollGesturesEnabledDuringRotateOrZoom = false,
-            tiltGesturesEnabled = false,
-            zoomControlsEnabled = false,
-            zoomGesturesEnabled = false
-        )
-    )
 }
 
 @Composable

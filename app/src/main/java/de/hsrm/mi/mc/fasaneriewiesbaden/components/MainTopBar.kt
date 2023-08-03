@@ -43,6 +43,7 @@ import androidx.navigation.compose.rememberNavController
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.Graph
 import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.colorpalette
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.spacing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainViewModel
@@ -58,7 +59,7 @@ fun MainTopBar(viewModel: MainViewModel, data: MainActivityViewModel, navControl
     if (viewModel.isExpanded.value) {
         Box(modifier = Modifier
             .fillMaxSize()
-            .background(Color(0x99000000))
+            .background(MaterialTheme.colorpalette.alphaDark)
             .clickable { viewModel.changeExpanded() }
         )
     }

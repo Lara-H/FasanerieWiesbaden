@@ -39,13 +39,13 @@ fun MapScreen(navController: NavHostController, data: MainActivityViewModel) {
                 }
             }
 
-            // TODO: ONLY FOR DEVELOPMENT
+            // TODO: ONLY FOR DEVELOPMENT AND TESTING REASONS
             Button(
                 modifier = Modifier .padding(MaterialTheme.spacing.medium),
                 onClick = { handleClick(navController, data) },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
             ) {
-                Text(text = "DEV: Nächste Station öffnen")
+                Text(text = "DEV: Open next station")
             }
             ///////////////////////////////
 

@@ -21,7 +21,7 @@ fun RootNavGraph(navController: NavHostController, data: MainActivityViewModel) 
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = Graph.INTRO,
+        startDestination = Graph.DEER,
     ) {
         introNavGraph(navController = navController, data = data)
 

@@ -84,6 +84,8 @@
     <string name="station_deer_greeting_text">Hallo, mein Name ist Hugo. Meine Freunde und ich haben Hunger. Kannst du uns aus dem Futterautomaten ein wenig Futter besorgen?</string>
     <string name="station_deer_greeting_btn">Helfe Hugo</string>
     <string name="station_deer_game_text">Scanne den QR-Code auf dem Futterautomaten</string>
+    <string name="station_deer_game_error">Bitte versuche es erneut, das scheint der falsche Code gewesen zu sein.</string>
+    <string name="station_deer_game_btn">Code scannen</string>
     <string name="station_deer_bye_text">Vielen Dank, gibst du meinen Freunden ein wenig von dem Futter? Wir leben schon lange in diesem Gehege. Wenn es hier einen Schatz geben würde, hätten wir diesen sicher schon gefunden. Habt ihr es schon bei den Waschbären versucht?</string>
 
     <string name="station_raccoon_greeting_text">Hallo, ich bin Wilma! Nach dem Waschen sind die Socken ganz durcheinander geraten. Kannst du mir helfen, die richtigen Paare zu finden?</string>

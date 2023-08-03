@@ -50,7 +50,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.activity:activity-compose:1.5.1'
@@ -73,17 +72,20 @@ dependencies {
     def nav_version = "2.5.3"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
-    //QR Code
+    //QR Code Generator
     implementation("com.simonsickle:composed-barcodes:1.1.1")
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.1'
-
-    // Maps
-    implementation 'com.google.maps.android:maps-compose:2.7.2'
-    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 
     // Google QR Scanner
     implementation 'com.google.android.gms:play-services-code-scanner:16.0.0'
 
+    // Google Maps
+    implementation 'com.google.maps.android:maps-compose:2.7.2'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
+
+    // Logger
+    implementation 'io.github.microutils:kotlin-logging-jvm:2.0.11'
 }

@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.game
 
 import android.annotation.SuppressLint
@@ -37,12 +39,12 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.DeerViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
 @Composable
 fun DeerScreen(onClose: () -> Unit, onDone: () -> Unit) {
     val context = LocalContext.current
 
-    // viewmodel
+    // viewModel
     val viewModel = viewModel<DeerViewModel>(
         factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -73,6 +75,10 @@ fun DeerScreen(onClose: () -> Unit, onDone: () -> Unit) {
         val barcodeResults = viewModel.barCodeResults.collectAsState()
         val scope = rememberCoroutineScope()
 
+        scope.launch {
+            viewModel.startScan()
+        }
+
         Text(
             modifier = Modifier
                 .background(color = Color.White)
@@ -90,7 +96,7 @@ fun DeerScreen(onClose: () -> Unit, onDone: () -> Unit) {
                     viewModel.startScan()
                 }
             },
-            text = "Code scannen",
+            text = stringResource(R.string.station_deer_game_btn),
         )
 
     }

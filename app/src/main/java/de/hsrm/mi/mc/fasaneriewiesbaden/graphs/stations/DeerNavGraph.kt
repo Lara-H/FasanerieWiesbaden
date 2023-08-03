@@ -23,7 +23,7 @@ fun NavGraphBuilder.deerNavGraph(navController: NavHostController, data: MainAct
                 text = stringResource(R.string.station_deer_greeting_text),
                 btnText = stringResource(R.string.station_deer_greeting_btn),
                 onClose = { navController.navigate(Graph.MAIN) },
-                onBtnClick = { navController.navigate(DeerScreen.Bye.route) }
+                onBtnClick = { navController.navigate(DeerScreen.Game.route) }
             )
         }
         composable(route = DeerScreen.Game.route) {

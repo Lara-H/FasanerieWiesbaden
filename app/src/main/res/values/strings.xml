@@ -70,7 +70,7 @@
     <string name="station_fox_game_text">Ziehe die Hände über die Erde, um zu graben</string>
     <string name="station_fox_bye_text">Herzlichen Dank, mit deiner Hilfe konnten wir noch schneller an unserem Fuchsbau weiterarbeiten. Beim Graben haben wir schon viele Regenwürmer, aber noch keine Goldmünze entdeckt. Besuch doch auch mal die Bären, die haben in ihrer Höhle einmal eine Münze gefunden.</string>
 
-    <string name="station_bear_greeting_text">Hallo, ich bin Bruno der Bär. Mein Magen grummelt wieder ganz schön und ich habe Lust auf ein wenig Honig. Kannst du mir helfen, ein paar Tropfen aus dem Bienenstock zu schütteln?</string>
+    <string name="station_bear_greeting_text">Hallo, ich bin Bruno der Bär. Mein Magen grummelt wieder ganz schön und ich habe Lust auf ein wenig Honig. Kannst du mir helfen, ein paar Tropfen aus dem Bienenstock aufzufangen?</string>
     <string name="station_bear_greeting_btn">Helfe Bruno</string>
     <string name="station_bear_game_text">Verschiebe das Honigglas, um den Honig aufzufangen. Meide dabei die Bienen!</string>
     <string name="station_bear_game_btn">Starten</string>

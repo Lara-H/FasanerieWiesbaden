@@ -99,7 +99,7 @@ class MainActivity : ComponentActivity() {
                         RootNavGraph(rememberNavController(), viewModel)
                     }else{
                         Box(modifier = Modifier.padding(top = MaterialTheme.sizing.topBar)) {
-                            TextBox(stringResource(R.string.map_text), colorText = Color.Red)
+                            TextBox(stringResource(R.string.permission_needed), colorText = Color.Red)
                         }
                     }
                 }

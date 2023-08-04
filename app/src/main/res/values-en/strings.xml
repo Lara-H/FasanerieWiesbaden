@@ -70,7 +70,7 @@
     <string name="station_fox_game_text">Swipe the dirt to dig</string>
     <string name="station_fox_bye_text">Thank you so much! With your help we could build our burrow even faster. During digging we found lots of earthworms but we didn\'t discover gold coins. You should visit the bears, once they discovered a gold coin in their cave.</string>
 
-    <string name="station_bear_greeting_text">Hello, I am Bruno the bear. My stomach is pretty grunting and I lust after some honey. Could you helpt me to shake some drops out of the bee hive?</string>
+    <string name="station_bear_greeting_text">Hello, I am Bruno the bear. My stomach is pretty grunting and I lust after some honey. Could you help me to get some honey drops out of the bee hive?</string>
     <string name="station_bear_greeting_btn">Help Bruno</string>
     <string name="station_bear_game_text">Move the honey jar to catch the honey. Avoid the bees!</string>
     <string name="station_bear_game_btn">Start</string>
@@ -89,7 +89,7 @@
     <string name="station_deer_game_btn">Scan Code</string>
     <string name="station_deer_bye_text">Thank you very much, would you like to give us some of the food? We live in this compound for a long time. If there were a treasure here, we would have still discovered it. Did you already try it at the raccoons?</string>
 
-    <string name="station_raccoon_greeting_text">Hello I am Wilma! After wahsing all the socks got very messy. Can you help me to find the matching pairs?</string>
+    <string name="station_raccoon_greeting_text">Hello I am Wilma! After washing all the socks got very messy. Can you help me to find the matching pairs?</string>
     <string name="station_raccoon_greeting_btn">Help Wilma</string>
     <string name="station_raccoon_game_text">Connect the same socks together by tapping</string>
     <string name="station_raccoon_bye_text">Thank you for helping me to sort the socks. Becaus of you the pairs found each other and the socks can be fairly cleared away. Once I found a coin by the pool of the chicken. You should visit them.</string>

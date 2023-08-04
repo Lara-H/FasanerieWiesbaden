@@ -41,6 +41,8 @@ fun NavGraphBuilder.foxNavGraph(navController: NavHostController, data: MainActi
         composable(route = FoxScreen.Bye.route) {
             CommunicationScreen(
                 data = data,
+                title = stringResource(R.string.title_name_fox),
+                imagePath = R.drawable.fox,
                 text = stringResource(R.string.station_fox_bye_text),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }

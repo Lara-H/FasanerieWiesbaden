@@ -41,6 +41,8 @@ fun NavGraphBuilder.raccoonNavGraph(navController: NavHostController, data: Main
         composable(route = RaccoonScreen.Bye.route) {
             CommunicationScreen(
                 data = data,
+                title = stringResource(R.string.title_name_raccoon),
+                imagePath = R.drawable.raccoon,
                 text = stringResource(R.string.station_raccoon_bye_text),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }

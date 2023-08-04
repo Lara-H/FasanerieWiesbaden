@@ -42,6 +42,8 @@ fun NavGraphBuilder.otterNavGraph(navController: NavHostController, data: MainAc
         composable(route = OtterScreen.Bye.route) {
             CommunicationScreen(
                 data = data,
+                title = stringResource(R.string.title_name_otter),
+                imagePath = R.drawable.otter,
                 text = stringResource(R.string.station_otter_bye_text),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }

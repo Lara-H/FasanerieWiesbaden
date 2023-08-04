@@ -53,17 +53,14 @@ class RaccoonViewModel: ViewModel() {
                 } else {
                     mutableStateOf(colorWrong)
                 }
-            updateUI()
-            Timer().schedule(1000) {
-                if (selectedColor.value == colorCorrect) {
-                    foundPair(item.imgPath)
-                }
-                selectedFirst = mutableStateOf(emptyItem)
-                selectedSecond = mutableStateOf(emptyItem)
-                selectedColor = mutableStateOf(colorUndecided)
-                checkIfAllFound()
-                updateUI()
+            if (selectedColor.value == colorCorrect) {
+                foundPair(item.imgPath)
             }
+            selectedFirst = mutableStateOf(emptyItem)
+            selectedSecond = mutableStateOf(emptyItem)
+            selectedColor = mutableStateOf(colorUndecided)
+            checkIfAllFound()
+            updateUI()
         }
     }
 

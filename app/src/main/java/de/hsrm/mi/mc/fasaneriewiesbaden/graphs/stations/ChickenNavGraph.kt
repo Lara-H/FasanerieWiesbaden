@@ -42,6 +42,8 @@ fun NavGraphBuilder.chickenNavGraph(navController: NavHostController, data: Main
         composable(route = ChickenScreen.Bye.route) {
             CommunicationScreen(
                 data = data,
+                title = stringResource(R.string.title_name_chicken),
+                imagePath = R.drawable.chicken,
                 text = stringResource(R.string.station_chicken_bye_text),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }

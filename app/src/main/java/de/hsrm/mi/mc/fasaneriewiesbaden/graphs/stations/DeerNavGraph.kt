@@ -41,6 +41,8 @@ fun NavGraphBuilder.deerNavGraph(navController: NavHostController, data: MainAct
         composable(route = DeerScreen.Bye.route) {
             CommunicationScreen(
                 data = data,
+                title = stringResource(R.string.title_name_deer),
+                imagePath = R.drawable.deer,
                 text = stringResource(R.string.station_deer_bye_text),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }

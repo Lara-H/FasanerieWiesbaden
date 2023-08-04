@@ -49,6 +49,8 @@ fun NavGraphBuilder.goatNavGraph(navController: NavHostController, data: MainAct
         composable(route = GoatScreen.Bye.route) {
             CommunicationScreen(
                 data = data,
+                title = stringResource(R.string.title_name_goat),
+                imagePath = R.drawable.goat,
                 text = stringResource(R.string.station_goat_bye_text),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }

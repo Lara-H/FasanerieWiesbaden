@@ -1,7 +1,11 @@
 package de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.Animatable
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateValue
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,7 +15,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -26,39 +33,57 @@ import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.BottomButton
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import androidx.compose.runtime.*
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
 import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.colorpalette
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun CommunicationScreen(data: MainActivityViewModel, title: String? = null, imagePath: Int? = null, text: String, btnText: String? = null, onBtnClick: () -> Unit, onClose: () -> Unit) {
 
-    val bgColor = remember { Animatable(Color(0xFF000000)) }
-
-    LaunchedEffect(Unit) {
-        bgColor.animateTo(Color(0x99000000), animationSpec = tween(5000))
-    }
-
-    //GoogleMaps(data)
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(bgColor.value)
+    val transition = rememberInfiniteTransition()
+    val offsetCloud by transition.animateFloat(
+        initialValue = -200f,
+        targetValue = 200f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(10000),
+            repeatMode = RepeatMode.Reverse
+        )
     )
 
     Column(modifier = Modifier
-        .fillMaxSize(),
+        .fillMaxSize()
+        .background(MaterialTheme.colorpalette.blue_500),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         TopBar(text=createTitle(data, title), onClose = onClose)
         Column {
-            Image(
-                painter = painterResource(id = createImgPath(data, imagePath)),
-                contentDescription = createTitle(data, title),
-                modifier = Modifier .align(Alignment.End)
-            )
+            Box(modifier = Modifier .fillMaxWidth()) {
+                Image(
+                    modifier = Modifier
+                        .size(200.dp)
+                        .offset(x = offsetCloud.toInt().dp),
+                    painter = painterResource(R.drawable.cloud),
+                    contentDescription = "Cloud",
+                    alignment = Alignment.TopCenter,
+                )
+                Image(
+                    painter = painterResource(R.drawable.tree),
+                    contentDescription = "Tree",
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(start = MaterialTheme.spacing.small),
+                )
+                Image(
+                    painter = painterResource(id = createImgPath(data, imagePath)),
+                    contentDescription = createTitle(data, title),
+                    modifier = Modifier .align(Alignment.BottomEnd)
+                )
+            }
             val scroll = rememberScrollState(0)
             Text(
                 modifier = Modifier
@@ -82,7 +107,7 @@ fun CommunicationScreen(data: MainActivityViewModel, title: String? = null, imag
 
 @Composable
 fun createTitle(data: MainActivityViewModel, title: String?): String {
-    var newTitle = data.stations[data.nextStationKey.value].animalName.asString()
+    val newTitle = data.stations[data.nextStationKey.value].animalName.asString()
     if (title != null) {
         return title
     }
@@ -91,7 +116,7 @@ fun createTitle(data: MainActivityViewModel, title: String?): String {
 
 @Composable
 fun createImgPath(data: MainActivityViewModel, imagePath: Int?): Int {
-    var newImgPath = data.stations[data.nextStationKey.value].imgPath
+    val newImgPath = data.stations[data.nextStationKey.value].imgPath
     if (imagePath != null) {
         return imagePath
     }
@@ -100,7 +125,7 @@ fun createImgPath(data: MainActivityViewModel, imagePath: Int?): Int {
 
 @Composable
 fun createBtnText(btnText: String?): String {
-    var newBtnText = stringResource(R.string.communication_btn)
+    val newBtnText = stringResource(R.string.communication_btn)
     if (btnText != null) {
         return btnText
     }

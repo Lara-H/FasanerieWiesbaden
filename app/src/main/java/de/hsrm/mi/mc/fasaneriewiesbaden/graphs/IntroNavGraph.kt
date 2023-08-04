@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.UiText
 import de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub.CommunicationScreen
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
@@ -44,6 +45,8 @@ fun NavGraphBuilder.introNavGraph(navController: NavHostController, data: MainAc
         composable(route = IntroScreen.Departure.route) {
             CommunicationScreen(
                 data = data,
+                title = stringResource(R.string.title_name_squirrel),
+                imagePath = R.drawable.squirrel,
                 text = stringResource(R.string.intro_departure_text),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() },

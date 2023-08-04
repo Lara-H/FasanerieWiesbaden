@@ -47,6 +47,14 @@ fun MapScreen(navController: NavHostController, data: MainActivityViewModel) {
             ) {
                 Text(text = "DEV: Open next station")
             }
+
+            Button(
+                modifier = Modifier .padding(MaterialTheme.spacing.medium),
+                onClick = { data.stationDone() },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
+            ) {
+                Text(text = "DEV: Skip next location")
+            }
             ///////////////////////////////
 
         }

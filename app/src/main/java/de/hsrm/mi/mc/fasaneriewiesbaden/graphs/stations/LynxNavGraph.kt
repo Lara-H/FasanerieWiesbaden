@@ -41,6 +41,8 @@ fun NavGraphBuilder.lynxNavGraph(navController: NavHostController, data: MainAct
         composable(route = LynxScreen.Bye.route) {
             CommunicationScreen(
                 data = data,
+                title = stringResource(R.string.title_name_lynx),
+                imagePath = R.drawable.lynx,
                 text = stringResource(R.string.station_lynx_bye_text),
                 onClose = { navController.navigate(Graph.MAIN); data.stationDone() },
                 onBtnClick = { navController.navigate(Graph.MAIN); data.stationDone() }

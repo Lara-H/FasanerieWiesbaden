@@ -75,10 +75,6 @@ fun DeerScreen(onClose: () -> Unit, onDone: () -> Unit) {
         val barcodeResults = viewModel.barCodeResults.collectAsState()
         val scope = rememberCoroutineScope()
 
-        scope.launch {
-            viewModel.startScan()
-        }
-
         Text(
             modifier = Modifier
                 .background(color = Color.White)

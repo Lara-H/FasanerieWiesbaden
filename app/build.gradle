@@ -80,8 +80,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-code-scanner:16.0.0'
 
     // Google Maps
-    implementation 'com.google.maps.android:maps-compose:2.7.2'
+    implementation 'com.google.maps.android:maps-compose:2.11.1'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.libraries.places:places:3.0.0'
 
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'

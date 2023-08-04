@@ -17,11 +17,23 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.FasanerieWiesbadenTheme
 import android.Manifest
+import android.content.Context
 import android.content.pm.ActivityInfo
+import android.location.Location
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -30,20 +42,32 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.location.*
+import com.google.android.libraries.places.api.Places
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.LockScreenOrientation
+import de.hsrm.mi.mc.fasaneriewiesbaden.components.TextBox
 import de.hsrm.mi.mc.fasaneriewiesbaden.graphs.RootNavGraph
 import de.hsrm.mi.mc.fasaneriewiesbaden.model.LocationDetails
 import de.hsrm.mi.mc.fasaneriewiesbaden.model.ScreenSize
+import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.sizing
 import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 
 @Suppress("UNCHECKED_CAST")
 class MainActivity : ComponentActivity() {
     private var locationCallback: LocationCallback? = null
-    private var fusedLocationClient: FusedLocationProviderClient? = null
+    var fusedLocationClient: FusedLocationProviderClient? = null
     private var locationRequired = false
 
+    companion object {
+        const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1234
+    }
+
+    private val locationPermissionGranted = mutableStateOf(false)
+
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Places.initialize(applicationContext, "AIzaSyD0TDOq1EBmtZlMDbu_nlOvOYGlLZmK5PM")
+
         setContent {
             FasanerieWiesbadenTheme {
                 LockScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
@@ -62,49 +86,31 @@ class MainActivity : ComponentActivity() {
                 // detect any changes to data and recompose composable
                 viewModel.onUpdate.value
 
+                // Location Tracking
+                fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+                locationCallback = object : LocationCallback() {
+                    override fun onLocationResult(p0: LocationResult) {
+                        for (lo in p0.locations) {
+                            // Update UI with location data
+                            viewModel.updateCurrentLocation(LocationDetails(lo.latitude, lo.longitude))
+                        }
+                    }
+                }
+                // Check for permission before showing anything
+                getLocationPermission()
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-
-                    // Location Tracking
-                    val context = LocalContext.current
-                    fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-                    locationCallback = object : LocationCallback() {
-                        override fun onLocationResult(p0: LocationResult) {
-                            for (lo in p0.locations) {
-                                viewModel.updateCurrentLocation(LocationDetails(lo.latitude, lo.longitude))
-                            }
-                        }
-                    }
-
-                    val launcherMultiplePermissions = rememberLauncherForActivityResult(
-                        ActivityResultContracts.RequestMultiplePermissions()
-                    ) { permissionsMap ->
-                        val areGranted = permissionsMap.values.reduce { acc, next -> acc && next }
-                        if (areGranted) {
-                            locationRequired = true
-                            startLocationUpdates()
-                            Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                    val permissions = arrayOf(
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    )
-
-                    if (permissions.all {ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED }) {
-                        // Get the location
+                    if (locationPermissionGranted.value) {
+                        locationRequired = true
                         startLocationUpdates()
-                    } else {
-                        launcherMultiplePermissions.launch(permissions)
+                        RootNavGraph(rememberNavController(), viewModel)
+                    }else{
+                        Box(modifier = Modifier.padding(top = MaterialTheme.sizing.topBar)) {
+                            TextBox("Ohne die Freigabe deines Standortes kannst du diese App leider nicht nutzen.", colorText = Color.Red)
+                        }
                     }
-
-                    // RootNavigation
-                    RootNavGraph(rememberNavController(), viewModel)
-
                 }
             }
         }
@@ -130,6 +136,34 @@ class MainActivity : ComponentActivity() {
             screenHeightPx = with(density) { configuration.screenHeightDp.dp.roundToPx() },
             screenWidthPx = with(density) { configuration.screenWidthDp.dp.roundToPx() },
         )
+    }
+
+    private fun getLocationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            locationPermissionGranted.value = true //we already have the permission
+        } else {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
+            )
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode== PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            locationPermissionGranted.value=true
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -161,5 +195,6 @@ class MainActivity : ComponentActivity() {
         super.onPause()
         locationCallback?.let { fusedLocationClient?.removeLocationUpdates(it) }
     }
+
 
 }

@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
                 // detect any changes to data and recompose composable
                 viewModel.onUpdate.value
 
-                // Location Tracking
+                // Get current location
                 fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
                 locationCallback = object : LocationCallback() {
                     override fun onLocationResult(p0: LocationResult) {
@@ -186,6 +186,5 @@ class MainActivity : ComponentActivity() {
         super.onPause()
         locationCallback?.let { fusedLocationClient?.removeLocationUpdates(it) }
     }
-
 
 }

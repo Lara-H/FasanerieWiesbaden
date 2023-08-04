@@ -25,19 +25,14 @@ class MainActivityViewModel(val screenSize: ScreenSize): ViewModel() {
     var nextStationButtonVisible = mutableStateOf(false)
         private set
 
-    fun updateUI() {
+    private fun updateUI() {
         onUpdate.value = (0..1_000_000).random()
     }
 
     var stations = mutableStateListOf(
         Station(UiText.StringResource(resId = R.string.title_location_squirrel), UiText.StringResource(resId = R.string.title_name_squirrel),R.drawable.squirrel, 50.10296712995634, 8.19239066804138, Graph.INTRO),
-
-        //Station(UiText.StringResource(resId = R.string.title_location_goat), UiText.StringResource(resId = R.string.title_name_goat), R.drawable.goat, 50.103323, 8.192826, Graph.GOAT),
-        Station(UiText.StringResource(resId = R.string.title_location_goat), UiText.StringResource(resId = R.string.title_name_goat), R.drawable.goat, 50.0457609, 8.2426477, Graph.GOAT),
-
-        //Station(UiText.StringResource(resId = R.string.title_location_fox), UiText.StringResource(resId = R.string.title_name_fox), R.drawable.fox, 50.104116, 8.194161, Graph.FOX),
-        Station(UiText.StringResource(resId = R.string.title_location_fox), UiText.StringResource(resId = R.string.title_name_fox), R.drawable.fox, 50.0458609, 8.2427477, Graph.FOX),
-
+        Station(UiText.StringResource(resId = R.string.title_location_goat), UiText.StringResource(resId = R.string.title_name_goat), R.drawable.goat, 50.103323, 8.192826, Graph.GOAT),
+        Station(UiText.StringResource(resId = R.string.title_location_fox), UiText.StringResource(resId = R.string.title_name_fox), R.drawable.fox, 50.104116, 8.194161, Graph.FOX),
         Station(UiText.StringResource(resId = R.string.title_location_bear), UiText.StringResource(resId = R.string.title_name_bear), R.drawable.bear, 50.106387, 8.196074, Graph.BEAR),
         Station(UiText.StringResource(resId = R.string.title_location_lynx), UiText.StringResource(resId = R.string.title_name_lynx), R.drawable.lynx, 50.106107, 8.194052, Graph.LYNX),
         Station(UiText.StringResource(resId = R.string.title_location_deer), UiText.StringResource(resId = R.string.title_name_deer), R.drawable.deer, 50.105601, 8.192938, Graph.DEER),
@@ -56,12 +51,12 @@ class MainActivityViewModel(val screenSize: ScreenSize): ViewModel() {
     private fun checkIfNextStationInNear(currentLocation: LocationDetails): Boolean {
         val distanceRadius = 0.0001
 
-        var distanceLatitude = currentLocation.latitude - stations[nextStationKey.value].mapLatitude
+        val distanceLatitude = currentLocation.latitude - stations[nextStationKey.value].mapLatitude
         if (distanceLatitude < 0) {
             distanceLatitude * (-1)
         }
 
-        var distanceLongitude = currentLocation.longitude - stations[nextStationKey.value].mapLongitude
+        val distanceLongitude = currentLocation.longitude - stations[nextStationKey.value].mapLongitude
         if (distanceLongitude < 0) {
             distanceLongitude * (-1)
         }
@@ -102,7 +97,7 @@ class MainActivityViewModel(val screenSize: ScreenSize): ViewModel() {
         userID = UUID.randomUUID()
         gameDone.value = false
         nextStationKey.value = 0
-        stations.forEach() {
+        stations.forEach {
             it.wasAlreadyOpened = false
             it.isDone = false
         }

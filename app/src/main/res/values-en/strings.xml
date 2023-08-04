@@ -1,117 +1,117 @@
 <resources>
     <string name="app_name">Fasanerie Wiesbaden</string>
-    <string name="permission_needed">Ohne die Freigabe deines Standortes kannst du diese App leider nicht nutzen.</string>
+    <string name="permission_needed">Unfortunately, you cannot use this app without sharing your location.</string>
 
-    <string name="title_map">Karte</string>
+    <string name="title_map">Map</string>
     <string name="title_level">Level</string>
-    <string name="title_info">Fütterungszeiten</string>
+    <string name="title_info">Feeding times</string>
     <string name="title_code">Code</string>
 
-    <string name="title_name_bat">Frieda Fledermaus</string>
-    <string name="title_name_bear">Bruno Bär</string>
-    <string name="title_name_chicken">Henry Hahn</string>
-    <string name="title_name_deer">Hugo Hirsch</string>
-    <string name="title_name_fox">Fiona Fuchs</string>
-    <string name="title_name_goat">Björn Bock</string>
-    <string name="title_name_goat_child">Becky Bock</string>
-    <string name="title_name_lynx">Ludwig Luchs</string>
-    <string name="title_name_otter">Olli Otter</string>
-    <string name="title_name_raccoon">Wilma Waschbär</string>
-    <string name="title_name_squirrel">Elli Eichhorn</string>
+    <string name="title_name_bat">Frieda</string>
+    <string name="title_name_bear">Bruno</string>
+    <string name="title_name_chicken">Henry</string>
+    <string name="title_name_deer">Hugo</string>
+    <string name="title_name_fox">Fiona</string>
+    <string name="title_name_goat">Björn</string>
+    <string name="title_name_goat_child">Becky</string>
+    <string name="title_name_lynx">Ludwig</string>
+    <string name="title_name_otter">Olli</string>
+    <string name="title_name_raccoon">Wilma</string>
+    <string name="title_name_squirrel">Elli</string>
 
-    <string name="title_location_bat">Fledermaushöhle</string>
-    <string name="title_location_bear">Wolf-Bär-Gehege</string>
-    <string name="title_location_chicken">Teichvogelanlage</string>
-    <string name="title_location_deer">Hirschgehege</string>
-    <string name="title_location_fox">Fuchs-Dachs-Tunnel</string>
-    <string name="title_location_goat">Ziegenwiese</string>
-    <string name="title_location_lynx">Luchsgehege</string>
-    <string name="title_location_otter">Fischottergehege</string>
-    <string name="title_location_raccoon">Waschbärgehege</string>
-    <string name="title_location_squirrel">Eingang</string>
+    <string name="title_location_bat">Bat cave</string>
+    <string name="title_location_bear">Wolf-Bear-Enclosure</string>
+    <string name="title_location_chicken">Bird pond</string>
+    <string name="title_location_deer">Deer enclosure</string>
+    <string name="title_location_fox">Fox-Badger-Tunnel</string>
+    <string name="title_location_goat">Goat meadow</string>
+    <string name="title_location_lynx">Lynx enclosure</string>
+    <string name="title_location_otter">Otter enclosure</string>
+    <string name="title_location_raccoon">Raccoon enclosure</string>
+    <string name="title_location_squirrel">Entry</string>
 
-    <string name="map_text">Bewege dich von deinem Standort aus zum grünen Punkt auf der Karte</string>
-    <string name="map_own_location">Dein Standort</string>
-    <string name="map_station_btn">Öffnen</string>
+    <string name="map_text">From your location, move to the green dot on the map</string>
+    <string name="map_own_location">Your location</string>
+    <string name="map_station_btn">Open</string>
 
-    <string name="maintopbar_reset_headline">Zurücksetzen</string>
-    <string name="maintopbar_reset_text">Tippe in das Textfeld \"RESET\" ein, wenn du deinen Spielstand wirklich unwiederuflich löschen möchtest.</string>
-    <string name="maintopbar_reset_btn">Ja, ich bin sicher</string>
+    <string name="maintopbar_reset_headline">Reset</string>
+    <string name="maintopbar_reset_text">Type \"RESET\" into the text field if you really want to permanently delete your saved game.</string>
+    <string name="maintopbar_reset_btn">Yes I am sure</string>
 
-    <string name="info_headline">Täglich außer freitags</string>
-    <string name="info_time_early">11:00 Uhr</string>
-    <string name="info_time_late">15:00 Uhr</string>
-    <string name="info_animal_bear">Bär</string>
-    <string name="info_animal_wolf">Wolf</string>
-    <string name="info_animal_lynx">Luchs</string>
-    <string name="info_animal_fox">Fuchs</string>
-    <string name="info_animal_racoon">Waschbär</string>
-    <string name="info_animal_racoondog">Marderhund</string>
-    <string name="info_animal_wildcat">Wildkatze</string>
-    <string name="info_animal_otter">Fischotter</string>
+    <string name="info_headline">Every day except Friday</string>
+    <string name="info_time_early">11:00 am</string>
+    <string name="info_time_late">15:00 pm</string>
+    <string name="info_animal_bear">bear</string>
+    <string name="info_animal_wolf">wolf</string>
+    <string name="info_animal_lynx">lynx</string>
+    <string name="info_animal_fox">fox</string>
+    <string name="info_animal_racoon">racoon</string>
+    <string name="info_animal_racoondog">raccoon dog</string>
+    <string name="info_animal_wildcat">wild cat</string>
+    <string name="info_animal_otter">otter</string>
 
-    <string name="communication_btn">Weiter</string>
+    <string name="communication_btn">Next</string>
 
-    <string name="intro_greeting_text">Hallo, mein Name ist Elli und ich die Parkwächterin. Unser Park ist in Geldnot und soll verkauft werden! Jetzt kann uns nur noch der Goldschatz retten, der laut einer alten Legende irgendwo im Park versteckt ist. Hilfst du uns ihn zu finden?</string>
-    <string name="intro_greeting_btn">Ja, ich helfe gerne!</string>
-    <string name="intro_explanation_text">Vielen Dank, du scheinst ein echter Tierfreund zu sein! Um den Schatz zu finden sollten wir die Tiere befragen, diese kennen sich hier am besten aus und zusammen können wir den Schatz bestimmt finden. Moment, was ist das für ein Geräusch…</string>
-    <string name="intro_meeting_text">Määääh, mein Name ist Becky. Schau nur mäh, ich übe gerade meine neuen Tanzschritte mäh, um Profitänzerin zu werden mäh!</string>
-    <string name="intro_departure_text">Deine Tanzschritte sehen toll aus! Deine Eltern machen sich aber bestimmt schon Sorgen. Komm, wir begleiten dich nach Hause.</string>
+    <string name="intro_greeting_text">Hello, my name is Elli and I am the park ranger. Our park needs money and should be sold! Now only the pot of gold that according to an old legend is hidden somewhere in the park can save us. Can you help us find it?</string>
+    <string name="intro_greeting_btn">Yes, I\'m happy to help!</string>
+    <string name="intro_explanation_text">Thank you, you seem to be a real animal lover! In order to find the treasure we should ask the animals, they know their way around best and together we can definitely find the treasure. Wait, what\'s that noise…</string>
+    <string name="intro_meeting_text">Meeeeh, my name is Becky. Look meh. I’m just practicing my new dance steps meh to become a professional dancer meh!</string>
+    <string name="intro_departure_text">Your dance steps look great! Your parents must be worried. Come on, we\'ll take you home.</string>
 
-    <string name="station_goat_greeting_text">Määääh, ich bin Björn, schön Dich kennen zu lernen mäh! Wir zählen gerade alle Ziegen auf unserer Wiese mäh. Allerdings haben sich auch einige Gäste darunter geschlichen mäh. Kannst du uns helfen die Ziegen von den anderen Tieren zu unterscheiden mäh?</string>
-    <string name="station_goat_greeting_btn">Helfe Björn</string>
-    <string name="station_goat_game_text">Schau dir die Bilder der Ziegenrassen auf dem Infoschild genau an</string>
-    <string name="station_goat_game_question">Ist das eine Ziege?</string>
-    <string name="station_goat_game_error">Das war leider nicht richtig. Aber versuche es einfach noch einmal!</string>
-    <string name="station_goat_bye_text">Vielen Dank für deine Hilfe mäh, nun können wir alle Ziegen zählen mäh! Ich höre du suchst nach einem Schatz mäh. Auf unseren Klettertouren konnten wir leider nichts finden mäh. Aber die Füchse nebenan sind gute Schnüffler und wissen vielleicht etwas määäähr.</string>
+    <string name="station_goat_greeting_text">Meeeeh, I’m Björn, nice to meet you meh! We are counting all the goats in our meadow right now meh. However, some guests have also snuck underneath meh. Can you help us distinguish the goats from the other animals meh?</string>
+    <string name="station_goat_greeting_btn">Help Björn</string>
+    <string name="station_goat_game_text">Look carefully at the pictures of the goat breeds on the information board</string>
+    <string name="station_goat_game_question">Is that a goat?</string>
+    <string name="station_goat_game_error">Unfortunately that was not correct. But just try again!</string>
+    <string name="station_goat_bye_text">Thanks for your help meh, now we can count all the goats meh! I hear you’re looking for treasure meh. Unfortunately, we could not find anything on our climbing tours meh. But the foxes next door are good snoopers and may know a little more meh.</string>
 
-    <string name="station_fox_greeting_text">Hallo, mein Name ist Fiona, es freut mich deine Bekanntschaft zu machen! Wir Füchse wollen unseren Fuchsbau erweitern und sind gerade fleißig am Bauen. Möchtest du uns beim Graben helfen? </string>
-    <string name="station_fox_greeting_btn">Helfe Fiona</string>
-    <string name="station_fox_game_text">Ziehe die Hände über die Erde, um zu graben</string>
-    <string name="station_fox_bye_text">Herzlichen Dank, mit deiner Hilfe konnten wir noch schneller an unserem Fuchsbau weiterarbeiten. Beim Graben haben wir schon viele Regenwürmer, aber noch keine Goldmünze entdeckt. Besuch doch auch mal die Bären, die haben in ihrer Höhle einmal eine Münze gefunden.</string>
+    <string name="station_fox_greeting_text">Hello, my name is Fiona, it\'s nice to meet you. We foxes like to expand our burrow and we are diligent working on it at the moment. Do you like to help us digging?</string>
+    <string name="station_fox_greeting_btn">Help Fiona</string>
+    <string name="station_fox_game_text">Swipe the dirt to dig</string>
+    <string name="station_fox_bye_text">Thank you so much! With your help we could build our burrow even faster. During digging we found lots of earthworms but we didn\'t discover gold coins. You should visit the bears, once they discovered a gold coin in their cave.</string>
 
-    <string name="station_bear_greeting_text">Hallo, ich bin Bruno der Bär. Mein Magen grummelt wieder ganz schön und ich habe Lust auf ein wenig Honig. Kannst du mir helfen, ein paar Tropfen aus dem Bienenstock zu schütteln?</string>
-    <string name="station_bear_greeting_btn">Helfe Bruno</string>
-    <string name="station_bear_game_text">Verschiebe das Honigglas, um den Honig aufzufangen. Meide dabei die Bienen!</string>
-    <string name="station_bear_game_btn">Starten</string>
-    <string name="station_bear_bye_text">Es ist so toll, dass mein Magen wieder gefüllt ist, danke dir! Laut einer alten Legende wurde der Schatz lange in unserer Höhle versteckt und dann in eine andere Höhle gebracht. Aber ich weis leider nicht, wo sich diese Höhle befinden könnte. Die Luchse sind sehr gerissen und haben vielleicht eine Idee.</string>
+    <string name="station_bear_greeting_text">Hello, I am Bruno the bear. My stomach is pretty grunting and I lust after some honey. Could you helpt me to shake some drops out of the bee hive?</string>
+    <string name="station_bear_greeting_btn">Help Bruno</string>
+    <string name="station_bear_game_text">Move the honey jar to catch the honey. Avoid the bees!</string>
+    <string name="station_bear_game_btn">Start</string>
+    <string name="station_bear_bye_text">It\'s very great that my stomach is full again, thank you! According to a legend the treasure were hide in our cave a long time ago and then moved to another cave. I\'m sorry, but I don\'t know where that cave is located. The lynx are very smart and they maybe have an idea.</string>
 
-    <string name="station_lynx_greeting_text">Hey du, ich bin Ludwig der Luchs. Wir wollen unseren Kindern das Jagen beibringen, aber beim Spielen haben sie die ganze Anleitung durcheinander gebracht. Kannst du dabei helfen, die Bilder wieder in die richtige Reihenfolge zu bringen?</string>
-    <string name="station_lynx_greeting_btn">Helfe Ludwig</string>
-    <string name="station_lynx_game_text">Schau dir das Infoschild genau an und bringe die Bilder durch Antippen in die richtige Reihenfolge</string>
-    <string name="station_lynx_game_label">Bild Nr.</string>
-    <string name="station_lynx_bye_text">Das hast du super gemacht, dank dir können wir unsere Kinder wieder auf die Jagd vorbereiten. Ich habe leider keine Ahnung, wo sich der Schatz befindet. Aber ich habe gehört, dass die Hirsche großen Hunger haben und deine Hilfe gebrauchen könnten.</string>
+    <string name="station_lynx_greeting_text">Hey you, I am Ludwig the lynx. We want to teach our children how to hunt, but during playing they confound the manual. Could you help us to get the pictures in the right order?</string>
+    <string name="station_lynx_greeting_btn">Help Ludwig</string>
+    <string name="station_lynx_game_text">Put the pictures in the right order by swapping them with a tap</string>
+    <string name="station_lynx_game_label">Picture number</string>
+    <string name="station_lynx_bye_text">Well done, becaus of your help we can prepare our children for hunting again. Unfortunately I don\'t know where the treasure could be. But I have heard that the deers are very hungry and they could need your help</string>
 
-    <string name="station_deer_greeting_text">Hallo, mein Name ist Hugo. Meine Freunde und ich haben Hunger. Kannst du uns aus dem Futterautomaten ein wenig Futter besorgen?</string>
-    <string name="station_deer_greeting_btn">Helfe Hugo</string>
-    <string name="station_deer_game_text">Scanne den QR-Code auf dem Futterautomaten</string>
-    <string name="station_deer_game_error">Bitte versuche es erneut, das scheint der falsche Code gewesen zu sein.</string>
-    <string name="station_deer_game_btn">Code scannen</string>
-    <string name="station_deer_bye_text">Vielen Dank, gibst du meinen Freunden ein wenig von dem Futter? Wir leben schon lange in diesem Gehege. Wenn es hier einen Schatz geben würde, hätten wir diesen sicher schon gefunden. Habt ihr es schon bei den Waschbären versucht?</string>
+    <string name="station_deer_greeting_text">Hello my name is Hugo. Me and my friends are very hungry. Can you bring us some food from the automatic feeder?</string>
+    <string name="station_deer_greeting_btn">Help Hugo</string>
+    <string name="station_deer_game_text">Scan the QR code on the automatic feeder</string>
+    <string name="station_deer_game_error">Please try again, this seems to have been the wrong code.</string>
+    <string name="station_deer_game_btn">Scan Code</string>
+    <string name="station_deer_bye_text">Thank you very much, would you like to give us some of the food? We live in this compound for a long time. If there were a treasure here, we would have still discovered it. Did you already try it at the raccoons?</string>
 
-    <string name="station_raccoon_greeting_text">Hallo, ich bin Wilma! Nach dem Waschen sind die Socken ganz durcheinander geraten. Kannst du mir helfen, die richtigen Paare zu finden?</string>
-    <string name="station_raccoon_greeting_btn">Helfe Wilma</string>
-    <string name="station_raccoon_game_text">Füge die gleichen Socken durch Antippen zusammen</string>
-    <string name="station_raccoon_bye_text">Dankeschön für die Hilfe beim Sortieren der Socken. Durch dich haben sich die Paare wieder gefunden und die Socken können ordentlich weggeräumt werden. Am Teich bei den Hühnern habe ich beim Waschen einmal eine Münze gefunden. Du solltest sie mal besuchen.</string>
+    <string name="station_raccoon_greeting_text">Hello I am Wilma! After wahsing all the socks got very messy. Can you help me to find the matching pairs?</string>
+    <string name="station_raccoon_greeting_btn">Help Wilma</string>
+    <string name="station_raccoon_game_text">Connect the same socks together by tapping</string>
+    <string name="station_raccoon_bye_text">Thank you for helping me to sort the socks. Becaus of you the pairs found each other and the socks can be fairly cleared away. Once I found a coin by the pool of the chicken. You should visit them.</string>
 
-    <string name="station_chicken_greeting_text">Hallo gack gack, schön dich kennenzulernen gack, ich bin Henry gack. Meine Hühner haben vor kurzem ganz viele Eier gelegt gack und jetzt herrscht hier ein großes Durcheinander gack. Wir brauchen deine Hilfe um die Eier wieder den passenden Hühnern zuzuordnen gaaack.</string>
-    <string name="station_chicken_greeting_btn">Helfe Henry</string>
-    <string name="station_chicken_game_text">Übergebe das Ei dem gleichfarbigen Huhn</string>
-    <string name="station_chicken_bye_text">Kikerikiii, wir sind dir überaus dankbar und meine Hühner sind glücklich gack, du hast uns sehr geholfen gack. Wir können nicht gut schwimmen und wissen daher nichts über Gold in unserem Teich. Aber die Otter waren hier schon tauchen. Viel Glück bei deiner Suche! Kikerikiiii</string>
+    <string name="station_chicken_greeting_text">Hello cluck cluck it\'s nice to meet you cluck, I am Henry cluck. Recently my chicken lay lots of eggs cluck and now there is a big mess cluck. We need your help to match the eggs to the right chicken cluuuck.</string>
+    <string name="station_chicken_greeting_btn">Help Henry</string>
+    <string name="station_chicken_game_text">Hand the egg over to the same colored chicken.</string>
+    <string name="station_chicken_bye_text">Cock-A-Doodle-Doo! We are very thankful and my chicken are happy cluck. We aren\'t very good at swimming and for that reason we don\'t know anything about gold in our pool. But the otter were diving here. Good luck by your search. Cock-A-Doodle-Doo!</string>
 
-    <string name="station_otter_greeting_text">Hallo, darf ich mich vorstellen, ich bin Olli. Mein Papa hat heute Geburtstag und ich möchte ihn mit einer tollen Geburtstagsparty überraschen. Dafür brauchen wir noch ein paar leckere Fische. Kannst du mir helfen?</string>
-    <string name="station_otter_greeting_btn">Helfe Olli</string>
-    <string name="station_otter_game_text">Tippe auf die Fische, um sie zu fangen</string>
-    <string name="station_otter_bye_text">Vielen lieben Dank, jetzt haben wir genügend Fische für die Party. Wir haben schon oft im Teich der Hühner gespielt und dabei ganze 5 Goldmünzen gefunden! Einmal haben wir auch eine geheime unterirdische Verbindung zur Fledermaushöhle entdeckt. Denkst du, der Schatz könnte sich in einer Höhle befinden?</string>
+    <string name="station_otter_greeting_text">Hello may I introduce me, I am Olli. Today my dad has birthday and I like to surprise him with a birthday party. We need some yummy fishes for the party. Can you help me?</string>
+    <string name="station_otter_greeting_btn">Help Olli</string>
+    <string name="station_otter_game_text">Tap on the fish to catch them</string>
+    <string name="station_otter_bye_text">>Many thanks! Now we have enough fishes for the party. We played a lot of times in the chicken pool and we found 5 gold coins! One time we discovered a secret connection between the pool and the bat cave. Do you think the treasure could be in that cave?</string>
 
-    <string name="station_bat_greeting_text">Fiep fiep fiep. Hey du, ich bin Frieda. Herzlich willkommen in unserer Höhle. Der geheimnisvolle Schatz soll in einer Höhle sein? Fiep. Wir haben bislang auch nur davon gehört, aber gesehen haben wir ihn noch nicht. Wie du siehst fiep, gibt es da hinten eine verschlossene Tür, die bisher niemand öffnen konnte. Fiep fiep.</string>
-    <string name="station_bat_greeting_btn">Tür ansehen</string>
-    <string name="station_bat_game_text">Drehe die Zahnräder mit ZWEI Fingern, um die Tür zu entschlüsseln</string>
-    <string name="station_bat_bye_text">Du bist ja ein echter Profi im Knacken von kniffligen Türschlössern! Hier hast du eine Taschenlampe, damit kannst du in die dunkle Höhle leuchten!</string>
+    <string name="station_bat_greeting_text">Click click click. Hello you there, I am Frieda. Welcome to our cave. The mysterious treasure shall be in a cave? Click. Thus far we just heard of it, but we didn\'t see it. Like you see, click, back there is a sealed door and nobody could open it. Click click.</string>
+    <string name="station_bat_greeting_btn">Show dor</string>
+    <string name="station_bat_game_text">Use TWO fingers to turn the gears to unlock the door</string>
+    <string name="station_bat_bye_text">You are a real professional in cracking door locks! Here is a flashlight for you, now you can give the dark cave light!</string>
 
-    <string name="outro_treasure_text">In der Höhle befindet sich tatsächlich der Schatz!</string>
-    <string name="outro_thanks_text">Hurra, der Park ist gerettet! Vielen Dank für deine Hilfe! Als kleines Dankeschön möchten wir dir natürlich auch etwas von unserem Fund abgeben. Mit diesem kannst du dir im Shop des Tierparks etwas Tolles aussuchen.</string>
-    <string name="outro_thanks_btn">Code einlösen</string>
-    <string name="outro_code_text">Einzulösen im Shop oder Kiosk der Fasanerie Wiesbaden. Einfach an der Kasse vorzeigen und einmalig 10% Rabatt erhalten.</string>
-    <string name="outro_code_error">Technischer Fehler, bitte melde dich im Shop.</string>
+    <string name="outro_treasure_text">The treasure is actually in the cave!</string>
+    <string name="outro_thanks_text">Hooray, the park is saved! Thanks a lot for your help! As a small thank you, we would like to give you something of our find. With this you can choose something great in the zoo shop.</string>
+    <string name="outro_thanks_btn">Redeem code</string>
+    <string name="outro_code_text">Redeemable in the Fasanerie Wiesbaden shop or kiosk. Simply present it at the checkout and receive a one-off 10% discount.</string>
+    <string name="outro_code_error">Technical error, please contact the shop.</string>
 </resources>

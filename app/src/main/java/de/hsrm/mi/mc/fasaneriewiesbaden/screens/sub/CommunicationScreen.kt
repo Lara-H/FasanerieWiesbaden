@@ -3,7 +3,6 @@ package de.hsrm.mi.mc.fasaneriewiesbaden.screens.sub
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateValue
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -18,7 +17,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -33,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.BottomButton
 import de.hsrm.mi.mc.fasaneriewiesbaden.components.TopBar
 import androidx.compose.runtime.*
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import de.hsrm.mi.mc.fasaneriewiesbaden.R
@@ -44,7 +41,6 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun CommunicationScreen(data: MainActivityViewModel, title: String? = null, imagePath: Int? = null, text: String, btnText: String? = null, onBtnClick: () -> Unit, onClose: () -> Unit) {
-
     val transition = rememberInfiniteTransition()
     val offsetCloud by transition.animateFloat(
         initialValue = -200f,

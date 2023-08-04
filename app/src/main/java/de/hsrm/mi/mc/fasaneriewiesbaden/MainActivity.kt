@@ -4,34 +4,25 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
-import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import de.hsrm.mi.mc.fasaneriewiesbaden.ui.theme.FasanerieWiesbadenTheme
 import android.Manifest
-import android.content.Context
 import android.content.pm.ActivityInfo
-import android.location.Location
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.view.WindowCompat
@@ -54,7 +45,7 @@ import de.hsrm.mi.mc.fasaneriewiesbaden.viewmodel.MainActivityViewModel
 @Suppress("UNCHECKED_CAST")
 class MainActivity : ComponentActivity() {
     private var locationCallback: LocationCallback? = null
-    var fusedLocationClient: FusedLocationProviderClient? = null
+    private var fusedLocationClient: FusedLocationProviderClient? = null
     private var locationRequired = false
 
     companion object {
@@ -108,7 +99,7 @@ class MainActivity : ComponentActivity() {
                         RootNavGraph(rememberNavController(), viewModel)
                     }else{
                         Box(modifier = Modifier.padding(top = MaterialTheme.sizing.topBar)) {
-                            TextBox("Ohne die Freigabe deines Standortes kannst du diese App leider nicht nutzen.", colorText = Color.Red)
+                            TextBox(stringResource(R.string.map_text), colorText = Color.Red)
                         }
                     }
                 }
